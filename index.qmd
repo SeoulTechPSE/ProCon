@@ -1,0 +1,18 @@
+---
+title: "Process Dynamics and Control"
+subtitle: "공정제어 · Department of Chemical & Biomolecular Engineering, SeoulTech"
+author: "Kee-Youn Yoo"
+---
+
+Lecture notes for **Process Dynamics and Control (공정제어)**. Slides are Quarto/reveal.js decks; every calculation is reproduced in a Python notebook (MATLAB code is shown alongside).
+
+| Chapter | Slides | PDF | Notebook |
+|:--|:--:|:--:|:--:|
+| 4. Stability of Closed-Loop Systems | [HTML](ch4/ch4_stability.html) | [slides](ch4/ch4_stability.pdf) · [handout](ch4/ch4_stability_handout.pdf) | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch4/ch4_stability.ipynb) |
+
+**How to use**
+
+- **HTML slides** — the main version: interactive widgets, Python/MATLAB code tabs with copy buttons. Press `F` for full screen, `S` for speaker view, `Esc` for the slide overview.
+- **PDF (slides)** — one slide per page, for tablets (GoodNotes, Notability, …).
+- **PDF (handout)** — A4, three slides per page with ruled note space, for printing.
+- **Notebook** — opens in Google Colab; run all cells to reproduce the figures.

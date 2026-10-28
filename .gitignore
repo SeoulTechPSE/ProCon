@@ -1,0 +1,10 @@
+.quarto/
+__pycache__/
+*.pyc
+.DS_Store
+.ipynb_checkpoints/
+/.luarc.json
+ch*/*_files/
+ch*/ch*_stability.html
+
+/.quarto/

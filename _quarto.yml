@@ -1,0 +1,28 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - index.qmd
+    - ch*/ch*_*.qmd
+  resources:
+    - "ch*/*.pdf"
+    - "ch*/*.ipynb"
+    - "ch*/*.py"
+    - "ch*/interactive/*.html"
+
+website:
+  title: "Process Dynamics and Control"
+  site-url: "https://seoultechpse.github.io/ProCon/"
+  repo-url: "https://github.com/SeoulTechPSE/ProCon"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+    right:
+      - icon: github
+        href: "https://github.com/SeoulTechPSE/ProCon"
+
+format:
+  html:
+    theme: cosmo
+    toc: false

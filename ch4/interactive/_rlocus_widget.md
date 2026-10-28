@@ -1,0 +1,130 @@
+```{=html}
+<div id="rlw" class="rlw">
+  <div class="rlw-ctrl">
+    <label>System
+      <select id="rlw-sys">
+        <option value="ex42">Ex 4.2 — P, 1/[(s+1)(s+2)(s+3)]</option>
+        <option value="ex43">Ex 4.3 — PI, τ<sub>I</sub>=0.2, 1/(s+1)²</option>
+        <option value="ex48">Ex 4.8 — PI, τ<sub>I</sub>=2/3, 0.5/(2s+1)</option>
+        <option value="rhpz">RHP zero — (−s+1)/[(s+1)(2s+1)]</option>
+      </select>
+    </label>
+    <label class="rlw-k">K<sub>c</sub> = <b id="rlw-kval">1.00</b>
+      <input id="rlw-k" type="range" min="0" max="1000" value="100">
+    </label>
+    <span id="rlw-status" class="rlw-status"></span>
+  </div>
+  <div class="rlw-plots">
+    <canvas id="rlw-s" width="520" height="400"></canvas>
+    <canvas id="rlw-t" width="520" height="400"></canvas>
+  </div>
+  <div id="rlw-poles" class="rlw-poles"></div>
+</div>
+<style>
+.rlw{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:18px;color:#222}
+.rlw-ctrl{display:flex;flex-wrap:wrap;gap:18px;align-items:center;margin-bottom:6px}
+.rlw select{font-size:16px;padding:2px 4px}
+.rlw-k{display:flex;align-items:center;gap:8px}
+.rlw-k input{width:280px}
+.rlw-status{font-weight:600;padding:2px 10px;border-radius:4px}
+.rlw-status.ok{background:#e6f2e8;color:#2E7D32}.rlw-status.bad{background:#fbe9e9;color:#C00000}.rlw-status.mar{background:#fff4e0;color:#b36b00}
+.rlw-plots{display:flex;gap:12px;flex-wrap:wrap}
+.rlw canvas{border:1px solid #ddd;border-radius:4px;max-width:100%;height:auto;background:#fff}
+.rlw-poles{font-family:ui-monospace,Menlo,monospace;font-size:15px;margin-top:4px;color:#333}
+</style>
+<script>
+(function(){
+const SYS={
+  ex42:{num:[1],den:[1,6,11,6],kmax:80,kdef:20,tmax:12,box:[-7,1.5,-5,5]},
+  ex43:{num:[0.2,1],den:[0.2,0.4,0.2,0],kmax:3,kdef:0.3,tmax:40,box:[-5.5,2,-4,4]},
+  ex48:{num:[1/3,0.5],den:[4/3,2/3,0],kmax:15,kdef:0.555,tmax:20,box:[-3.6,0.4,-1.8,1.8]},
+  rhpz:{num:[-1,1],den:[2,3,1],kmax:5,kdef:1,tmax:20,box:[-3,4,-2.5,2.5]}
+};
+const C=(r,i)=>({r,i});
+const add=(a,b)=>C(a.r+b.r,a.i+b.i),sub=(a,b)=>C(a.r-b.r,a.i-b.i),
+  mul=(a,b)=>C(a.r*b.r-a.i*b.i,a.r*b.i+a.i*b.r),
+  div=(a,b)=>{const d=b.r*b.r+b.i*b.i;return C((a.r*b.r+a.i*b.i)/d,(a.i*b.r-a.r*b.i)/d)},
+  cabs=a=>Math.hypot(a.r,a.i);
+function padAdd(den,num,k){const n=den.length,m=num.length,o=den.slice();
+  for(let j=0;j<m;j++)o[n-m+j]+=k*num[j];return o;}
+function roots(p){ // Durand-Kerner
+  while(p.length>1&&Math.abs(p[0])<1e-12)p=p.slice(1);
+  const n=p.length-1;if(n<1)return[];
+  const a=p.map(x=>x/p[0]);
+  let z=[];for(let i=0;i<n;i++)z.push(mul(C(0.4,0.9),C(Math.cos(2*Math.PI*i/n)*(1+i*0.1),Math.sin(2*Math.PI*i/n))));
+  const ev=x=>{let v=C(a[0],0);for(let i=1;i<=n;i++)v=add(mul(v,x),C(a[i],0));return v};
+  for(let it=0;it<500;it++){let mx=0;
+    for(let i=0;i<n;i++){let d=C(1,0);for(let j=0;j<n;j++)if(j!==i)d=mul(d,sub(z[i],z[j]));
+      const dz=div(ev(z[i]),d);z[i]=sub(z[i],dz);mx=Math.max(mx,cabs(dz));}
+    if(mx<1e-12)break;}
+  return z.map(x=>C(x.r,Math.abs(x.i)<1e-7?0:x.i));
+}
+function locus(S){const pts=[];const N=900;
+  for(let i=0;i<=N;i++){const k=S.kmax*40*Math.pow(i/N,3);roots(padAdd(S.den,S.num,k)).forEach(r=>pts.push(r));}
+  return pts;}
+function step(S,k){ // unity feedback servo: k*num/(den+k*num)
+  let D=padAdd(S.den,S.num,k);while(Math.abs(D[0])<1e-12)D=D.slice(1);
+  const n=D.length-1;let N=new Array(n+1).fill(0);
+  for(let j=0;j<S.num.length;j++)N[n+1-S.num.length+j]=k*S.num[j];
+  const a0=D[0];D=D.map(x=>x/a0);N=N.map(x=>x/a0);
+  const d0=N[0];const b=[];for(let i=1;i<=n;i++)b.push(N[i]-d0*D[i]); // strictly proper part
+  const f=x=>{const dx=new Array(n);for(let i=0;i<n-1;i++)dx[i]=x[i+1];
+    let s=1;for(let i=0;i<n;i++)s-=D[n-i]*x[i];dx[n-1]=s;return dx;};
+  const out=x=>{let y=d0;for(let i=0;i<n;i++)y+=b[n-1-i]*x[i];return y;};
+  let x=new Array(n).fill(0);const T=S.tmax,M=2000,h=T/M,ts=[0],ys=[out(x)];
+  for(let s=0;s<M;s++){const k1=f(x),k2=f(x.map((v,i)=>v+h/2*k1[i])),k3=f(x.map((v,i)=>v+h/2*k2[i])),k4=f(x.map((v,i)=>v+h*k3[i]));
+    x=x.map((v,i)=>v+h/6*(k1[i]+2*k2[i]+2*k3[i]+k4[i]));ts.push((s+1)*h);ys.push(out(x));}
+  return{ts,ys,final:N[n]/D[n]};
+}
+const $=id=>document.getElementById(id);
+const cs=$('rlw-s'),ct=$('rlw-t'),gs=cs.getContext('2d'),gt=ct.getContext('2d');
+let S,L;
+function axes(g,W,H,box,xl,yl){const[x0,x1,y0,y1]=box,pad=44;
+  const X=x=>pad+(x-x0)/(x1-x0)*(W-pad-10),Y=y=>H-pad+(y0-y)/(y1-y0)*(H-pad-10);
+  g.clearRect(0,0,W,H);g.strokeStyle='#ccc';g.lineWidth=1;g.setLineDash([3,3]);
+  if(x0<0&&x1>0){g.beginPath();g.moveTo(X(0),Y(y0));g.lineTo(X(0),Y(y1));g.stroke();}
+  if(y0<0&&y1>0){g.beginPath();g.moveTo(X(x0),Y(0));g.lineTo(X(x1),Y(0));g.stroke();}
+  g.setLineDash([]);g.strokeStyle='#888';g.strokeRect(pad,10,W-pad-10,H-pad-10);
+  g.fillStyle='#555';g.font='13px system-ui';g.textAlign='center';
+  const tick=(a,b)=>{const r=b-a,st=Math.pow(10,Math.floor(Math.log10(r/5)));const m=[1,2,5,10].find(q=>r/(q*st)<=7)*st;const o=[];for(let v=Math.ceil(a/m)*m;v<=b+1e-9;v+=m)o.push(+v.toFixed(6));return o;};
+  tick(x0,x1).forEach(v=>g.fillText(v,X(v),H-pad+16));g.textAlign='right';
+  tick(y0,y1).forEach(v=>g.fillText(v,pad-5,Y(v)+4));
+  g.textAlign='center';g.fillText(xl,(W+pad)/2,H-8);
+  g.save();g.translate(12,H/2);g.rotate(-Math.PI/2);g.fillText(yl,0,0);g.restore();
+  return{X,Y};
+}
+function draw(){
+  const k=S.kmax*(+$('rlw-k').value)/1000;$('rlw-kval').textContent=k.toFixed(3);
+  // s-plane
+  const W=cs.width,H=cs.height,{X,Y}=axes(gs,W,H,S.box,'Re s','Im s');
+  gs.save();gs.beginPath();gs.rect(44,10,W-54,H-54);gs.clip();
+  gs.fillStyle='rgba(192,0,0,0.06)';gs.fillRect(X(0),10,X(S.box[1])-X(0),H-54);
+  gs.fillStyle='#7da0d8';L.forEach(p=>{gs.fillRect(X(p.r)-1,Y(p.i)-1,2,2);});
+  gs.strokeStyle='#000';gs.lineWidth=2;roots(S.den).forEach(p=>{const x=X(p.r),y=Y(p.i);gs.beginPath();gs.moveTo(x-6,y-6);gs.lineTo(x+6,y+6);gs.moveTo(x+6,y-6);gs.lineTo(x-6,y+6);gs.stroke();});
+  if(S.num.length>1)roots(S.num).forEach(p=>{gs.beginPath();gs.arc(X(p.r),Y(p.i),6,0,2*Math.PI);gs.fillStyle='#fff';gs.fill();gs.stroke();});
+  const R=roots(padAdd(S.den,S.num,k));
+  R.forEach(p=>{gs.fillStyle='#C00000';gs.fillRect(X(p.r)-5,Y(p.i)-5,10,10);});
+  gs.restore();
+  const mr=Math.max(...R.map(p=>p.r));
+  const st=$('rlw-status');
+  if(mr<-1e-4){st.textContent='STABLE';st.className='rlw-status ok';}
+  else if(mr<1e-3){st.textContent='MARGINAL';st.className='rlw-status mar';}
+  else{st.textContent='UNSTABLE';st.className='rlw-status bad';}
+  const cx=R.filter(p=>p.i>0).sort((a,b)=>b.r-a.r)[0];
+  $('rlw-poles').textContent='poles: '+R.map(p=>p.r.toFixed(3)+(p.i?((p.i>0?'+':'−')+Math.abs(p.i).toFixed(3)+'j'):'')).join(',  ')
+    +(cx?`    dominant ζ = ${(-cx.r/Math.hypot(cx.r,cx.i)).toFixed(3)}`:'');
+  // time response
+  const {ts,ys,final}=step(S,k);
+  let lo=Math.min(0,...ys),hi=Math.max(1.2,...ys);lo=Math.max(lo,-1.5);hi=Math.min(hi,2.5);
+  const A=axes(gt,ct.width,ct.height,[0,S.tmax,lo,hi],'time','c(t)  (unit set-point step)');
+  gt.strokeStyle='#888';gt.setLineDash([5,4]);gt.beginPath();gt.moveTo(A.X(0),A.Y(final));gt.lineTo(A.X(S.tmax),A.Y(final));gt.stroke();gt.setLineDash([]);
+  gt.save();gt.beginPath();gt.rect(44,10,ct.width-54,ct.height-54);gt.clip();
+  gt.strokeStyle=mr<-1e-4?'#333399':'#C00000';gt.lineWidth=2.2;gt.beginPath();
+  ts.forEach((t,i)=>{const y=A.Y(ys[i]);i?gt.lineTo(A.X(t),y):gt.moveTo(A.X(t),y);});gt.stroke();gt.restore();
+}
+function load(){S=SYS[$('rlw-sys').value];L=locus(S);$('rlw-k').value=Math.round(1000*S.kdef/S.kmax);draw();}
+$('rlw-sys').addEventListener('change',load);$('rlw-k').addEventListener('input',draw);
+load();
+})();
+</script>
+```
