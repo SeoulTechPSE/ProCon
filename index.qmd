@@ -9,6 +9,7 @@ Lecture notes for **Process Dynamics and Control (공정제어)**. Slides are Qu
 | Chapter | Slides | PDF | Notebook |
 |:--|:--:|:--:|:--:|
 | 4. Stability of Closed-Loop Systems | [HTML](ch4/ch4_stability.html) | [slides](ch4/ch4_stability.pdf) · [handout](ch4/ch4_stability_handout.pdf) | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch4/ch4_stability.ipynb) |
+| 5. Frequency-Response Analysis & Design | [HTML](ch5/ch5_frequency.html) | [slides](ch5/ch5_frequency.pdf) · [handout](ch5/ch5_frequency_handout.pdf) | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch5/ch5_frequency.ipynb) |
 
 **How to use**
 

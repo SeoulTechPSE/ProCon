@@ -5,6 +5,6 @@ __pycache__/
 .ipynb_checkpoints/
 /.luarc.json
 ch*/*_files/
-ch*/ch*_stability.html
+ch*/ch*_*.html
 
 /.quarto/
