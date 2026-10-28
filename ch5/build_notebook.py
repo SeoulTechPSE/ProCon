@@ -53,8 +53,8 @@ print('formula   :', np.sqrt(1+(w*ta)**2)/np.sqrt(1+(w*t1)**2)/np.sqrt(1+(w*t2)*
 
 md("## 5.2 Bode and Nyquist plots\n### Example 5.2 — first order")
 code(r"""G = ct.tf(1, [2, 1])
-ct.bode_plot(G, dB=False, deg=True); plt.show()
-ct.nyquist_plot(G); plt.show()""")
+ct.bode_plot(G, dB=False, deg=True, title=r'Ex 5.2: $G=\dfrac{1}{2s+1}$'); plt.show()
+ct.nyquist_plot(G, title=r'Ex 5.2: $G=\dfrac{1}{2s+1}$'); plt.show()""")
 md("### Example 5.3 — second order, $\\zeta = 1.2 \\dots 0.2$")
 code(r"""tau, w = 2, np.logspace(-2, 2, 800)
 axs = None
@@ -98,7 +98,7 @@ t = np.linspace(0, 100, 3000)
 for K in (0.5, 1.5, 2.5):
     _, y = ct.step_response(ct.feedback(K*G, 1), t); plt.plot(t, y, label=rf'$K_c={K}$')
 plt.legend(); plt.xlabel('time (s)'); plt.ylabel(r'$y(t)$');""")
-code(r"""ct.nyquist_plot(G); plt.xlim(-1.5, 3.2); plt.show()""")
+code(r"""ct.nyquist_plot(G, title=r'Ex 5.11: $G_{OL}=\dfrac{3(-2s+1)}{(10s+1)(5s+1)}$, $K_c=1$'); plt.xlim(-1.5, 3.2); plt.show()""")
 md("### Ex 4.4 revisited — dead time by Bode, exactly")
 code(r"""G44 = ct.tf(0.8, [5, 1])
 wc = brentq(lambda w: np.arctan(5*w) + 2*w - np.pi, 0.1, 2)
@@ -117,7 +117,7 @@ L = Kc*ct.tf([tI, 1], [tI, 0])*G
 gm, pm, wc, wg = ct.margin(L)
 print(f'Kc={Kc:.3f}, τI={tI:.2f}:  GM={gm:.3f}, PM={pm:.1f}°, ωc={wc:.3f}, ωg={wg:.3f}')
 print('extra dead time that destabilizes: θmax = PM[rad]/ωg =', np.radians(pm)/wg, 's')
-ct.bode_plot(L, display_margins=True); plt.show()
+ct.bode_plot(L, display_margins=True, title=r'Ex 5.12: ZN PI loop $G_{OL}=G_cG$'); plt.show()
 T = ct.feedback(L, 1); U = ct.feedback(Kc*ct.tf([tI, 1], [tI, 0]), G)
 t = np.linspace(0, 120, 3000)
 plt.plot(t, ct.step_response(T, t)[1], label=r'$y(t)$'); plt.plot(t, ct.step_response(U, t)[1], label=r'$u(t)$')
