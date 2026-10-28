@@ -58,3 +58,7 @@ html.print-pdf .panel-tabset .tab-content > div:nth-child(2)::before { content: 
 html.print-pdf .reveal div.sourceCode pre code { font-size: 15.5px !important; line-height: 1.25 !important; }
 html.print-pdf .reveal div.sourceCode { max-height: none; overflow: visible; margin: 2px 0; }
 html.print-pdf .reveal .code-copy-button { display: none; }
+
+/* compact formula tables (tuning-rule tables) */
+.reveal .ftab table { font-size: 0.8em; }
+.reveal .ftab td, .reveal .ftab th { padding: 0.25em 0.9em; }

@@ -34,8 +34,6 @@ Different tuning techniques give **similar but not identical** results. There is
 |  | closed-loop test | $K_{cu}$, $T_u$ only | ZN ultimate cycle |
 | **Model-based** (3.2) | — | transfer function | direct synthesis, IMC |
 
-[Notation: the original slides write the dead time as $t_d$; here $\theta$, as in Ch 4–6.]{.small .navy}
-
 # 3.1 Tuning with Empirical Relations
 
 ## Empirical tuning in practice
@@ -80,14 +78,16 @@ Simple, but it **overestimates** $\tau$ and underestimates $\theta$, so it gives
 
 ## Ziegler–Nichols and Cohen–Coon (open-loop test)
 
+::: {.ftab}
 | Controller | | Cohen–Coon | Ziegler–Nichols |
-|:--|:--|:--|:--|
+|:--|:--|:--:|:--:|
 | P | $K_cK$ | $\dfrac{\tau}{\theta}+\dfrac13$ | $\dfrac{\tau}{\theta}$ |
 | PI | $K_cK$ | $0.9\dfrac{\tau}{\theta}+\dfrac{1}{12}$ | $0.9\dfrac{\tau}{\theta}$ |
 | | $\tau_I$ | $\theta\,\dfrac{30+3\theta/\tau}{9+20\theta/\tau}$ | $3.3\,\theta$ |
 | PID | $K_cK$ | $\dfrac43\dfrac{\tau}{\theta}+\dfrac14$ | $1.2\dfrac{\tau}{\theta}$ |
 | | $\tau_I$ | $\theta\,\dfrac{32+6\theta/\tau}{13+8\theta/\tau}$ | $2\,\theta$ |
 | | $\tau_D$ | $\theta\,\dfrac{4}{11+2\theta/\tau}$ | $0.5\,\theta$ |
+:::
 
 ::: {.small .navy}
 Both aim at a **quarter-decay ratio**, which is fast but oscillatory. Note $K_c\propto 1/K$ and $K_c\propto\tau/\theta$: the larger the dead time relative to the time constant, the gentler the controller.
@@ -171,13 +171,14 @@ These are exactly the $K_{cu}$ and $\omega_u=2\pi/T_u$ of Ch 4 (Routh, direct su
 ![](figures/f02_ultimate_cycle.png){width="100%"}
 
 ::: {.tiny}
-With valve saturation (d) the oscillation stays bounded and *looks* sustained even above $K_{cu}$, so check that the valve is not hitting its limits.
+With valve saturation (d) the oscillation stays bounded and *looks* sustained [even above $K_{cu}$,]{style="white-space:nowrap"} so check that the valve is not hitting its limits.
 :::
 :::
 :::
 
 ## Ziegler–Nichols ultimate-cycle settings
 
+::: {.ftab}
 | Controller | | $K_c$ | $\tau_I$ | $\tau_D$ |
 |:--|:--|:--:|:--:|:--:|
 | P | | $0.5\,K_{cu}$ | — | — |
@@ -185,6 +186,7 @@ With valve saturation (d) the oscillation stays bounded and *looks* sustained ev
 | PID | quarter decay | $0.6\,K_{cu}$ | $0.5\,T_u$ | $0.125\,T_u$ |
 | | some overshoot | $0.33\,K_{cu}$ | $0.5\,T_u$ | $0.333\,T_u$ |
 | | no overshoot | $0.2\,K_{cu}$ | $0.5\,T_u$ | $0.333\,T_u$ |
+:::
 
 ::: {.small .navy}
 Advantages: no model is needed, and the test is done on the real loop. Drawbacks: the plant is pushed to the edge of instability, and it takes time.

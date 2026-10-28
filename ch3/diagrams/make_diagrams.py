@@ -48,7 +48,7 @@ def imc():
     d.wire([q["r"], gp["l"]]); d.math(275, y - 20, "P"); d.wire([gp["r"], s3["l"]]); d.wire([s3["r"], (680, y)])
     d.math(668, y - 22, "C"); d.wire([(530, 14), gl["t"]]); d.math(548, 20, "L", anchor="start"); d.wire([gl["b"], s3["t"]])
     d.dot(290, y); d.wire([(290, y), (290, 245), mdl["l"]]); d.wire([mdl["r"], s4["l"]]); d.math(480, 225, "C̃")
-    d.dot(620, y); d.wire([(620, y), s4["t"]]) if False else d.wire([(620, y), (620, 200), (590, 200), s4["t"]])
+    d.dot(590, y); d.wire([(590, y), s4["t"]])
     d.wire([s4["b"], (590, 320), (70, 320), s1["b"]]); d.math(330, 340, "C − C̃", size=20)
     d.text(400, 290, "internal model", size=14, color=NAVY)
     d.text(330, 365, "only the model error is fed back", size=14, color=GREEN)

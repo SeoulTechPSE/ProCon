@@ -39,8 +39,8 @@
   <path d="M290,150 L290,245 L355.0,245" fill="none" stroke="#555" stroke-width="2" marker-end="url(#imc-arr)"/>
   <path d="M445.0,245 L577,245" fill="none" stroke="#555" stroke-width="2" marker-end="url(#imc-arr)"/>
   <text x="480" y="225" font-family="'Times New Roman', 'STIX Two Text', serif" font-style="italic" font-size="22" fill="#222" text-anchor="middle" dominant-baseline="central">C̃</text>
-  <circle cx="620" cy="150" r="4" fill="#222"/>
-  <path d="M620,150 L620,200 L590,200 L590,232" fill="none" stroke="#555" stroke-width="2" marker-end="url(#imc-arr)"/>
+  <circle cx="590" cy="150" r="4" fill="#222"/>
+  <path d="M590,150 L590,232" fill="none" stroke="#555" stroke-width="2" marker-end="url(#imc-arr)"/>
   <path d="M590,258 L590,320 L70,320 L70,163" fill="none" stroke="#555" stroke-width="2" marker-end="url(#imc-arr)"/>
   <text x="330" y="340" font-family="'Times New Roman', 'STIX Two Text', serif" font-style="italic" font-size="20" fill="#222" text-anchor="middle" dominant-baseline="central">C − C̃</text>
   <text x="400" y="290" font-size="14" fill="#333399" text-anchor="middle" font-weight="400" dominant-baseline="central">internal model</text>
