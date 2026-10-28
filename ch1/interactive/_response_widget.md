@@ -1,0 +1,106 @@
+```{=html}
+<div id="prw" class="prw">
+  <div class="prw-ctrl">
+    <label>model <select id="prw-m"><option value="1">first order</option><option value="2" selected>second order</option></select></label>
+    <label>input <select id="prw-u"><option value="step" selected>unit step</option><option value="imp">unit impulse</option></select></label>
+    <label><i>K</i> = <b id="prw-kv"></b><input id="prw-k" type="range" min="0.2" max="2" step="0.05" value="1"></label>
+    <label><i>τ</i> = <b id="prw-tv"></b><input id="prw-t" type="range" min="0.2" max="4" step="0.05" value="1"></label>
+  </div>
+  <div class="prw-ctrl">
+    <label><i>ζ</i> = <b id="prw-zv"></b><input id="prw-z" type="range" min="0" max="3" step="0.01" value="0.3"></label>
+    <label>zero <i>τ</i><sub>z</sub> = <b id="prw-zzv"></b><input id="prw-zz" type="range" min="-3" max="6" step="0.05" value="0"></label>
+    <label>dead time <i>θ</i> = <b id="prw-dv"></b><input id="prw-d" type="range" min="0" max="5" step="0.05" value="0"></label>
+  </div>
+  <div class="prw-body">
+    <canvas id="prw-cv" width="640" height="380"></canvas>
+    <canvas id="prw-pz" width="250" height="250"></canvas>
+    <div id="prw-info" class="prw-info"></div>
+  </div>
+</div>
+<style>
+.prw{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:19px;color:#222}
+.prw-ctrl{display:flex;flex-wrap:wrap;gap:18px;align-items:center;margin-bottom:6px}
+.prw-ctrl input[type=range]{width:160px;vertical-align:middle}
+.prw select{font-size:17px}
+.prw-body{display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap}
+.prw canvas{border:1px solid #ddd;border-radius:4px;max-width:100%;height:auto;background:#fff}
+.prw-info{font-size:17px;line-height:1.5;min-width:220px}
+.prw-info b{color:#333399}
+.prw-info .bad{color:#C00000;font-weight:700}
+</style>
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const cv=$('prw-cv'),g=cv.getContext('2d'),pz=$('prw-pz'),h=pz.getContext('2d');
+function sim(m,K,tau,z,tz,imp,T){
+  // z-state: m=1: tau z' + z = u ; m=2: tau^2 z'' + 2 zeta tau z' + z = u ; y = K (z + tz z')
+  const n=4000,dt=T/n,y=new Float64Array(n+1);
+  let x1=0,x2=0;
+  if(imp){ if(m===1){x1=1/tau;} else {x2=1/(tau*tau);} }   // impulse = initial condition
+  const u=imp?0:1;
+  const f=(a,b)=>m===1?[(u-a)/tau,0]:[b,(u-a-2*z*tau*b)/(tau*tau)];
+  for(let k=0;k<=n;k++){
+    const d=f(x1,x2); y[k]=K*(x1+tz*(m===1?d[0]:x2));
+    const k1=f(x1,x2),k2=f(x1+dt/2*k1[0],x2+dt/2*k1[1]),k3=f(x1+dt/2*k2[0],x2+dt/2*k2[1]),k4=f(x1+dt*k3[0],x2+dt*k3[1]);
+    x1+=dt/6*(k1[0]+2*k2[0]+2*k3[0]+k4[0]); x2+=dt/6*(k1[1]+2*k2[1]+2*k3[1]+k4[1]);
+  }
+  return{y,dt};
+}
+function draw(){
+  const m=+$('prw-m').value,imp=$('prw-u').value==='imp',K=+$('prw-k').value,tau=+$('prw-t').value,
+        z=+$('prw-z').value,tz=+$('prw-zz').value,th=+$('prw-d').value;
+  $('prw-kv').textContent=K.toFixed(2);$('prw-tv').textContent=tau.toFixed(2);$('prw-zv').textContent=m===2?z.toFixed(2):'—';
+  $('prw-zzv').textContent=tz.toFixed(2);$('prw-dv').textContent=th.toFixed(2);$('prw-z').disabled=m!==2;
+  const slow=m===1?tau:(z>=1?tau*(z+Math.sqrt(z*z-1)):(z>0?tau/z:40*tau));
+  const T=Math.min(Math.max(8*slow,6*tau)+th,60);
+  const {y,dt}=sim(m,K,tau,z,tz,imp,T);
+  const n=y.length; let lo=0,hi=0; for(let k=0;k<n;k++){lo=Math.min(lo,y[k]);hi=Math.max(hi,y[k]);}
+  if(!imp)hi=Math.max(hi,K); hi=hi*1.08+0.02; lo=Math.min(lo*1.08,0)-0.02;
+  const W=cv.width,H=cv.height,x0=56,x1=W-12,y0=12,y1=H-40;
+  g.clearRect(0,0,W,H);
+  const X=t=>x0+t/T*(x1-x0),Y=v=>y1-(v-lo)/(hi-lo)*(y1-y0);
+  g.font='15px system-ui';g.fillStyle='#555';g.strokeStyle='#999';g.strokeRect(x0,y0,x1-x0,y1-y0);
+  const st=[0.1,0.2,0.25,0.5,1,2,5].find(v=>(hi-lo)/v<=8);g.textAlign='right';
+  for(let v=Math.ceil(lo/st)*st;v<=hi;v+=st){g.strokeStyle='#eee';g.beginPath();g.moveTo(x0+1,Y(v));g.lineTo(x1-1,Y(v));g.stroke();g.fillText(+v.toFixed(2),x0-5,Y(v)+5);}
+  const ts=[1,2,5,10].find(v=>T/v<=8);g.textAlign='center';for(let t=0;t<=T+1e-9;t+=ts)g.fillText(t,X(t),y1+18);
+  g.fillText('time',(x0+x1)/2,H-4);
+  g.setLineDash([5,4]);g.strokeStyle='#999';g.beginPath();g.moveTo(x0,Y(0));g.lineTo(x1,Y(0));g.stroke();
+  if(!imp){g.beginPath();g.moveTo(x0,Y(K));g.lineTo(x1,Y(K));g.stroke();}
+  g.setLineDash([]);
+  g.save();g.beginPath();g.rect(x0,y0,x1-x0,y1-y0);g.clip();g.strokeStyle='#333399';g.lineWidth=2.6;g.beginPath();
+  g.moveTo(X(0),Y(0));g.lineTo(X(th),Y(0));
+  for(let k=0;k<n;k+=2){const t=k*dt+th;if(t>T)break;g.lineTo(X(t),Y(y[k]));}g.stroke();g.restore();
+  // poles and zeros
+  let poles=[];if(m===1)poles=[[-1/tau,0]];else if(z>=1){const r=Math.sqrt(z*z-1);poles=[[(-z+r)/tau,0],[(-z-r)/tau,0]];}
+  else{const r=Math.sqrt(1-z*z)/tau;poles=[[-z/tau,r],[-z/tau,-r]];}
+  const zero=tz!==0?-1/tz:null;
+  const S=pz.width,c=S/2;let R=1.2;poles.forEach(p=>R=Math.max(R,Math.abs(p[0])*1.15,Math.abs(p[1])*1.15));
+  if(zero!==null&&Math.abs(zero)<8)R=Math.max(R,Math.abs(zero)*1.15);
+  const P=v=>c+v/R*(c-14);
+  h.clearRect(0,0,S,S);h.fillStyle='rgba(192,0,0,0.06)';h.fillRect(c,0,S-c,S);
+  h.strokeStyle='#888';h.lineWidth=1;h.beginPath();h.moveTo(0,c);h.lineTo(S,c);h.moveTo(c,0);h.lineTo(c,S);h.stroke();
+  h.font='13px system-ui';h.fillStyle='#777';h.textAlign='left';h.fillText('Re',S-24,c-6);h.fillText('Im',c+5,13);
+  h.fillText('±'+(+R.toFixed(2)),4,c-6);
+  h.strokeStyle='#C00000';h.lineWidth=2.6;poles.forEach(p=>{const u=P(p[0]),v=S-P(p[1]);h.beginPath();h.moveTo(u-7,v-7);h.lineTo(u+7,v+7);h.moveTo(u+7,v-7);h.lineTo(u-7,v+7);h.stroke();});
+  if(zero!==null&&Math.abs(zero)<R){h.strokeStyle='#2E7D32';h.beginPath();h.arc(P(zero),c,7,0,2*Math.PI);h.stroke();}
+  // readouts
+  const f=v=>(Math.abs(v)<1e-9?'0':v.toFixed(3));
+  let s=`poles: <b>${poles.map(p=>p[1]?f(p[0])+(p[1]>0?' + ':' − ')+f(Math.abs(p[1]))+'j':f(p[0])).join(', ')}</b><br>`;
+  s+=`zero: <b>${zero===null?'none':f(zero)}</b>`+(zero!==null&&zero>0?' <span class="bad">(RHP)</span>':'')+'<br>';
+  if(!imp){
+    let pk=-1e9,tp=0;for(let k=0;k<n;k++)if(y[k]>pk){pk=y[k];tp=k*dt;}
+    let tsl=0;for(let k=n-1;k>=0;k--)if(Math.abs(y[k]-K)>0.02*K){tsl=(k+1)*dt;break;}
+    let mn=0;for(let k=0;k<n;k++)mn=Math.min(mn,y[k]);
+    s+=`final value <i>K</i> = <b>${K.toFixed(2)}</b><br>`;
+    if(pk>K*1.001)s+=`overshoot <b>${((pk-K)/K*100).toFixed(1)}%</b> at <i>t</i> = <b>${(tp+th).toFixed(2)}</b><br>`;
+    if(mn<-1e-3)s+=`<span class="bad">inverse response</span>, min ${mn.toFixed(3)}<br>`;
+    if(m===2&&z>0&&z<1&&tz===0)s+=`theory: OS = <b>${(100*Math.exp(-Math.PI*z/Math.sqrt(1-z*z))).toFixed(1)}%</b>, DR = <b>${Math.exp(-2*Math.PI*z/Math.sqrt(1-z*z)).toFixed(3)}</b><br>`;
+    s+=(m===2&&z===0)?'<span class="bad">undamped: never settles</span><br>':`2% settling time <b>${(tsl+th).toFixed(2)}</b><br>`;
+  }else s+=`impulse response decays to 0`+(m===2&&z===0?' <span class="bad">— not for ζ = 0</span>':'')+'<br>';
+  $('prw-info').innerHTML=s+'<span style="color:#777;font-size:14px">G(s) = K(τ<sub>z</sub>s+1)e<sup>−θs</sup>/(τs+1) or /(τ²s²+2ζτs+1)</span>';
+}
+['prw-m','prw-u','prw-k','prw-t','prw-z','prw-zz','prw-d'].forEach(id=>$(id).addEventListener('input',draw));
+draw();
+})();
+</script>
+```

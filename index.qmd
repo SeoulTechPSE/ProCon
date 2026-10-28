@@ -8,6 +8,7 @@ Lecture notes for **Process Dynamics and Control (공정제어)**. Slides are Qu
 
 | Chapter | Slides | PDF | Notebook |
 |:--|:--:|:--:|:--:|
+| 1. Mathematical Preliminaries & Dynamic Response | [HTML](ch1/ch1_dynamics.html) | [slides](ch1/ch1_dynamics.pdf) · [handout](ch1/ch1_dynamics_handout.pdf) | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch1/ch1_dynamics.ipynb) |
 | 2. Analysis of Single-Loop Control Systems | [HTML](ch2/ch2_analysis.html) | [slides](ch2/ch2_analysis.pdf) · [handout](ch2/ch2_analysis_handout.pdf) | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch2/ch2_analysis.ipynb) |
 | 3. Tuning of Single-Loop Control Systems | [HTML](ch3/ch3_tuning.html) | [slides](ch3/ch3_tuning.pdf) · [handout](ch3/ch3_tuning_handout.pdf) | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch3/ch3_tuning.ipynb) |
 | 4. Stability of Closed-Loop Systems | [HTML](ch4/ch4_stability.html) | [slides](ch4/ch4_stability.pdf) · [handout](ch4/ch4_stability_handout.pdf) | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch4/ch4_stability.ipynb) |
