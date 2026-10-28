@@ -787,7 +787,7 @@ Interactive version: [seoultechpse.github.io/ProCon/ch6/ch6_multiloop.html](http
 None of these replaces feedback: each one is built **around** a feedback loop.
 :::
 
-## [Problem #3]{.ex} &nbsp; (homework) [NEW]{.new}
+## [Problem #1]{.ex} &nbsp; (homework) [NEW]{.new}
 
 $$
 \mathbf G(s)=\begin{bmatrix}\dfrac{2e^{-s}}{10s+1} & \dfrac{1.5e^{-s}}{15s+1}\\[2mm] \dfrac{1.5e^{-s}}{15s+1} & \dfrac{2e^{-s}}{10s+1}\end{bmatrix}

@@ -1,0 +1,34 @@
+/* Course website (not the slides): chapter cards, buttons, footer */
+:root { --navy: #333399; --red: #C00000; --line: #e3e5ee; }
+
+/* home page uses page-layout: full; keep the text column readable */
+.page-full #quarto-content main { max-width: 1240px; margin: 0 auto; padding: 0 1.2rem; }
+
+.chapter-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.1rem; margin: 1.2rem 0 1.6rem; }
+.chapter-card { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 10px; overflow: hidden;
+  background: #fff; box-shadow: 0 1px 3px rgba(51, 51, 153, .06); transition: box-shadow .15s, transform .15s; }
+.chapter-card:hover { box-shadow: 0 6px 18px rgba(51, 51, 153, .14); transform: translateY(-2px); }
+.chapter-card .thumb { display: block; aspect-ratio: 16 / 9; background: #fff; border-bottom: 1px solid var(--line); }
+.chapter-card .thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.card-body { padding: .8rem 1rem 1rem; display: flex; flex-direction: column; gap: .45rem; flex: 1; }
+.card-num { font-size: .78rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--red);
+  display: flex; justify-content: space-between; align-items: baseline; }
+.card-num .updated { font-weight: 400; letter-spacing: 0; text-transform: none; color: #888; }
+.chapter-card h3 { font-size: 1.12rem; line-height: 1.3; margin: 0; border: 0; padding: 0; }
+.chapter-card h3 a { color: var(--navy); text-decoration: none; }
+.chapter-card .topics { font-size: .88rem; color: #555; margin: 0; flex: 1; }
+.chapter-card .links { display: flex; flex-wrap: wrap; gap: .3rem; }
+.chapter-card .btn { font-size: .8rem; padding: .24rem .48rem; border: 1px solid #ccd; border-radius: 6px; color: var(--navy);
+  text-decoration: none; background: #fff; white-space: nowrap; }
+.chapter-card .btn:hover { background: #f0f1fa; }
+.chapter-card .btn.primary { background: var(--navy); border-color: var(--navy); color: #fff; }
+.chapter-card .btn.primary:hover { background: #26267a; }
+.chapter-card .btn small { color: #888; font-size: .78em; margin-left: .1em; }
+.chapter-card .btn.primary small { color: #ccd; }
+.chapter-card .widgets { display: flex; flex-wrap: wrap; gap: .35rem; }
+.chapter-card .chip { font-size: .8rem; color: #2E7D32; background: #eef7ef; border-radius: 999px; padding: .15rem .6rem; text-decoration: none; }
+.chapter-card .chip:hover { background: #dff0e1; }
+
+/* footer */
+.nav-footer { font-size: .85rem; }
+.nav-footer a { text-decoration: none; }

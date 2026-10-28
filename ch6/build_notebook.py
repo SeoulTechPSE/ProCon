@@ -131,7 +131,7 @@ for col, (r1, r2) in enumerate([(1, 0), (0, 1)]):
     axs[1, col].set_xlabel('time')
 axs[0, 0].set_ylabel(r'$x_D$'); axs[1, 0].set_ylabel(r'$x_B$'); axs[0, 0].legend(); fig.tight_layout()""")
 
-md("## Problem #3 — (homework) start here")
+md("## Problem #1 — (homework) start here")
 code(r"""G3 = [[(2, 10, 1), (1.5, 15, 1)],
       [(1.5, 15, 1), (2, 10, 1)]]
 K3 = np.array([[g[0] for g in row] for row in G3])

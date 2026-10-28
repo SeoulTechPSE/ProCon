@@ -680,7 +680,7 @@ They **complement** each other; a design decision is often made only after both.
 | margins | `[GM,PM,wc,wg] = margin(L)` | `gm, pm, wc, wg = ct.margin(L)` |
 :::
 
-## [Problem #2]{.ex} &nbsp; (homework) [NEW]{.new}
+## [Problem #1]{.ex} &nbsp; (homework) [NEW]{.new}
 
 $$
 G_p=\frac{2e^{-s}}{10s+1},\qquad G_c=K_c\left(1+\frac{1}{\tau_Is}\right),\quad \tau_I=10

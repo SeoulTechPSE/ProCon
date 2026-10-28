@@ -21,10 +21,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0             # full history: per-chapter "updated" dates and recent changes
       - uses: quarto-dev/quarto-actions/setup@v2
         with:
           version: 1.6.42
-      - name: Render site          # code blocks are display-only, so no Python is needed here
+      - name: Render site          # pre-render runs tools/build_index.py (stdlib python3 only)
         run: quarto render
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -143,7 +143,7 @@ for K in (Kc, Kc_GM, Kc_PM):
     plt.plot(t, ct.step_response(ct.feedback(K*Gs, 1), t)[1], label=rf'$K_c={K:.2f}$')
 plt.legend();""")
 
-md("## Problem #2 — (homework) start here\n$G_p = 2e^{-s}/(10s+1)$, PI with $\\tau_I = 10$")
+md("## Problem #1 — (homework) start here\n$G_p = 2e^{-s}/(10s+1)$, PI with $\\tau_I = 10$")
 code(r"""Gp = ct.tf(2, [10, 1]); theta = 1.0; tI = 10
 w = np.logspace(-3, 2, 20000)
 g_star = Gp(1j*w)*np.exp(-1j*w*theta)*(1 + 1/(1j*w*tI))      # G*(jω)

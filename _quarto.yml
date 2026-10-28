@@ -1,26 +1,50 @@
 project:
   type: website
   output-dir: _site
+  pre-render: python3 tools/build_index.py     # chapter cards, updates, contents, problems, README table
   render:
     - index.qmd
+    - contents.qmd
+    - problems.qmd
     - ch*/ch*_*.qmd
   resources:
     - "ch*/*.pdf"
     - "ch*/interactive/*.html"
+    - "assets/og-card.png"
+    - "assets/apple-touch-icon.png"
 
 website:
   title: "Process Dynamics and Control"
+  description: "Lecture slides, PDFs and Colab notebooks for Process Dynamics and Control (공정제어), SeoulTech"
   site-url: "https://seoultechpse.github.io/ProCon/"
   repo-url: "https://github.com/SeoulTechPSE/ProCon"
+  favicon: assets/favicon.png
+  image: assets/og-card.png
+  open-graph: true
+  twitter-card: true
   navbar:
     left:
       - href: index.qmd
         text: Home
+      - href: contents.qmd
+        text: Slide contents
+      - href: problems.qmd
+        text: Problems
     right:
+      - icon: github
+        href: "https://github.com/SeoulTechPSE/ProCon"
+  page-footer:
+    left: "© 2026 Kee-Youn Yoo · Department of Chemical & Biomolecular Engineering, SeoulTech"
+    right:
+      - text: "CC BY-NC 4.0"
+        href: "https://creativecommons.org/licenses/by-nc/4.0/"
+      - text: "kyyoo@seoultech.ac.kr"
+        href: "mailto:kyyoo@seoultech.ac.kr"
       - icon: github
         href: "https://github.com/SeoulTechPSE/ProCon"
 
 format:
   html:
     theme: cosmo
+    css: assets/site.css
     toc: false

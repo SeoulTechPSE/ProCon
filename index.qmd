@@ -2,22 +2,21 @@
 title: "Process Dynamics and Control"
 subtitle: "공정제어 · Department of Chemical & Biomolecular Engineering, SeoulTech"
 author: "Kee-Youn Yoo"
+page-layout: full
+image: assets/og-card.png
+description: "Lecture slides, PDFs, Colab notebooks and interactive explorers for Process Dynamics and Control (공정제어), SeoulTech"
 ---
 
-Lecture notes for **Process Dynamics and Control (공정제어)**. Slides are Quarto/reveal.js decks; every calculation is reproduced in a Python notebook (MATLAB code is shown alongside).
+Lecture notes for **Process Dynamics and Control (공정제어)**. Slides are Quarto/reveal.js decks; every calculation is reproduced in a Python notebook (MATLAB code is shown alongside). Green chips open the interactive explorers on their own page.
 
-| Chapter | Slides | PDF | Notebook |
-|:--|:--:|:--:|:--:|
-| 1. Mathematical Preliminaries & Dynamic Response | [HTML](ch1/ch1_dynamics.html) | [slides](ch1/ch1_dynamics.pdf) · [handout](ch1/ch1_dynamics_handout.pdf) | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch1/ch1_dynamics.ipynb) |
-| 2. Analysis of Single-Loop Control Systems | [HTML](ch2/ch2_analysis.html) | [slides](ch2/ch2_analysis.pdf) · [handout](ch2/ch2_analysis_handout.pdf) | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch2/ch2_analysis.ipynb) |
-| 3. Tuning of Single-Loop Control Systems | [HTML](ch3/ch3_tuning.html) | [slides](ch3/ch3_tuning.pdf) · [handout](ch3/ch3_tuning_handout.pdf) | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch3/ch3_tuning.ipynb) |
-| 4. Stability of Closed-Loop Systems | [HTML](ch4/ch4_stability.html) | [slides](ch4/ch4_stability.pdf) · [handout](ch4/ch4_stability_handout.pdf) | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch4/ch4_stability.ipynb) |
-| 5. Frequency-Response Analysis & Design | [HTML](ch5/ch5_frequency.html) | [slides](ch5/ch5_frequency.pdf) · [handout](ch5/ch5_frequency_handout.pdf) | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch5/ch5_frequency.ipynb) |
-| 6. Multi-loop Systems | [HTML](ch6/ch6_multiloop.html) | [slides](ch6/ch6_multiloop.pdf) · [handout](ch6/ch6_multiloop_handout.pdf) | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch6/ch6_multiloop.ipynb) |
+{{< include _chapters.md >}}
 
 **How to use**
 
-- **HTML slides** — the main version: interactive widgets, Python/MATLAB code tabs with copy buttons. Press `F` for full screen, `S` for speaker view, `Esc` for the slide overview.
-- **PDF (slides)** — one slide per page, for tablets (GoodNotes, Notability, …).
-- **PDF (handout)** — A4, three slides per page with ruled note space, for printing.
-- **Notebook** — opens in Google Colab; run all cells to reproduce the figures.
+- **Slides (HTML)** — the main version: interactive widgets, Python/MATLAB code tabs with copy buttons. Press `F` for full screen, `S` for speaker view, `Esc` for the slide overview.
+- **PDF** — one slide per page, for tablets (GoodNotes, Notability, …).
+- **Handout** — A4, three slides per page with ruled note space, for printing.
+- **Colab** — opens the chapter notebook in Google Colab; run all cells to reproduce the figures.
+- **[Slide contents](contents.qmd)** lists every slide (searchable) and **[Homework problems](problems.qmd)** collects the problems of all chapters.
+
+{{< include _updates.md >}}

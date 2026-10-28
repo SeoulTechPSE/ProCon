@@ -4,21 +4,26 @@ Lecture slides for Process Dynamics and Control, Department of Chemical & Biomol
 
 **Site:** <https://seoultechpse.github.io/ProCon/>
 
-| Chapter | Source | Slides | PDF | Notebook |
+<!-- chapters:start -->
+| Chapter | Topics | Slides | PDF | Notebook |
 |:--|:--|:--|:--|:--|
-| 1. Mathematical Preliminaries & Dynamic Response | [`ch1/`](ch1) | [HTML](https://seoultechpse.github.io/ProCon/ch1/ch1_dynamics.html) | [slides](ch1/ch1_dynamics.pdf) · [handout](ch1/ch1_dynamics_handout.pdf) | [Colab](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch1/ch1_dynamics.ipynb) |
-| 2. Analysis of Single-Loop Control Systems | [`ch2/`](ch2) | [HTML](https://seoultechpse.github.io/ProCon/ch2/ch2_analysis.html) | [slides](ch2/ch2_analysis.pdf) · [handout](ch2/ch2_analysis_handout.pdf) | [Colab](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch2/ch2_analysis.ipynb) |
-| 3. Tuning of Single-Loop Control Systems | [`ch3/`](ch3) | [HTML](https://seoultechpse.github.io/ProCon/ch3/ch3_tuning.html) | [slides](ch3/ch3_tuning.pdf) · [handout](ch3/ch3_tuning_handout.pdf) | [Colab](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch3/ch3_tuning.ipynb) |
-| 4. Stability of Closed-Loop Systems | [`ch4/`](ch4) | [HTML](https://seoultechpse.github.io/ProCon/ch4/ch4_stability.html) | [slides](ch4/ch4_stability.pdf) · [handout](ch4/ch4_stability_handout.pdf) | [Colab](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch4/ch4_stability.ipynb) |
-| 5. Frequency-Response Analysis & Design | [`ch5/`](ch5) | [HTML](https://seoultechpse.github.io/ProCon/ch5/ch5_frequency.html) | [slides](ch5/ch5_frequency.pdf) · [handout](ch5/ch5_frequency_handout.pdf) | [Colab](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch5/ch5_frequency.ipynb) |
-| 6. Multi-loop Systems | [`ch6/`](ch6) | [HTML](https://seoultechpse.github.io/ProCon/ch6/ch6_multiloop.html) | [slides](ch6/ch6_multiloop.pdf) · [handout](ch6/ch6_multiloop_handout.pdf) | [Colab](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch6/ch6_multiloop.ipynb) |
+| [1. Mathematical Preliminaries & Dynamic Response](ch1) | Laplace transform, partial fractions, poles & zeros, 1st/2nd-order response, dead time & Padé, FOPDT approximation | [HTML](https://seoultechpse.github.io/ProCon/ch1/ch1_dynamics.html) | [slides](ch1/ch1_dynamics.pdf) · [handout](ch1/ch1_dynamics_handout.pdf) | [Colab](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch1/ch1_dynamics.ipynb) |
+| [2. Analysis of Single-Loop Control Systems](ch2) | block diagrams, closed-loop transfer functions, P / PI / PD / PID, offset, reset windup, derivative kick | [HTML](https://seoultechpse.github.io/ProCon/ch2/ch2_analysis.html) | [slides](ch2/ch2_analysis.pdf) · [handout](ch2/ch2_analysis_handout.pdf) | [Colab](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch2/ch2_analysis.ipynb) |
+| [3. Tuning of Single-Loop Control Systems](ch3) | process reaction curve, Ziegler–Nichols, Cohen–Coon, ITAE, direct synthesis, IMC | [HTML](https://seoultechpse.github.io/ProCon/ch3/ch3_tuning.html) | [slides](ch3/ch3_tuning.pdf) · [handout](ch3/ch3_tuning_handout.pdf) | [Colab](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch3/ch3_tuning.ipynb) |
+| [4. Stability of Closed-Loop Systems](ch4) | characteristic equation, Routh–Hurwitz, root locus, dead time & RHP zeros | [HTML](https://seoultechpse.github.io/ProCon/ch4/ch4_stability.html) | [slides](ch4/ch4_stability.pdf) · [handout](ch4/ch4_stability_handout.pdf) | [Colab](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch4/ch4_stability.ipynb) |
+| [5. Frequency-Response Analysis & Design](ch5) | Bode & Nyquist plots, Bode/Nyquist stability, gain & phase margins, tuning by margins | [HTML](https://seoultechpse.github.io/ProCon/ch5/ch5_frequency.html) | [slides](ch5/ch5_frequency.pdf) · [handout](ch5/ch5_frequency_handout.pdf) | [Colab](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch5/ch5_frequency.ipynb) |
+| [6. Multi-loop Systems](ch6) | cascade, feedforward, Smith predictor, ratio control, RGA & decoupling | [HTML](https://seoultechpse.github.io/ProCon/ch6/ch6_multiloop.html) | [slides](ch6/ch6_multiloop.pdf) · [handout](ch6/ch6_multiloop_handout.pdf) | [Colab](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch6/ch6_multiloop.ipynb) |
+<!-- chapters:end -->
 
 ## Layout
 
 ```
 _quarto.yml            website project (renders to _site/, not committed)
 .github/workflows/     publish.yml: renders and deploys the site to GitHub Pages on every push
-index.qmd              course home page
+index.qmd              course home page (cards, updates: generated pieces _chapters.md, _updates.md)
+contents.qmd, problems.qmd  generated slide contents and problem index
+tools/chapters.py      single source of truth for chapters (title, topics, thumbnail, widgets)
+tools/build_index.py   writes the generated pieces + the table above (Quarto pre-render)
 assets/procon.css      slide theme + print rules (shared by all chapters)
 tools/                 make_pdf.py, make_handout.py, build_chapter.sh, svgdiagram.py (shared SVG diagram helper)
 ch4/
