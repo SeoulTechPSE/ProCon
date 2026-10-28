@@ -6,6 +6,7 @@ Lecture slides for Process Dynamics and Control, Department of Chemical & Biomol
 
 | Chapter | Source | Slides | PDF | Notebook |
 |:--|:--|:--|:--|:--|
+| 2. Analysis of Single-Loop Control Systems | [`ch2/`](ch2) | [HTML](https://seoultechpse.github.io/ProCon/ch2/ch2_analysis.html) | [slides](ch2/ch2_analysis.pdf) · [handout](ch2/ch2_analysis_handout.pdf) | [Colab](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch2/ch2_analysis.ipynb) |
 | 3. Tuning of Single-Loop Control Systems | [`ch3/`](ch3) | [HTML](https://seoultechpse.github.io/ProCon/ch3/ch3_tuning.html) | [slides](ch3/ch3_tuning.pdf) · [handout](ch3/ch3_tuning_handout.pdf) | [Colab](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch3/ch3_tuning.ipynb) |
 | 4. Stability of Closed-Loop Systems | [`ch4/`](ch4) | [HTML](https://seoultechpse.github.io/ProCon/ch4/ch4_stability.html) | [slides](ch4/ch4_stability.pdf) · [handout](ch4/ch4_stability_handout.pdf) | [Colab](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch4/ch4_stability.ipynb) |
 | 5. Frequency-Response Analysis & Design | [`ch5/`](ch5) | [HTML](https://seoultechpse.github.io/ProCon/ch5/ch5_frequency.html) | [slides](ch5/ch5_frequency.pdf) · [handout](ch5/ch5_frequency_handout.pdf) | [Colab](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch5/ch5_frequency.ipynb) |
@@ -39,6 +40,7 @@ PDFs, figures and notebooks are built locally and committed in each `chN/` folde
 ```bash
 pip install control sympy scipy matplotlib nbformat playwright pymupdf
 playwright install chromium
+tools/build_chapter.sh ch2 ch2_analysis "Ch. 2 Analysis of Single-Loop Control Systems"
 tools/build_chapter.sh ch3 ch3_tuning "Ch. 3 Tuning of Single-Loop Control Systems"
 tools/build_chapter.sh ch4 ch4_stability "Ch. 4 Stability of Closed-Loop Systems"
 tools/build_chapter.sh ch5 ch5_frequency "Ch. 5 Frequency-Response Analysis & Design"
