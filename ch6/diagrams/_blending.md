@@ -8,7 +8,7 @@
   <path d="M20,70 L160,70" fill="none" stroke="#222" stroke-width="2.4"/>
   <path d="M161,59.6 L187,80.4 L187,59.6 L161,80.4 Z" fill="#fff" stroke="#222" stroke-width="2"/>
   <path d="M174,70 L174,48 M162,48 A12,12 0 0 1 186,48 Z" fill="#fff" stroke="#222" stroke-width="2"/>
-  <path d="M188,70 L300,70 L300,180" fill="none" stroke="#222" stroke-width="2.4" marker-end="url(#blending-arr)"/>
+  <path d="M188,70 L300,70 L300,199" fill="none" stroke="#222" stroke-width="2.4" marker-end="url(#blending-arr)"/>
   <text x="110" y="48" font-family="'Times New Roman', 'STIX Two Text', serif" font-style="italic" font-size="20" fill="#222" text-anchor="middle" dominant-baseline="central">m<tspan dy="0.32em" font-size="72%">1</tspan><tspan dy="-0.32em">​</tspan></text>
   <text x="110" y="96" font-size="14" fill="#666" text-anchor="middle" font-weight="400" dominant-baseline="central">pure A</text>
   <path d="M20,200 L160,200" fill="none" stroke="#222" stroke-width="2.4"/>

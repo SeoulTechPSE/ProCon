@@ -535,16 +535,16 @@ Same result from the gains: $\kappa=K_{12}K_{21}/(K_{11}K_{22})=-m_1/m_2$
 ## Reading the RGA: pairing rules [FIX]{.fix}
 
 | $\lambda_{ij}$ | $\kappa$ (2×2) | meaning | pair $m_j$–$c_i$? |
-|:--:|:--:|:--------------------------|:--------------:|
+|:----------:|:----------:|:------------------------------------------|:--------------:|
 | $1$ | $0$ | no interaction from the other loop | **yes, ideal** |
 | $0.5$–$1$ | $<0$ | closing the other loop **raises** this loop's gain | yes |
 | $>1$ | $0$–$1$ | closing the other loop **lowers** the gain | yes; avoid $\lambda\gg1$ |
-| $0.5$ | $-1$ | the other loop doubles the gain: both pairings equally bad | — |
+| $0.5$ | $-1$ | the other loop doubles the gain; both pairings bad | — |
 | $0$ | — | $m_j$ has no effect on $c_i$ | **no** |
 | $<0$ | $>1$ | the gain **changes sign** when the other loop closes | **never** |
 
 ::: {.small .navy}
-Rule: pair on relative gains that are **positive and closest to 1**. (The original said $\lambda>1$ means "all gains have the same sign"; it is the **sign of $\kappa$** that matters — Ex 6.6 has mixed signs and $\lambda=1.91$.)
+Rule: pair on relative gains that are **positive and closest to 1**. The **sign of $\kappa$** decides the case, not the signs of the gains (Ex 6.6: mixed signs, $\lambda=1.91$).
 :::
 
 ## [Example 6.5]{.ex} &nbsp; Pairing depends on the operating point

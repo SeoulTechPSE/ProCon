@@ -330,7 +330,7 @@ def smith():
 def blending():
     d = SVG("blending", 1000, 330, "Blending process and its 2x2 transfer-function model")
     # process
-    d.pipe([(20, 70), (160, 70)], arrow=False); a1 = d.valve(174, 70); d.pipe([(188, 70), (300, 70), (300, 180)], arrow=True)
+    d.pipe([(20, 70), (160, 70)], arrow=False); a1 = d.valve(174, 70); d.pipe([(188, 70), (300, 70), (300, 199)], arrow=True)
     d.math(110, 48, "m_{1}", size=20); d.text(110, 96, "pure A", size=14, color="#666")
     d.pipe([(20, 200), (160, 200)], arrow=False); a2 = d.valve(174, 200)
     d.pipe([(188, 200), (470, 200)], arrow=True); d.math(110, 178, "m_{2}", size=20)
