@@ -1,6 +1,6 @@
 %% Ch.6 — Example 6.1 in code
 % Process Dynamics and Control, SeoulTech — slide 12
-% https://seoultechpse.github.io/ProCon/ch6/ch6_multiloop.html#/11
+% https://seoultechpse.github.io/ProCon/ch6/ch6_multiloop.html#/2/9
 % Requires: Control System Toolbox
 
 clear; close all; clc

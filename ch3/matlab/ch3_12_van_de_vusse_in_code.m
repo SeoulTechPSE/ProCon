@@ -1,6 +1,6 @@
 %% Ch.3 — Van de Vusse in code
 % Process Dynamics and Control, SeoulTech — slide 13
-% https://seoultechpse.github.io/ProCon/ch3/ch3_tuning.html#/12
+% https://seoultechpse.github.io/ProCon/ch3/ch3_tuning.html#/2/10
 % Requires: Control System Toolbox
 
 clear; close all; clc

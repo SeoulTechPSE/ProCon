@@ -9,73 +9,73 @@ subtitle: "Every slide of every chapter — use the search box (top right) to fi
 
 **[1.1 Process Models and Deviation Variables](ch1/ch1_dynamics.html#/2)**
 
-- [A simple differential-equation model](ch1/ch1_dynamics.html#/3)
-- [Linearization of nonlinear models](ch1/ch1_dynamics.html#/4)
-- [Example 1.1 Linearize a mixed vessel](ch1/ch1_dynamics.html#/5)
-- [Example 1.2 Stirred-tank heater](ch1/ch1_dynamics.html#/6)
-- [Example 1.3 Non-isothermal CSTR](ch1/ch1_dynamics.html#/7)
-- [Problem #1 (homework)](ch1/ch1_dynamics.html#/8)
+- [A simple differential-equation model](ch1/ch1_dynamics.html#/2/1)
+- [Linearization of nonlinear models](ch1/ch1_dynamics.html#/2/2)
+- [Example 1.1 Linearize a mixed vessel](ch1/ch1_dynamics.html#/2/3)
+- [Example 1.2 Stirred-tank heater](ch1/ch1_dynamics.html#/2/4)
+- [Example 1.3 Non-isothermal CSTR](ch1/ch1_dynamics.html#/2/5)
+- [Problem #1 (homework)](ch1/ch1_dynamics.html#/2/6)
 
-**[1.2 Laplace Transform](ch1/ch1_dynamics.html#/9)**
+**[1.2 Laplace Transform](ch1/ch1_dynamics.html#/3)**
 
-- [Definition and the look-up table approach](ch1/ch1_dynamics.html#/10)
-- [Transforms of common functions](ch1/ch1_dynamics.html#/11)
-- [Inputs common to control problems](ch1/ch1_dynamics.html#/12)
-- [Initial- and final-value theorems](ch1/ch1_dynamics.html#/13)
+- [Definition and the look-up table approach](ch1/ch1_dynamics.html#/3/1)
+- [Transforms of common functions](ch1/ch1_dynamics.html#/3/2)
+- [Inputs common to control problems](ch1/ch1_dynamics.html#/3/3)
+- [Initial- and final-value theorems](ch1/ch1_dynamics.html#/3/4)
 
-**[1.3 Partial-Fraction Expansion](ch1/ch1_dynamics.html#/14)**
+**[1.3 Partial-Fraction Expansion](ch1/ch1_dynamics.html#/4)**
 
-- [Breaking $F(s)$ into table entries](ch1/ch1_dynamics.html#/15)
-- [Example 1.5 Case 1: distinct real roots](ch1/ch1_dynamics.html#/16)
-- [Example 1.6 Case 2: complex roots](ch1/ch1_dynamics.html#/17)
-- [Example 1.7 Case 3: repeated roots](ch1/ch1_dynamics.html#/18)
-- [Partial fractions by computer](ch1/ch1_dynamics.html#/19)
-- [Problem #2 (homework)](ch1/ch1_dynamics.html#/20)
+- [Breaking $F(s)$ into table entries](ch1/ch1_dynamics.html#/4/1)
+- [Example 1.5 Case 1: distinct real roots](ch1/ch1_dynamics.html#/4/2)
+- [Example 1.6 Case 2: complex roots](ch1/ch1_dynamics.html#/4/3)
+- [Example 1.7 Case 3: repeated roots](ch1/ch1_dynamics.html#/4/4)
+- [Partial fractions by computer](ch1/ch1_dynamics.html#/4/5)
+- [Problem #2 (homework)](ch1/ch1_dynamics.html#/4/6)
 
-**[1.4 Transfer Functions, Poles and Zeros](ch1/ch1_dynamics.html#/21)**
+**[1.4 Transfer Functions, Poles and Zeros](ch1/ch1_dynamics.html#/5)**
 
-- [The transfer function](ch1/ch1_dynamics.html#/22)
-- [Poles tell the shape of the response](ch1/ch1_dynamics.html#/23)
-- [Back to the first-order tank: step and impulse](ch1/ch1_dynamics.html#/24)
+- [The transfer function](ch1/ch1_dynamics.html#/5/1)
+- [Poles tell the shape of the response](ch1/ch1_dynamics.html#/5/2)
+- [Back to the first-order tank: step and impulse](ch1/ch1_dynamics.html#/5/3)
 
-**[1.5 First-Order Systems](ch1/ch1_dynamics.html#/25)**
+**[1.5 First-Order Systems](ch1/ch1_dynamics.html#/6)**
 
-- [First-order model](ch1/ch1_dynamics.html#/26)
-- [Effect of $\tau$ and $K$](ch1/ch1_dynamics.html#/27)
-- [Ramp input and the integrating process](ch1/ch1_dynamics.html#/28)
-- [Example 1.8 Two stirred tanks in series](ch1/ch1_dynamics.html#/29)
-- [Problem #3 (homework)](ch1/ch1_dynamics.html#/30)
+- [First-order model](ch1/ch1_dynamics.html#/6/1)
+- [Effect of $\tau$ and $K$](ch1/ch1_dynamics.html#/6/2)
+- [Ramp input and the integrating process](ch1/ch1_dynamics.html#/6/3)
+- [Example 1.8 Two stirred tanks in series](ch1/ch1_dynamics.html#/6/4)
+- [Problem #3 (homework)](ch1/ch1_dynamics.html#/6/5)
 
-**[1.6 Second-Order Systems](ch1/ch1_dynamics.html#/31)**
+**[1.6 Second-Order Systems](ch1/ch1_dynamics.html#/7)**
 
-- [Second-order model](ch1/ch1_dynamics.html#/32)
-- [Example 1.9 Oscillations of a damped manometer](ch1/ch1_dynamics.html#/33)
-- [Step response of a second-order model](ch1/ch1_dynamics.html#/34)
-- [Features of the underdamped step response](ch1/ch1_dynamics.html#/35)
-- [Second-order responses in code](ch1/ch1_dynamics.html#/36)
-- [Problem #4 (homework)](ch1/ch1_dynamics.html#/37)
+- [Second-order model](ch1/ch1_dynamics.html#/7/1)
+- [Example 1.9 Oscillations of a damped manometer](ch1/ch1_dynamics.html#/7/2)
+- [Step response of a second-order model](ch1/ch1_dynamics.html#/7/3)
+- [Features of the underdamped step response](ch1/ch1_dynamics.html#/7/4)
+- [Second-order responses in code](ch1/ch1_dynamics.html#/7/5)
+- [Problem #4 (homework)](ch1/ch1_dynamics.html#/7/6)
 
-**[1.7 Processes with Dead Time](ch1/ch1_dynamics.html#/38)**
+**[1.7 Processes with Dead Time](ch1/ch1_dynamics.html#/8)**
 
-- [Dead time (time delay, transport lag)](ch1/ch1_dynamics.html#/39)
-- [Example 1.10 Padé approximation of $e^{-3s}/(10s+1)$](ch1/ch1_dynamics.html#/40)
-- [Problem #5 (homework)](ch1/ch1_dynamics.html#/41)
+- [Dead time (time delay, transport lag)](ch1/ch1_dynamics.html#/8/1)
+- [Example 1.10 Padé approximation of $e^{-3s}/(10s+1)$](ch1/ch1_dynamics.html#/8/2)
+- [Problem #5 (homework)](ch1/ch1_dynamics.html#/8/3)
 
-**[1.8 Higher-Order Processes and Approximations](ch1/ch1_dynamics.html#/42)**
+**[1.8 Higher-Order Processes and Approximations](ch1/ch1_dynamics.html#/9)**
 
-- [Non-interacting tanks in series](ch1/ch1_dynamics.html#/43)
-- [Example 1.11 Low-order approximation with dead time](ch1/ch1_dynamics.html#/44)
-- [Interacting tanks](ch1/ch1_dynamics.html#/45)
-- [Problem #6 (homework) Blending tank and transfer pipe](ch1/ch1_dynamics.html#/46)
+- [Non-interacting tanks in series](ch1/ch1_dynamics.html#/9/1)
+- [Example 1.11 Low-order approximation with dead time](ch1/ch1_dynamics.html#/9/2)
+- [Interacting tanks](ch1/ch1_dynamics.html#/9/3)
+- [Problem #6 (homework) Blending tank and transfer pipe](ch1/ch1_dynamics.html#/9/4)
 
-**[1.9 Effect of Zeros](ch1/ch1_dynamics.html#/47)**
+**[1.9 Effect of Zeros](ch1/ch1_dynamics.html#/10)**
 
-- [Lead-lag element](ch1/ch1_dynamics.html#/48)
-- [Transfer functions in parallel](ch1/ch1_dynamics.html#/49)
-- [Problem #7 (homework)](ch1/ch1_dynamics.html#/50)
-- [Interactive: poles, zeros, dead time](ch1/ch1_dynamics.html#/51)
-- [Summary](ch1/ch1_dynamics.html#/52)
-- [Resources](ch1/ch1_dynamics.html#/53)
+- [Lead-lag element](ch1/ch1_dynamics.html#/10/1)
+- [Transfer functions in parallel](ch1/ch1_dynamics.html#/10/2)
+- [Problem #7 (homework)](ch1/ch1_dynamics.html#/10/3)
+- [Interactive: poles, zeros, dead time](ch1/ch1_dynamics.html#/10/4)
+- [Summary](ch1/ch1_dynamics.html#/10/5)
+- [Resources](ch1/ch1_dynamics.html#/10/6)
 
 ## 2. Analysis of Single-Loop Control Systems
 
@@ -83,46 +83,46 @@ subtitle: "Every slide of every chapter — use the search box (top right) to fi
 
 **[2.1 Classical Feedback Control System](ch2/ch2_analysis.html#/2)**
 
-- [A liquid-level loop](ch2/ch2_analysis.html#/3)
-- [Block-diagram algebra](ch2/ch2_analysis.html#/4)
-- [The standard loop: stirred-tank heater](ch2/ch2_analysis.html#/5)
-- [Servo and regulator problems](ch2/ch2_analysis.html#/6)
-- [Choosing the controlled and manipulated variables](ch2/ch2_analysis.html#/7)
-- [Problem #1 (homework)](ch2/ch2_analysis.html#/8)
-- [Hardware around the loop](ch2/ch2_analysis.html#/9)
-- [Sensor and transmitter: $G_m$](ch2/ch2_analysis.html#/10)
-- [Actuator: the control valve, $G_a$](ch2/ch2_analysis.html#/11)
-- [The heater loop assembled](ch2/ch2_analysis.html#/12)
+- [A liquid-level loop](ch2/ch2_analysis.html#/2/1)
+- [Block-diagram algebra](ch2/ch2_analysis.html#/2/2)
+- [The standard loop: stirred-tank heater](ch2/ch2_analysis.html#/2/3)
+- [Servo and regulator problems](ch2/ch2_analysis.html#/2/4)
+- [Choosing the controlled and manipulated variables](ch2/ch2_analysis.html#/2/5)
+- [Problem #1 (homework)](ch2/ch2_analysis.html#/2/6)
+- [Hardware around the loop](ch2/ch2_analysis.html#/2/7)
+- [Sensor and transmitter: $G_m$](ch2/ch2_analysis.html#/2/8)
+- [Actuator: the control valve, $G_a$](ch2/ch2_analysis.html#/2/9)
+- [The heater loop assembled](ch2/ch2_analysis.html#/2/10)
 
-**[2.2 PID Controllers](ch2/ch2_analysis.html#/13)**
+**[2.2 PID Controllers](ch2/ch2_analysis.html#/3)**
 
-- [Proportional control](ch2/ch2_analysis.html#/14)
-- [Proportional-integral control](ch2/ch2_analysis.html#/15)
-- [The price of integral action](ch2/ch2_analysis.html#/16)
-- [Derivative action](ch2/ch2_analysis.html#/17)
-- [Derivative kick](ch2/ch2_analysis.html#/18)
-- [PID control and its forms](ch2/ch2_analysis.html#/19)
-- [The three modes side by side](ch2/ch2_analysis.html#/20)
-- [Problem #2 (homework)](ch2/ch2_analysis.html#/21)
+- [Proportional control](ch2/ch2_analysis.html#/3/1)
+- [Proportional-integral control](ch2/ch2_analysis.html#/3/2)
+- [The price of integral action](ch2/ch2_analysis.html#/3/3)
+- [Derivative action](ch2/ch2_analysis.html#/3/4)
+- [Derivative kick](ch2/ch2_analysis.html#/3/5)
+- [PID control and its forms](ch2/ch2_analysis.html#/3/6)
+- [The three modes side by side](ch2/ch2_analysis.html#/3/7)
+- [Problem #2 (homework)](ch2/ch2_analysis.html#/3/8)
 
-**[2.3 Closed-Loop System Response](ch2/ch2_analysis.html#/22)**
+**[2.3 Closed-Loop System Response](ch2/ch2_analysis.html#/4)**
 
-- [Unity-feedback servo loop](ch2/ch2_analysis.html#/23)
-- [Example 2.1 P control, first-order process](ch2/ch2_analysis.html#/24)
-- [Example 2.2 P control, second-order overdamped process](ch2/ch2_analysis.html#/25)
-- [Example 2.3 PI control, first-order process](ch2/ch2_analysis.html#/26)
-- [Example 2.4 PD control, first-order process](ch2/ch2_analysis.html#/27)
-- [Example 2.5 P control, integrating process](ch2/ch2_analysis.html#/28)
-- [Examples 2.1–2.5 at a glance](ch2/ch2_analysis.html#/29)
-- [Example 2.6 Closed-loop simulation](ch2/ch2_analysis.html#/30)
-- [Interactive: try the modes yourself](ch2/ch2_analysis.html#/31)
+- [Unity-feedback servo loop](ch2/ch2_analysis.html#/4/1)
+- [Example 2.1 P control, first-order process](ch2/ch2_analysis.html#/4/2)
+- [Example 2.2 P control, second-order overdamped process](ch2/ch2_analysis.html#/4/3)
+- [Example 2.3 PI control, first-order process](ch2/ch2_analysis.html#/4/4)
+- [Example 2.4 PD control, first-order process](ch2/ch2_analysis.html#/4/5)
+- [Example 2.5 P control, integrating process](ch2/ch2_analysis.html#/4/6)
+- [Examples 2.1–2.5 at a glance](ch2/ch2_analysis.html#/4/7)
+- [Example 2.6 Closed-loop simulation](ch2/ch2_analysis.html#/4/8)
+- [Interactive: try the modes yourself](ch2/ch2_analysis.html#/4/9)
 
-**[2.4 Choice of Controllers](ch2/ch2_analysis.html#/32)**
+**[2.4 Choice of Controllers](ch2/ch2_analysis.html#/5)**
 
-- [Which mode for which variable?](ch2/ch2_analysis.html#/33)
-- [Problem #3 (homework) Blending tank](ch2/ch2_analysis.html#/34)
-- [Summary](ch2/ch2_analysis.html#/35)
-- [Resources](ch2/ch2_analysis.html#/36)
+- [Which mode for which variable?](ch2/ch2_analysis.html#/5/1)
+- [Problem #3 (homework) Blending tank](ch2/ch2_analysis.html#/5/2)
+- [Summary](ch2/ch2_analysis.html#/5/3)
+- [Resources](ch2/ch2_analysis.html#/5/4)
 
 ## 3. Tuning of Single-Loop Control Systems
 
@@ -130,37 +130,37 @@ subtitle: "Every slide of every chapter — use the search box (top right) to fi
 
 **[3.1 Tuning with Empirical Relations](ch3/ch3_tuning.html#/2)**
 
-- [Empirical tuning in practice](ch3/ch3_tuning.html#/3)
-- [Process-reaction curve: the open-loop step test](ch3/ch3_tuning.html#/4)
-- [Fitting the FOPDT model](ch3/ch3_tuning.html#/5)
-- [Ziegler–Nichols and Cohen–Coon (open-loop test)](ch3/ch3_tuning.html#/6)
-- [Minimum error-integral criteria](ch3/ch3_tuning.html#/7)
-- [Minimum-ITAE tuning relations](ch3/ch3_tuning.html#/8)
-- [Ziegler–Nichols ultimate-cycle method (closed-loop test)](ch3/ch3_tuning.html#/9)
-- [Ziegler–Nichols ultimate-cycle settings](ch3/ch3_tuning.html#/10)
-- [Example: the Van de Vusse reactor](ch3/ch3_tuning.html#/11)
-- [Van de Vusse in code](ch3/ch3_tuning.html#/12)
-- [Example 3.6 Same plant, five tuning rules](ch3/ch3_tuning.html#/13)
-- [Example 3.6: responses](ch3/ch3_tuning.html#/14)
-- [Tuning rules in code](ch3/ch3_tuning.html#/15)
-- [Interactive: compare the rules yourself](ch3/ch3_tuning.html#/16)
+- [Empirical tuning in practice](ch3/ch3_tuning.html#/2/1)
+- [Process-reaction curve: the open-loop step test](ch3/ch3_tuning.html#/2/2)
+- [Fitting the FOPDT model](ch3/ch3_tuning.html#/2/3)
+- [Ziegler–Nichols and Cohen–Coon (open-loop test)](ch3/ch3_tuning.html#/2/4)
+- [Minimum error-integral criteria](ch3/ch3_tuning.html#/2/5)
+- [Minimum-ITAE tuning relations](ch3/ch3_tuning.html#/2/6)
+- [Ziegler–Nichols ultimate-cycle method (closed-loop test)](ch3/ch3_tuning.html#/2/7)
+- [Ziegler–Nichols ultimate-cycle settings](ch3/ch3_tuning.html#/2/8)
+- [Example: the Van de Vusse reactor](ch3/ch3_tuning.html#/2/9)
+- [Van de Vusse in code](ch3/ch3_tuning.html#/2/10)
+- [Example 3.6 Same plant, five tuning rules](ch3/ch3_tuning.html#/2/11)
+- [Example 3.6: responses](ch3/ch3_tuning.html#/2/12)
+- [Tuning rules in code](ch3/ch3_tuning.html#/2/13)
+- [Interactive: compare the rules yourself](ch3/ch3_tuning.html#/2/14)
 
-**[3.2 Direct Synthesis and Internal Model Control](ch3/ch3_tuning.html#/17)**
+**[3.2 Direct Synthesis and Internal Model Control](ch3/ch3_tuning.html#/3)**
 
-- [Design the closed-loop response first](ch3/ch3_tuning.html#/18)
-- [The catch, and two more target responses](ch3/ch3_tuning.html#/19)
-- [Example 3.1 First-order process → PI](ch3/ch3_tuning.html#/20)
-- [Example 3.2 Second-order overdamped process → PID](ch3/ch3_tuning.html#/21)
-- [Example 3.3 FOPDT process → PI](ch3/ch3_tuning.html#/22)
-- [Example 3.4 Overdamped process, underdamped target](ch3/ch3_tuning.html#/23)
-- [Internal model control (IMC)](ch3/ch3_tuning.html#/24)
-- [IMC closed loop and the model controller](ch3/ch3_tuning.html#/25)
-- [Example 3.5 IMC for a FOPDT process](ch3/ch3_tuning.html#/26)
-- [Choosing $\tau_c$](ch3/ch3_tuning.html#/27)
-- [Example 3.7 IMC for the Van de Vusse reactor](ch3/ch3_tuning.html#/28)
-- [Summary: which method when?](ch3/ch3_tuning.html#/29)
-- [Problem #1 (homework)](ch3/ch3_tuning.html#/30)
-- [Resources](ch3/ch3_tuning.html#/31)
+- [Design the closed-loop response first](ch3/ch3_tuning.html#/3/1)
+- [The catch, and two more target responses](ch3/ch3_tuning.html#/3/2)
+- [Example 3.1 First-order process → PI](ch3/ch3_tuning.html#/3/3)
+- [Example 3.2 Second-order overdamped process → PID](ch3/ch3_tuning.html#/3/4)
+- [Example 3.3 FOPDT process → PI](ch3/ch3_tuning.html#/3/5)
+- [Example 3.4 Overdamped process, underdamped target](ch3/ch3_tuning.html#/3/6)
+- [Internal model control (IMC)](ch3/ch3_tuning.html#/3/7)
+- [IMC closed loop and the model controller](ch3/ch3_tuning.html#/3/8)
+- [Example 3.5 IMC for a FOPDT process](ch3/ch3_tuning.html#/3/9)
+- [Choosing $\tau_c$](ch3/ch3_tuning.html#/3/10)
+- [Example 3.7 IMC for the Van de Vusse reactor](ch3/ch3_tuning.html#/3/11)
+- [Summary: which method when?](ch3/ch3_tuning.html#/3/12)
+- [Problem #1 (homework)](ch3/ch3_tuning.html#/3/13)
+- [Resources](ch3/ch3_tuning.html#/3/14)
 
 ## 4. Stability of Closed-Loop Systems
 
@@ -168,57 +168,57 @@ subtitle: "Every slide of every chapter — use the search box (top right) to fi
 
 **[4.1 Definition of Stability](ch4/ch4_stability.html#/2)**
 
-- [Closed-loop characteristic equation](ch4/ch4_stability.html#/3)
-- [Pole location ↔ time response](ch4/ch4_stability.html#/4)
-- [Example 4.1 Stabilizing an unstable process with P control](ch4/ch4_stability.html#/5)
+- [Closed-loop characteristic equation](ch4/ch4_stability.html#/2/1)
+- [Pole location ↔ time response](ch4/ch4_stability.html#/2/2)
+- [Example 4.1 Stabilizing an unstable process with P control](ch4/ch4_stability.html#/2/3)
 
-**[4.2 Routh–Hurwitz Criterion](ch4/ch4_stability.html#/6)**
+**[4.2 Routh–Hurwitz Criterion](ch4/ch4_stability.html#/3)**
 
-- [(1) Hurwitz test: a necessary condition](ch4/ch4_stability.html#/7)
-- [(2) Routh array: necessary and sufficient](ch4/ch4_stability.html#/8)
-- [(3) Special cases](ch4/ch4_stability.html#/9)
-- [Example 4.2 P control of a third-order process](ch4/ch4_stability.html#/10)
-- [Example 4.2 at $K_c=60$: a row of zeros](ch4/ch4_stability.html#/11)
-- [Example 4.3 PI control of a critically damped process](ch4/ch4_stability.html#/12)
-- [Routh array in code](ch4/ch4_stability.html#/13)
+- [(1) Hurwitz test: a necessary condition](ch4/ch4_stability.html#/3/1)
+- [(2) Routh array: necessary and sufficient](ch4/ch4_stability.html#/3/2)
+- [(3) Special cases](ch4/ch4_stability.html#/3/3)
+- [Example 4.2 P control of a third-order process](ch4/ch4_stability.html#/3/4)
+- [Example 4.2 at $K_c=60$: a row of zeros](ch4/ch4_stability.html#/3/5)
+- [Example 4.3 PI control of a critically damped process](ch4/ch4_stability.html#/3/6)
+- [Routh array in code](ch4/ch4_stability.html#/3/7)
 
-**[4.3 Direct-Substitution Analysis](ch4/ch4_stability.html#/14)**
+**[4.3 Direct-Substitution Analysis](ch4/ch4_stability.html#/4)**
 
-- [Finding the stability boundary with $s=j\omega$](ch4/ch4_stability.html#/15)
-- [Example 4.4 First-order process with dead time](ch4/ch4_stability.html#/16)
-- [Dead time: exact vs. Padé approximation](ch4/ch4_stability.html#/17)
-- [Dead time in code](ch4/ch4_stability.html#/18)
-- [Which technique? (decision chart)](ch4/ch4_stability.html#/19)
-- [From $K_{cu}, P_u$ to controller tuning](ch4/ch4_stability.html#/20)
+- [Finding the stability boundary with $s=j\omega$](ch4/ch4_stability.html#/4/1)
+- [Example 4.4 First-order process with dead time](ch4/ch4_stability.html#/4/2)
+- [Dead time: exact vs. Padé approximation](ch4/ch4_stability.html#/4/3)
+- [Dead time in code](ch4/ch4_stability.html#/4/4)
+- [Which technique? (decision chart)](ch4/ch4_stability.html#/4/5)
+- [From $K_{cu}, P_u$ to controller tuning](ch4/ch4_stability.html#/4/6)
 
-**[4.4 Root-Locus Analysis](ch4/ch4_stability.html#/21)**
+**[4.4 Root-Locus Analysis](ch4/ch4_stability.html#/5)**
 
-- [What is a root locus?](ch4/ch4_stability.html#/22)
-- [Angle and magnitude conditions](ch4/ch4_stability.html#/23)
-- [Sketching rules (1)–(5)](ch4/ch4_stability.html#/24)
-- [Sketching rules (6)–(8)](ch4/ch4_stability.html#/25)
-- [Example 4.2B Root locus of Ex 4.2](ch4/ch4_stability.html#/26)
-- [Example 4.6 Representative root-locus shapes](ch4/ch4_stability.html#/27)
-- [Example 4.6 (c), (d): the calculations](ch4/ch4_stability.html#/28)
-- [Effect of adding a **zero**](ch4/ch4_stability.html#/29)
-- [Effect of adding a **pole**: PI control (Example 4.3B)](ch4/ch4_stability.html#/30)
-- [RHP zero: inverse response](ch4/ch4_stability.html#/31)
+- [What is a root locus?](ch4/ch4_stability.html#/5/1)
+- [Angle and magnitude conditions](ch4/ch4_stability.html#/5/2)
+- [Sketching rules (1)–(5)](ch4/ch4_stability.html#/5/3)
+- [Sketching rules (6)–(8)](ch4/ch4_stability.html#/5/4)
+- [Example 4.2B Root locus of Ex 4.2](ch4/ch4_stability.html#/5/5)
+- [Example 4.6 Representative root-locus shapes](ch4/ch4_stability.html#/5/6)
+- [Example 4.6 (c), (d): the calculations](ch4/ch4_stability.html#/5/7)
+- [Effect of adding a **zero**](ch4/ch4_stability.html#/5/8)
+- [Effect of adding a **pole**: PI control (Example 4.3B)](ch4/ch4_stability.html#/5/9)
+- [RHP zero: inverse response](ch4/ch4_stability.html#/5/10)
 
-**[4.5 Root-Locus Design](ch4/ch4_stability.html#/32)**
+**[4.5 Root-Locus Design](ch4/ch4_stability.html#/6)**
 
-- [Dominant poles and performance specs](ch4/ch4_stability.html#/33)
-- [Example 4.7 Gain for $\zeta=0.7$ (P control)](ch4/ch4_stability.html#/34)
-- [Example 4.7 in code](ch4/ch4_stability.html#/35)
-- [Example 4.8 PI design for $\zeta=0.7$](ch4/ch4_stability.html#/36)
-- [Example 4.8: root loci and a caveat](ch4/ch4_stability.html#/37)
-- [Interactive: move $K_c$, watch poles and response](ch4/ch4_stability.html#/38)
-- [Final remarks on root-locus plots](ch4/ch4_stability.html#/39)
-- [Problem #1 (homework)](ch4/ch4_stability.html#/40)
-- [Resources](ch4/ch4_stability.html#/41)
+- [Dominant poles and performance specs](ch4/ch4_stability.html#/6/1)
+- [Example 4.7 Gain for $\zeta=0.7$ (P control)](ch4/ch4_stability.html#/6/2)
+- [Example 4.7 in code](ch4/ch4_stability.html#/6/3)
+- [Example 4.8 PI design for $\zeta=0.7$](ch4/ch4_stability.html#/6/4)
+- [Example 4.8: root loci and a caveat](ch4/ch4_stability.html#/6/5)
+- [Interactive: move $K_c$, watch poles and response](ch4/ch4_stability.html#/6/6)
+- [Final remarks on root-locus plots](ch4/ch4_stability.html#/6/7)
+- [Problem #1 (homework)](ch4/ch4_stability.html#/6/8)
+- [Resources](ch4/ch4_stability.html#/6/9)
 
-**[Appendix](ch4/ch4_stability.html#/42)**
+**[Appendix](ch4/ch4_stability.html#/7)**
 
-- [Routh array: 4th-order polynomial](ch4/ch4_stability.html#/43)
+- [Routh array: 4th-order polynomial](ch4/ch4_stability.html#/7/1)
 
 ## 5. Frequency-Response Analysis & Design
 
@@ -226,51 +226,51 @@ subtitle: "Every slide of every chapter — use the search box (top right) to fi
 
 **[5.1 Magnitude and Phase Lag](ch5/ch5_frequency.html#/2)**
 
-- [A sine in, a sine out](ch5/ch5_frequency.html#/3)
-- [… and $G(j\omega)$ gives AR and $\phi$ directly](ch5/ch5_frequency.html#/4)
-- [Products of transfer functions](ch5/ch5_frequency.html#/5)
+- [A sine in, a sine out](ch5/ch5_frequency.html#/2/1)
+- [… and $G(j\omega)$ gives AR and $\phi$ directly](ch5/ch5_frequency.html#/2/2)
+- [Products of transfer functions](ch5/ch5_frequency.html#/2/3)
 
-**[5.2 Graphical Analysis Tools](ch5/ch5_frequency.html#/6)**
+**[5.2 Graphical Analysis Tools](ch5/ch5_frequency.html#/3)**
 
-- [Bode and Nyquist plots](ch5/ch5_frequency.html#/7)
-- [Example 5.2 First-order lag $\;K_p/(\tau_ps+1)$](ch5/ch5_frequency.html#/8)
-- [Example 5.3 Second-order $\;K/(\tau^2s^2+2\zeta\tau s+1)$](ch5/ch5_frequency.html#/9)
-- [Example 5.3: Bode and Nyquist for $\zeta=1.2\ldots0.2$](ch5/ch5_frequency.html#/10)
-- [Examples 5.4, 5.7, 5.8: lead, integrator, lag + integrator](ch5/ch5_frequency.html#/11)
-- [Examples 5.5, 5.6: dead time](ch5/ch5_frequency.html#/12)
-- [Building blocks at a glance](ch5/ch5_frequency.html#/13)
-- [Sketching a Bode plot by asymptotes](ch5/ch5_frequency.html#/14)
-- [Example 5.9 $(5s+1)/[(10s+1)(2s+1)]$ by asymptotes](ch5/ch5_frequency.html#/15)
-- [Bode and Nyquist in code](ch5/ch5_frequency.html#/16)
+- [Bode and Nyquist plots](ch5/ch5_frequency.html#/3/1)
+- [Example 5.2 First-order lag $\;K_p/(\tau_ps+1)$](ch5/ch5_frequency.html#/3/2)
+- [Example 5.3 Second-order $\;K/(\tau^2s^2+2\zeta\tau s+1)$](ch5/ch5_frequency.html#/3/3)
+- [Example 5.3: Bode and Nyquist for $\zeta=1.2\ldots0.2$](ch5/ch5_frequency.html#/3/4)
+- [Examples 5.4, 5.7, 5.8: lead, integrator, lag + integrator](ch5/ch5_frequency.html#/3/5)
+- [Examples 5.5, 5.6: dead time](ch5/ch5_frequency.html#/3/6)
+- [Building blocks at a glance](ch5/ch5_frequency.html#/3/7)
+- [Sketching a Bode plot by asymptotes](ch5/ch5_frequency.html#/3/8)
+- [Example 5.9 $(5s+1)/[(10s+1)(2s+1)]$ by asymptotes](ch5/ch5_frequency.html#/3/9)
+- [Bode and Nyquist in code](ch5/ch5_frequency.html#/3/10)
 
-**[5.3 Stability Analysis](ch5/ch5_frequency.html#/17)**
+**[5.3 Stability Analysis](ch5/ch5_frequency.html#/4)**
 
-- [Two frequency-domain tests](ch5/ch5_frequency.html#/18)
-- [Reading the Nyquist criterion](ch5/ch5_frequency.html#/19)
-- [Examples 5.10, 5.11 Inverse-response process, P control](ch5/ch5_frequency.html#/20)
-- [Example 5.11 by frequency response](ch5/ch5_frequency.html#/21)
-- [Ex 4.4 revisited: dead time handled exactly](ch5/ch5_frequency.html#/22)
-- [Example 5.14 Nyquist for an open-loop unstable process](ch5/ch5_frequency.html#/23)
-- [Gain and phase margins](ch5/ch5_frequency.html#/24)
-- [What the margins protect against](ch5/ch5_frequency.html#/25)
-- [Phase margin and damping](ch5/ch5_frequency.html#/26)
-- [Example 5.12 Ziegler–Nichols PI for the inverse-response process](ch5/ch5_frequency.html#/27)
-- [Margins in code](ch5/ch5_frequency.html#/28)
+- [Two frequency-domain tests](ch5/ch5_frequency.html#/4/1)
+- [Reading the Nyquist criterion](ch5/ch5_frequency.html#/4/2)
+- [Examples 5.10, 5.11 Inverse-response process, P control](ch5/ch5_frequency.html#/4/3)
+- [Example 5.11 by frequency response](ch5/ch5_frequency.html#/4/4)
+- [Ex 4.4 revisited: dead time handled exactly](ch5/ch5_frequency.html#/4/5)
+- [Example 5.14 Nyquist for an open-loop unstable process](ch5/ch5_frequency.html#/4/6)
+- [Gain and phase margins](ch5/ch5_frequency.html#/4/7)
+- [What the margins protect against](ch5/ch5_frequency.html#/4/8)
+- [Phase margin and damping](ch5/ch5_frequency.html#/4/9)
+- [Example 5.12 Ziegler–Nichols PI for the inverse-response process](ch5/ch5_frequency.html#/4/10)
+- [Margins in code](ch5/ch5_frequency.html#/4/11)
 
-**[5.4 Controller Design](ch5/ch5_frequency.html#/29)**
+**[5.4 Controller Design](ch5/ch5_frequency.html#/5)**
 
-- [Choosing $K_c$ without trial and error](ch5/ch5_frequency.html#/30)
-- [Example 5.13 Retuning Ex 5.12 for GM ≥ 2 and PM ≥ 45°](ch5/ch5_frequency.html#/31)
-- [Example 5.13 in code](ch5/ch5_frequency.html#/32)
-- [Interactive: move $K_c$, watch the margins](ch5/ch5_frequency.html#/33)
-- [A final word: frequency response or root locus?](ch5/ch5_frequency.html#/34)
-- [Problem #1 (homework)](ch5/ch5_frequency.html#/35)
-- [Resources](ch5/ch5_frequency.html#/36)
+- [Choosing $K_c$ without trial and error](ch5/ch5_frequency.html#/5/1)
+- [Example 5.13 Retuning Ex 5.12 for GM ≥ 2 and PM ≥ 45°](ch5/ch5_frequency.html#/5/2)
+- [Example 5.13 in code](ch5/ch5_frequency.html#/5/3)
+- [Interactive: move $K_c$, watch the margins](ch5/ch5_frequency.html#/5/4)
+- [A final word: frequency response or root locus?](ch5/ch5_frequency.html#/5/5)
+- [Problem #1 (homework)](ch5/ch5_frequency.html#/5/6)
+- [Resources](ch5/ch5_frequency.html#/5/7)
 
-**[Appendix](ch5/ch5_frequency.html#/37)**
+**[Appendix](ch5/ch5_frequency.html#/6)**
 
-- [General frequency response: derivation](ch5/ch5_frequency.html#/38)
-- [Resonance of the second-order system](ch5/ch5_frequency.html#/39)
+- [General frequency response: derivation](ch5/ch5_frequency.html#/6/1)
+- [Resonance of the second-order system](ch5/ch5_frequency.html#/6/2)
 
 ## 6. Multi-loop Systems
 
@@ -278,58 +278,58 @@ subtitle: "Every slide of every chapter — use the search box (top right) to fi
 
 **[6.1 Cascade Control](ch6/ch6_multiloop.html#/2)**
 
-- [The fired-heater problem](ch6/ch6_multiloop.html#/3)
-- [Master and slave loops](ch6/ch6_multiloop.html#/4)
-- [Block diagram](ch6/ch6_multiloop.html#/5)
-- [Reduced block diagram](ch6/ch6_multiloop.html#/6)
-- [Example 6.1 Choosing the slave gain $K_{c2}$](ch6/ch6_multiloop.html#/7)
-- [Example 6.1 (d): choosing the master $\tau_I$](ch6/ch6_multiloop.html#/8)
-- [Example 6.1 (e): without the cascade](ch6/ch6_multiloop.html#/9)
-- [Example 6.1: responses (replaces the Simulink runs)](ch6/ch6_multiloop.html#/10)
-- [Example 6.1 in code](ch6/ch6_multiloop.html#/11)
+- [The fired-heater problem](ch6/ch6_multiloop.html#/2/1)
+- [Master and slave loops](ch6/ch6_multiloop.html#/2/2)
+- [Block diagram](ch6/ch6_multiloop.html#/2/3)
+- [Reduced block diagram](ch6/ch6_multiloop.html#/2/4)
+- [Example 6.1 Choosing the slave gain $K_{c2}$](ch6/ch6_multiloop.html#/2/5)
+- [Example 6.1 (d): choosing the master $\tau_I$](ch6/ch6_multiloop.html#/2/6)
+- [Example 6.1 (e): without the cascade](ch6/ch6_multiloop.html#/2/7)
+- [Example 6.1: responses (replaces the Simulink runs)](ch6/ch6_multiloop.html#/2/8)
+- [Example 6.1 in code](ch6/ch6_multiloop.html#/2/9)
 
-**[6.2 Feedforward Control](ch6/ch6_multiloop.html#/12)**
+**[6.2 Feedforward Control](ch6/ch6_multiloop.html#/3)**
 
-- [Act on the disturbance, not on the error](ch6/ch6_multiloop.html#/13)
-- [The feedforward controller](ch6/ch6_multiloop.html#/14)
-- [Example 6.7 Static or dynamic feedforward?](ch6/ch6_multiloop.html#/15)
+- [Act on the disturbance, not on the error](ch6/ch6_multiloop.html#/3/1)
+- [The feedforward controller](ch6/ch6_multiloop.html#/3/2)
+- [Example 6.7 Static or dynamic feedforward?](ch6/ch6_multiloop.html#/3/3)
 
-**[6.3 Feedforward–Feedback Control](ch6/ch6_multiloop.html#/16)**
+**[6.3 Feedforward–Feedback Control](ch6/ch6_multiloop.html#/4)**
 
-- [Feedforward never works alone](ch6/ch6_multiloop.html#/17)
-- [Example 6.2 Furnace with feedforward, feedback and cascade](ch6/ch6_multiloop.html#/18)
+- [Feedforward never works alone](ch6/ch6_multiloop.html#/4/1)
+- [Example 6.2 Furnace with feedforward, feedback and cascade](ch6/ch6_multiloop.html#/4/2)
 
-**[6.4 Ratio Control](ch6/ch6_multiloop.html#/19)**
+**[6.4 Ratio Control](ch6/ch6_multiloop.html#/5)**
 
-- [Keeping air in proportion to fuel](ch6/ch6_multiloop.html#/20)
+- [Keeping air in proportion to fuel](ch6/ch6_multiloop.html#/5/1)
 
-**[6.5 The Smith Predictor](ch6/ch6_multiloop.html#/21)**
+**[6.5 The Smith Predictor](ch6/ch6_multiloop.html#/6)**
 
-- [Dead time in the loop](ch6/ch6_multiloop.html#/22)
-- [The Smith predictor](ch6/ch6_multiloop.html#/23)
-- [Example 6.8 Smith predictor on the Ex 4.4 plant](ch6/ch6_multiloop.html#/24)
-- [Smith predictor in code](ch6/ch6_multiloop.html#/25)
+- [Dead time in the loop](ch6/ch6_multiloop.html#/6/1)
+- [The Smith predictor](ch6/ch6_multiloop.html#/6/2)
+- [Example 6.8 Smith predictor on the Ex 4.4 plant](ch6/ch6_multiloop.html#/6/3)
+- [Smith predictor in code](ch6/ch6_multiloop.html#/6/4)
 
-**[6.6 Multiple-Input Multiple-Output Control](ch6/ch6_multiloop.html#/26)**
+**[6.6 Multiple-Input Multiple-Output Control](ch6/ch6_multiloop.html#/7)**
 
-- [A blending process](ch6/ch6_multiloop.html#/27)
-- [MIMO closed loop](ch6/ch6_multiloop.html#/28)
-- [Process gain matrix](ch6/ch6_multiloop.html#/29)
-- [Relative gain array (RGA)](ch6/ch6_multiloop.html#/30)
-- [Example 6.4 RGA of the blending process](ch6/ch6_multiloop.html#/31)
-- [Reading the RGA: pairing rules](ch6/ch6_multiloop.html#/32)
-- [Example 6.5 Pairing depends on the operating point](ch6/ch6_multiloop.html#/33)
-- [RGA in code](ch6/ch6_multiloop.html#/34)
+- [A blending process](ch6/ch6_multiloop.html#/7/1)
+- [MIMO closed loop](ch6/ch6_multiloop.html#/7/2)
+- [Process gain matrix](ch6/ch6_multiloop.html#/7/3)
+- [Relative gain array (RGA)](ch6/ch6_multiloop.html#/7/4)
+- [Example 6.4 RGA of the blending process](ch6/ch6_multiloop.html#/7/5)
+- [Reading the RGA: pairing rules](ch6/ch6_multiloop.html#/7/6)
+- [Example 6.5 Pairing depends on the operating point](ch6/ch6_multiloop.html#/7/7)
+- [RGA in code](ch6/ch6_multiloop.html#/7/8)
 
-**[6.7 Decoupling of Interacting Systems](ch6/ch6_multiloop.html#/35)**
+**[6.7 Decoupling of Interacting Systems](ch6/ch6_multiloop.html#/8)**
 
-- [Feedforward-like decouplers](ch6/ch6_multiloop.html#/36)
-- [Example 6.6 Distillation column](ch6/ch6_multiloop.html#/37)
-- [Example 6.6: PI tuning (ITAE)](ch6/ch6_multiloop.html#/38)
-- [Example 6.6: does decoupling help? (replaces the Simulink runs)](ch6/ch6_multiloop.html#/39)
-- [Decoupling in code](ch6/ch6_multiloop.html#/40)
-- [Interactive: cascade vs. single loop](ch6/ch6_multiloop.html#/41)
-- [Summary: which structure for which problem?](ch6/ch6_multiloop.html#/42)
-- [Problem #1 (homework)](ch6/ch6_multiloop.html#/43)
-- [Resources](ch6/ch6_multiloop.html#/44)
-- [A final word — Neal R. Amundson (University of Minnesota, circa 1970)](ch6/ch6_multiloop.html#/45)
+- [Feedforward-like decouplers](ch6/ch6_multiloop.html#/8/1)
+- [Example 6.6 Distillation column](ch6/ch6_multiloop.html#/8/2)
+- [Example 6.6: PI tuning (ITAE)](ch6/ch6_multiloop.html#/8/3)
+- [Example 6.6: does decoupling help? (replaces the Simulink runs)](ch6/ch6_multiloop.html#/8/4)
+- [Decoupling in code](ch6/ch6_multiloop.html#/8/5)
+- [Interactive: cascade vs. single loop](ch6/ch6_multiloop.html#/8/6)
+- [Summary: which structure for which problem?](ch6/ch6_multiloop.html#/8/7)
+- [Problem #1 (homework)](ch6/ch6_multiloop.html#/8/8)
+- [Resources](ch6/ch6_multiloop.html#/8/9)
+- [A final word — Neal R. Amundson (University of Minnesota, circa 1970)](ch6/ch6_multiloop.html#/8/10)

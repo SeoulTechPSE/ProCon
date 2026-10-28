@@ -1,6 +1,6 @@
 %% Ch.6 — RGA in code
 % Process Dynamics and Control, SeoulTech — slide 35
-% https://seoultechpse.github.io/ProCon/ch6/ch6_multiloop.html#/34
+% https://seoultechpse.github.io/ProCon/ch6/ch6_multiloop.html#/7/8
 % Requires: Control System Toolbox
 
 clear; close all; clc

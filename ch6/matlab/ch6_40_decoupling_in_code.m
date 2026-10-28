@@ -1,6 +1,6 @@
 %% Ch.6 — Decoupling in code
 % Process Dynamics and Control, SeoulTech — slide 41
-% https://seoultechpse.github.io/ProCon/ch6/ch6_multiloop.html#/40
+% https://seoultechpse.github.io/ProCon/ch6/ch6_multiloop.html#/8/5
 % Requires: Control System Toolbox
 
 clear; close all; clc

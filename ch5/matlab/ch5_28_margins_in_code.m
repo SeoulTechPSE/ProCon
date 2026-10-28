@@ -1,6 +1,6 @@
 %% Ch.5 — Margins in code
 % Process Dynamics and Control, SeoulTech — slide 29
-% https://seoultechpse.github.io/ProCon/ch5/ch5_frequency.html#/28
+% https://seoultechpse.github.io/ProCon/ch5/ch5_frequency.html#/4/11
 % Requires: Control System Toolbox
 
 clear; close all; clc

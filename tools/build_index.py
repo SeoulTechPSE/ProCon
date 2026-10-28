@@ -45,18 +45,37 @@ def clean_title(t):
     return re.sub(r"\s+", " ", t).strip()
 
 
+POS = {}                                                        # (qmd, flat index) -> reveal hash "h" or "h/v"
+
+
 def slides(qmd):
-    """[(index, level, title, body_lines)] with reveal's numeric hash index (title slide = 0)."""
-    out, fence, k = [], False, 0
+    """[(flat index, level, title, body_lines)]; flat index = slide number - 1 (title slide = 0).
+
+    Level-1 headings open a vertical stack in reveal.js, so the URL of a slide is #/h/v,
+    not the flat number; hash(qmd, k) gives it.
+    """
+    out, fence, k, h, v, stack = [], False, 0, 0, 0, False
     for line in (ROOT / qmd).read_text(encoding="utf-8").split("\n"):
         if line.lstrip().startswith("```"):
             fence = not fence
         if not fence and re.match(r"^#{1,2} ", line):
             k += 1
-            out.append([k, len(line.split(" ")[0]), clean_title(line.split(" ", 1)[1]), []])
+            lev = len(line.split(" ")[0])
+            if lev == 1:
+                h, v, stack = h + 1, 0, True
+            elif stack:
+                v += 1
+            else:
+                h, v = h + 1, 0
+            POS[(qmd, k)] = f"{h}/{v}" if v else f"{h}"
+            out.append([k, lev, clean_title(line.split(" ", 1)[1]), []])
         elif out:
             out[-1][3].append(line)
     return out
+
+
+def hash_(qmd, k):
+    return POS[(qmd, k)]
 
 
 def summary(body, limit=230):
@@ -152,7 +171,7 @@ def contents():
         d, s = f"ch{ch['n']}", ch["slug"]
         out.append(f"## {ch['n']}. {ch['title']}\n")
         for k, lev, t, _ in slides(f"{d}/{s}.qmd"):
-            link = f"[{t}]({d}/{s}.html#/{k})"
+            link = f"[{t}]({d}/{s}.html#/{hash_(f'{d}/{s}.qmd', k)})"
             out.append(f"\n**{link}**\n" if lev == 1 else f"- {link}")
         out.append("")
     return "\n".join(out)
@@ -169,7 +188,7 @@ def problems():
         for k, t, b in probs:
             label = re.sub(r"\s+", " ", t.replace("(homework)", "")).strip()
             label = re.sub(r"^(Problem #\d+) ", r"\1 — ", label)
-            out.append(f"- **[{label}]({d}/{s}.html#/{k})** — {summary(b)}")
+            out.append(f"- **[{label}]({d}/{s}.html#/{hash_(f'{d}/{s}.qmd', k)})** — {summary(b)}")
         out.append("")
     out.append(f"*Starter code for each problem is at the end of the chapter's Colab notebook.*")
     return "\n".join(out)
@@ -231,7 +250,7 @@ def matlab():
             tbx = "Control System Toolbox" + (", Symbolic Math Toolbox" if re.search(r"\bsyms\b", code) else "")
             setup = MATLAB_SETUP.get((n, t), [])
             text = "\n".join([f"%% Ch.{n} — {t}", f"% Process Dynamics and Control, SeoulTech — slide {k + 1}",
-                              f"% {SITE}{d}/{s}.html#/{k}", f"% Requires: {tbx}", "", "clear; close all; clc", "",
+                              f"% {SITE}{d}/{s}.html#/{hash_(f'{d}/{s}.qmd', k)}", f"% Requires: {tbx}", "", "clear; close all; clc", "",
                               *setup, *([""] if setup else []), code, ""])
             (mdir / f"{name}.m").write_text(text, encoding="utf-8")
             files.append((k, t, name, text, tbx))
@@ -244,7 +263,7 @@ def matlab():
         for k, t, name, text, tbx in files:
             sym = " · needs Symbolic Math Toolbox" if "Symbolic" in tbx else ""
             page.append(f"### {t}\n")
-            page.append(f'[slide {k + 1}]({d}/{s}.html#/{k}) · [⬇ {name}.m]({d}/matlab/{name}.m){{download=""}}{sym}\n')
+            page.append(f'[slide {k + 1}]({d}/{s}.html#/{hash_(f"{d}/{s}.qmd", k)}) · [⬇ {name}.m]({d}/matlab/{name}.m){{download=""}}{sym}\n')
             page.append(f'```{{.matlab filename="{name}.m"}}\n{text.rstrip()}\n```\n')
     return "\n".join(page)
 

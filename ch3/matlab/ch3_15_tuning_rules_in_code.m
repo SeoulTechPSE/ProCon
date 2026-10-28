@@ -1,6 +1,6 @@
 %% Ch.3 — Tuning rules in code
 % Process Dynamics and Control, SeoulTech — slide 16
-% https://seoultechpse.github.io/ProCon/ch3/ch3_tuning.html#/15
+% https://seoultechpse.github.io/ProCon/ch3/ch3_tuning.html#/2/13
 % Requires: Control System Toolbox
 
 clear; close all; clc

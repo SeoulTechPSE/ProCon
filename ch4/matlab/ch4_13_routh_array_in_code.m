@@ -1,6 +1,6 @@
 %% Ch.4 — Routh array in code
 % Process Dynamics and Control, SeoulTech — slide 14
-% https://seoultechpse.github.io/ProCon/ch4/ch4_stability.html#/13
+% https://seoultechpse.github.io/ProCon/ch4/ch4_stability.html#/3/7
 % Requires: Control System Toolbox, Symbolic Math Toolbox
 
 clear; close all; clc

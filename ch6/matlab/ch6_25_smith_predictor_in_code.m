@@ -1,6 +1,6 @@
 %% Ch.6 — Smith predictor in code
 % Process Dynamics and Control, SeoulTech — slide 26
-% https://seoultechpse.github.io/ProCon/ch6/ch6_multiloop.html#/25
+% https://seoultechpse.github.io/ProCon/ch6/ch6_multiloop.html#/6/4
 % Requires: Control System Toolbox
 
 clear; close all; clc

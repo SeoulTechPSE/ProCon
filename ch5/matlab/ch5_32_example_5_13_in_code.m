@@ -1,6 +1,6 @@
 %% Ch.5 — Example 5.13 in code
 % Process Dynamics and Control, SeoulTech — slide 33
-% https://seoultechpse.github.io/ProCon/ch5/ch5_frequency.html#/32
+% https://seoultechpse.github.io/ProCon/ch5/ch5_frequency.html#/5/3
 % Requires: Control System Toolbox
 
 clear; close all; clc

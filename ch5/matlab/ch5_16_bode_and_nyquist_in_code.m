@@ -1,6 +1,6 @@
 %% Ch.5 — Bode and Nyquist in code
 % Process Dynamics and Control, SeoulTech — slide 17
-% https://seoultechpse.github.io/ProCon/ch5/ch5_frequency.html#/16
+% https://seoultechpse.github.io/ProCon/ch5/ch5_frequency.html#/3/10
 % Requires: Control System Toolbox
 
 clear; close all; clc

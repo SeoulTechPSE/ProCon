@@ -11,12 +11,12 @@ Each script is self-contained (`clear; close all` at the top) and named after it
 
 ### Partial fractions by computer
 
-[slide 20](ch1/ch1_dynamics.html#/19) · [⬇ ch1_19_partial_fractions_by_computer.m](ch1/matlab/ch1_19_partial_fractions_by_computer.m){download=""} · needs Symbolic Math Toolbox
+[slide 20](ch1/ch1_dynamics.html#/4/5) · [⬇ ch1_19_partial_fractions_by_computer.m](ch1/matlab/ch1_19_partial_fractions_by_computer.m){download=""} · needs Symbolic Math Toolbox
 
 ```{.matlab filename="ch1_19_partial_fractions_by_computer.m"}
 %% Ch.1 — Partial fractions by computer
 % Process Dynamics and Control, SeoulTech — slide 20
-% https://seoultechpse.github.io/ProCon/ch1/ch1_dynamics.html#/19
+% https://seoultechpse.github.io/ProCon/ch1/ch1_dynamics.html#/4/5
 % Requires: Control System Toolbox, Symbolic Math Toolbox
 
 clear; close all; clc
@@ -32,12 +32,12 @@ partfrac(2/((s + 1)^3*(s + 2)), s)
 
 ### Second-order responses in code
 
-[slide 37](ch1/ch1_dynamics.html#/36) · [⬇ ch1_36_second_order_responses_in_code.m](ch1/matlab/ch1_36_second_order_responses_in_code.m){download=""}
+[slide 37](ch1/ch1_dynamics.html#/7/5) · [⬇ ch1_36_second_order_responses_in_code.m](ch1/matlab/ch1_36_second_order_responses_in_code.m){download=""}
 
 ```{.matlab filename="ch1_36_second_order_responses_in_code.m"}
 %% Ch.1 — Second-order responses in code
 % Process Dynamics and Control, SeoulTech — slide 37
-% https://seoultechpse.github.io/ProCon/ch1/ch1_dynamics.html#/36
+% https://seoultechpse.github.io/ProCon/ch1/ch1_dynamics.html#/7/5
 % Requires: Control System Toolbox
 
 clear; close all; clc
@@ -52,12 +52,12 @@ S = stepinfo(tf(1, [1 0.6 1]))                             % zeta = 0.3
 
 ### Example 1.10 Padé approximation of $e^{-3s}/(10s+1)$
 
-[slide 41](ch1/ch1_dynamics.html#/40) · [⬇ ch1_40_example_1_10_pade_approximation_of.m](ch1/matlab/ch1_40_example_1_10_pade_approximation_of.m){download=""}
+[slide 41](ch1/ch1_dynamics.html#/8/2) · [⬇ ch1_40_example_1_10_pade_approximation_of.m](ch1/matlab/ch1_40_example_1_10_pade_approximation_of.m){download=""}
 
 ```{.matlab filename="ch1_40_example_1_10_pade_approximation_of.m"}
 %% Ch.1 — Example 1.10 Padé approximation of $e^{-3s}/(10s+1)$
 % Process Dynamics and Control, SeoulTech — slide 41
-% https://seoultechpse.github.io/ProCon/ch1/ch1_dynamics.html#/40
+% https://seoultechpse.github.io/ProCon/ch1/ch1_dynamics.html#/8/2
 % Requires: Control System Toolbox
 
 clear; close all; clc
@@ -75,12 +75,12 @@ legend('Pade 1/1', 'exact')
 
 ### Example 2.6 Closed-loop simulation
 
-[slide 31](ch2/ch2_analysis.html#/30) · [⬇ ch2_30_example_2_6_closed_loop_simulation.m](ch2/matlab/ch2_30_example_2_6_closed_loop_simulation.m){download=""}
+[slide 31](ch2/ch2_analysis.html#/4/8) · [⬇ ch2_30_example_2_6_closed_loop_simulation.m](ch2/matlab/ch2_30_example_2_6_closed_loop_simulation.m){download=""}
 
 ```{.matlab filename="ch2_30_example_2_6_closed_loop_simulation.m"}
 %% Ch.2 — Example 2.6 Closed-loop simulation
 % Process Dynamics and Control, SeoulTech — slide 31
-% https://seoultechpse.github.io/ProCon/ch2/ch2_analysis.html#/30
+% https://seoultechpse.github.io/ProCon/ch2/ch2_analysis.html#/4/8
 % Requires: Control System Toolbox
 
 clear; close all; clc
@@ -102,12 +102,12 @@ step(Gcl)
 
 ### Van de Vusse in code
 
-[slide 13](ch3/ch3_tuning.html#/12) · [⬇ ch3_12_van_de_vusse_in_code.m](ch3/matlab/ch3_12_van_de_vusse_in_code.m){download=""}
+[slide 13](ch3/ch3_tuning.html#/2/10) · [⬇ ch3_12_van_de_vusse_in_code.m](ch3/matlab/ch3_12_van_de_vusse_in_code.m){download=""}
 
 ```{.matlab filename="ch3_12_van_de_vusse_in_code.m"}
 %% Ch.3 — Van de Vusse in code
 % Process Dynamics and Control, SeoulTech — slide 13
-% https://seoultechpse.github.io/ProCon/ch3/ch3_tuning.html#/12
+% https://seoultechpse.github.io/ProCon/ch3/ch3_tuning.html#/2/10
 % Requires: Control System Toolbox
 
 clear; close all; clc
@@ -124,12 +124,12 @@ legend('P','PI','PID')
 
 ### Tuning rules in code
 
-[slide 16](ch3/ch3_tuning.html#/15) · [⬇ ch3_15_tuning_rules_in_code.m](ch3/matlab/ch3_15_tuning_rules_in_code.m){download=""}
+[slide 16](ch3/ch3_tuning.html#/2/13) · [⬇ ch3_15_tuning_rules_in_code.m](ch3/matlab/ch3_15_tuning_rules_in_code.m){download=""}
 
 ```{.matlab filename="ch3_15_tuning_rules_in_code.m"}
 %% Ch.3 — Tuning rules in code
 % Process Dynamics and Control, SeoulTech — slide 16
-% https://seoultechpse.github.io/ProCon/ch3/ch3_tuning.html#/15
+% https://seoultechpse.github.io/ProCon/ch3/ch3_tuning.html#/2/13
 % Requires: Control System Toolbox
 
 clear; close all; clc
@@ -151,12 +151,12 @@ figure, step(feedback(C*G, 1)),  figure, margin(C*G)
 
 ### Routh array in code
 
-[slide 14](ch4/ch4_stability.html#/13) · [⬇ ch4_13_routh_array_in_code.m](ch4/matlab/ch4_13_routh_array_in_code.m){download=""} · needs Symbolic Math Toolbox
+[slide 14](ch4/ch4_stability.html#/3/7) · [⬇ ch4_13_routh_array_in_code.m](ch4/matlab/ch4_13_routh_array_in_code.m){download=""} · needs Symbolic Math Toolbox
 
 ```{.matlab filename="ch4_13_routh_array_in_code.m"}
 %% Ch.4 — Routh array in code
 % Process Dynamics and Control, SeoulTech — slide 14
-% https://seoultechpse.github.io/ProCon/ch4/ch4_stability.html#/13
+% https://seoultechpse.github.io/ProCon/ch4/ch4_stability.html#/3/7
 % Requires: Control System Toolbox, Symbolic Math Toolbox
 
 clear; close all; clc
@@ -181,12 +181,12 @@ end
 
 ### Dead time in code
 
-[slide 19](ch4/ch4_stability.html#/18) · [⬇ ch4_18_dead_time_in_code.m](ch4/matlab/ch4_18_dead_time_in_code.m){download=""}
+[slide 19](ch4/ch4_stability.html#/4/4) · [⬇ ch4_18_dead_time_in_code.m](ch4/matlab/ch4_18_dead_time_in_code.m){download=""}
 
 ```{.matlab filename="ch4_18_dead_time_in_code.m"}
 %% Ch.4 — Dead time in code
 % Process Dynamics and Control, SeoulTech — slide 19
-% https://seoultechpse.github.io/ProCon/ch4/ch4_stability.html#/18
+% https://seoultechpse.github.io/ProCon/ch4/ch4_stability.html#/4/4
 % Requires: Control System Toolbox
 
 clear; close all; clc
@@ -202,12 +202,12 @@ Gd = tf(0.8, [5 1], 'InputDelay', 2);
 
 ### Example 4.7 in code
 
-[slide 36](ch4/ch4_stability.html#/35) · [⬇ ch4_35_example_4_7_in_code.m](ch4/matlab/ch4_35_example_4_7_in_code.m){download=""}
+[slide 36](ch4/ch4_stability.html#/6/3) · [⬇ ch4_35_example_4_7_in_code.m](ch4/matlab/ch4_35_example_4_7_in_code.m){download=""}
 
 ```{.matlab filename="ch4_35_example_4_7_in_code.m"}
 %% Ch.4 — Example 4.7 in code
 % Process Dynamics and Control, SeoulTech — slide 36
-% https://seoultechpse.github.io/ProCon/ch4/ch4_stability.html#/35
+% https://seoultechpse.github.io/ProCon/ch4/ch4_stability.html#/6/3
 % Requires: Control System Toolbox
 
 clear; close all; clc
@@ -226,12 +226,12 @@ stepinfo(feedback(Kc*G,1))
 
 ### Bode and Nyquist in code
 
-[slide 17](ch5/ch5_frequency.html#/16) · [⬇ ch5_16_bode_and_nyquist_in_code.m](ch5/matlab/ch5_16_bode_and_nyquist_in_code.m){download=""}
+[slide 17](ch5/ch5_frequency.html#/3/10) · [⬇ ch5_16_bode_and_nyquist_in_code.m](ch5/matlab/ch5_16_bode_and_nyquist_in_code.m){download=""}
 
 ```{.matlab filename="ch5_16_bode_and_nyquist_in_code.m"}
 %% Ch.5 — Bode and Nyquist in code
 % Process Dynamics and Control, SeoulTech — slide 17
-% https://seoultechpse.github.io/ProCon/ch5/ch5_frequency.html#/16
+% https://seoultechpse.github.io/ProCon/ch5/ch5_frequency.html#/3/10
 % Requires: Control System Toolbox
 
 clear; close all; clc
@@ -252,12 +252,12 @@ end
 
 ### Margins in code
 
-[slide 29](ch5/ch5_frequency.html#/28) · [⬇ ch5_28_margins_in_code.m](ch5/matlab/ch5_28_margins_in_code.m){download=""}
+[slide 29](ch5/ch5_frequency.html#/4/11) · [⬇ ch5_28_margins_in_code.m](ch5/matlab/ch5_28_margins_in_code.m){download=""}
 
 ```{.matlab filename="ch5_28_margins_in_code.m"}
 %% Ch.5 — Margins in code
 % Process Dynamics and Control, SeoulTech — slide 29
-% https://seoultechpse.github.io/ProCon/ch5/ch5_frequency.html#/28
+% https://seoultechpse.github.io/ProCon/ch5/ch5_frequency.html#/4/11
 % Requires: Control System Toolbox
 
 clear; close all; clc
@@ -274,12 +274,12 @@ margin(L)                                   % Bode plot with margins marked
 
 ### Example 5.13 in code
 
-[slide 33](ch5/ch5_frequency.html#/32) · [⬇ ch5_32_example_5_13_in_code.m](ch5/matlab/ch5_32_example_5_13_in_code.m){download=""}
+[slide 33](ch5/ch5_frequency.html#/5/3) · [⬇ ch5_32_example_5_13_in_code.m](ch5/matlab/ch5_32_example_5_13_in_code.m){download=""}
 
 ```{.matlab filename="ch5_32_example_5_13_in_code.m"}
 %% Ch.5 — Example 5.13 in code
 % Process Dynamics and Control, SeoulTech — slide 33
-% https://seoultechpse.github.io/ProCon/ch5/ch5_frequency.html#/32
+% https://seoultechpse.github.io/ProCon/ch5/ch5_frequency.html#/5/3
 % Requires: Control System Toolbox
 
 clear; close all; clc
@@ -309,12 +309,12 @@ margin(Kc*Gs), stepinfo(feedback(Kc*Gs, 1))
 
 ### Example 6.1 in code
 
-[slide 12](ch6/ch6_multiloop.html#/11) · [⬇ ch6_11_example_6_1_in_code.m](ch6/matlab/ch6_11_example_6_1_in_code.m){download=""}
+[slide 12](ch6/ch6_multiloop.html#/2/9) · [⬇ ch6_11_example_6_1_in_code.m](ch6/matlab/ch6_11_example_6_1_in_code.m){download=""}
 
 ```{.matlab filename="ch6_11_example_6_1_in_code.m"}
 %% Ch.6 — Example 6.1 in code
 % Process Dynamics and Control, SeoulTech — slide 12
-% https://seoultechpse.github.io/ProCon/ch6/ch6_multiloop.html#/11
+% https://seoultechpse.github.io/ProCon/ch6/ch6_multiloop.html#/2/9
 % Requires: Control System Toolbox
 
 clear; close all; clc
@@ -332,12 +332,12 @@ step(load_single, load_cascade, 30), legend('single loop','cascade')
 
 ### Smith predictor in code
 
-[slide 26](ch6/ch6_multiloop.html#/25) · [⬇ ch6_25_smith_predictor_in_code.m](ch6/matlab/ch6_25_smith_predictor_in_code.m){download=""}
+[slide 26](ch6/ch6_multiloop.html#/6/4) · [⬇ ch6_25_smith_predictor_in_code.m](ch6/matlab/ch6_25_smith_predictor_in_code.m){download=""}
 
 ```{.matlab filename="ch6_25_smith_predictor_in_code.m"}
 %% Ch.6 — Smith predictor in code
 % Process Dynamics and Control, SeoulTech — slide 26
-% https://seoultechpse.github.io/ProCon/ch6/ch6_multiloop.html#/25
+% https://seoultechpse.github.io/ProCon/ch6/ch6_multiloop.html#/6/4
 % Requires: Control System Toolbox
 
 clear; close all; clc
@@ -355,12 +355,12 @@ step(T_smith, 40)
 
 ### RGA in code
 
-[slide 35](ch6/ch6_multiloop.html#/34) · [⬇ ch6_34_rga_in_code.m](ch6/matlab/ch6_34_rga_in_code.m){download=""}
+[slide 35](ch6/ch6_multiloop.html#/7/8) · [⬇ ch6_34_rga_in_code.m](ch6/matlab/ch6_34_rga_in_code.m){download=""}
 
 ```{.matlab filename="ch6_34_rga_in_code.m"}
 %% Ch.6 — RGA in code
 % Process Dynamics and Control, SeoulTech — slide 35
-% https://seoultechpse.github.io/ProCon/ch6/ch6_multiloop.html#/34
+% https://seoultechpse.github.io/ProCon/ch6/ch6_multiloop.html#/7/8
 % Requires: Control System Toolbox
 
 clear; close all; clc
@@ -378,12 +378,12 @@ rga(K66)                                     % [1.91 -0.91; -0.91 1.91]
 
 ### Decoupling in code
 
-[slide 41](ch6/ch6_multiloop.html#/40) · [⬇ ch6_40_decoupling_in_code.m](ch6/matlab/ch6_40_decoupling_in_code.m){download=""}
+[slide 41](ch6/ch6_multiloop.html#/8/5) · [⬇ ch6_40_decoupling_in_code.m](ch6/matlab/ch6_40_decoupling_in_code.m){download=""}
 
 ```{.matlab filename="ch6_40_decoupling_in_code.m"}
 %% Ch.6 — Decoupling in code
 % Process Dynamics and Control, SeoulTech — slide 41
-% https://seoultechpse.github.io/ProCon/ch6/ch6_multiloop.html#/40
+% https://seoultechpse.github.io/ProCon/ch6/ch6_multiloop.html#/8/5
 % Requires: Control System Toolbox
 
 clear; close all; clc
