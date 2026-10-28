@@ -38,7 +38,7 @@ website:
       - icon: github
         href: "https://github.com/SeoulTechPSE/ProCon"
   page-footer:
-    left: "© 2026 Kee-Youn Yoo · Department of Chemical & Biomolecular Engineering, SeoulTech"
+    left: "© 2026 Kee-Youn Yoo<br>Department of Chemical & Biomolecular Engineering, SeoulTech"
     right:
       - text: "CC BY-NC 4.0"
         href: "https://creativecommons.org/licenses/by-nc/4.0/"

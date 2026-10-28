@@ -7,11 +7,11 @@ Each script is self-contained (`clear; close all` at the top) and named after it
 
 ## 1. Mathematical Preliminaries & Dynamic Response
 
-[⬇ Download all (3 scripts, zip)](ch1/matlab/ch1_matlab.zip){.btn-dl download=}}
+[⬇ Download all (3 scripts, zip)](ch1/matlab/ch1_matlab.zip){.btn-dl download=""}
 
 ### Partial fractions by computer
 
-[slide 20](ch1/ch1_dynamics.html#/19) · [⬇ ch1_19_partial_fractions_by_computer.m](ch1/matlab/ch1_19_partial_fractions_by_computer.m){download=}}{sym}
+[slide 20](ch1/ch1_dynamics.html#/19) · [⬇ ch1_19_partial_fractions_by_computer.m](ch1/matlab/ch1_19_partial_fractions_by_computer.m){download=""} · needs Symbolic Math Toolbox
 
 ```{.matlab filename="ch1_19_partial_fractions_by_computer.m"}
 %% Ch.1 — Partial fractions by computer
@@ -32,7 +32,7 @@ partfrac(2/((s + 1)^3*(s + 2)), s)
 
 ### Second-order responses in code
 
-[slide 37](ch1/ch1_dynamics.html#/36) · [⬇ ch1_36_second_order_responses_in_code.m](ch1/matlab/ch1_36_second_order_responses_in_code.m){download=}}{sym}
+[slide 37](ch1/ch1_dynamics.html#/36) · [⬇ ch1_36_second_order_responses_in_code.m](ch1/matlab/ch1_36_second_order_responses_in_code.m){download=""}
 
 ```{.matlab filename="ch1_36_second_order_responses_in_code.m"}
 %% Ch.1 — Second-order responses in code
@@ -52,7 +52,7 @@ S = stepinfo(tf(1, [1 0.6 1]))                             % zeta = 0.3
 
 ### Example 1.10 Padé approximation of $e^{-3s}/(10s+1)$
 
-[slide 41](ch1/ch1_dynamics.html#/40) · [⬇ ch1_40_example_1_10_pade_approximation_of.m](ch1/matlab/ch1_40_example_1_10_pade_approximation_of.m){download=}}{sym}
+[slide 41](ch1/ch1_dynamics.html#/40) · [⬇ ch1_40_example_1_10_pade_approximation_of.m](ch1/matlab/ch1_40_example_1_10_pade_approximation_of.m){download=""}
 
 ```{.matlab filename="ch1_40_example_1_10_pade_approximation_of.m"}
 %% Ch.1 — Example 1.10 Padé approximation of $e^{-3s}/(10s+1)$
@@ -71,11 +71,11 @@ legend('Pade 1/1', 'exact')
 
 ## 2. Analysis of Single-Loop Control Systems
 
-[⬇ Download all (1 scripts, zip)](ch2/matlab/ch2_matlab.zip){.btn-dl download=}}
+[⬇ Download all (1 script, zip)](ch2/matlab/ch2_matlab.zip){.btn-dl download=""}
 
 ### Example 2.6 Closed-loop simulation
 
-[slide 31](ch2/ch2_analysis.html#/30) · [⬇ ch2_30_example_2_6_closed_loop_simulation.m](ch2/matlab/ch2_30_example_2_6_closed_loop_simulation.m){download=}}{sym}
+[slide 31](ch2/ch2_analysis.html#/30) · [⬇ ch2_30_example_2_6_closed_loop_simulation.m](ch2/matlab/ch2_30_example_2_6_closed_loop_simulation.m){download=""}
 
 ```{.matlab filename="ch2_30_example_2_6_closed_loop_simulation.m"}
 %% Ch.2 — Example 2.6 Closed-loop simulation
@@ -98,11 +98,11 @@ step(Gcl)
 
 ## 3. Tuning of Single-Loop Control Systems
 
-[⬇ Download all (2 scripts, zip)](ch3/matlab/ch3_matlab.zip){.btn-dl download=}}
+[⬇ Download all (2 scripts, zip)](ch3/matlab/ch3_matlab.zip){.btn-dl download=""}
 
 ### Van de Vusse in code
 
-[slide 13](ch3/ch3_tuning.html#/12) · [⬇ ch3_12_van_de_vusse_in_code.m](ch3/matlab/ch3_12_van_de_vusse_in_code.m){download=}}{sym}
+[slide 13](ch3/ch3_tuning.html#/12) · [⬇ ch3_12_van_de_vusse_in_code.m](ch3/matlab/ch3_12_van_de_vusse_in_code.m){download=""}
 
 ```{.matlab filename="ch3_12_van_de_vusse_in_code.m"}
 %% Ch.3 — Van de Vusse in code
@@ -124,7 +124,7 @@ legend('P','PI','PID')
 
 ### Tuning rules in code
 
-[slide 16](ch3/ch3_tuning.html#/15) · [⬇ ch3_15_tuning_rules_in_code.m](ch3/matlab/ch3_15_tuning_rules_in_code.m){download=}}{sym}
+[slide 16](ch3/ch3_tuning.html#/15) · [⬇ ch3_15_tuning_rules_in_code.m](ch3/matlab/ch3_15_tuning_rules_in_code.m){download=""}
 
 ```{.matlab filename="ch3_15_tuning_rules_in_code.m"}
 %% Ch.3 — Tuning rules in code
@@ -147,11 +147,11 @@ figure, step(feedback(C*G, 1)),  figure, margin(C*G)
 
 ## 4. Stability of Closed-Loop Systems
 
-[⬇ Download all (3 scripts, zip)](ch4/matlab/ch4_matlab.zip){.btn-dl download=}}
+[⬇ Download all (3 scripts, zip)](ch4/matlab/ch4_matlab.zip){.btn-dl download=""}
 
 ### Routh array in code
 
-[slide 14](ch4/ch4_stability.html#/13) · [⬇ ch4_13_routh_array_in_code.m](ch4/matlab/ch4_13_routh_array_in_code.m){download=}}{sym}
+[slide 14](ch4/ch4_stability.html#/13) · [⬇ ch4_13_routh_array_in_code.m](ch4/matlab/ch4_13_routh_array_in_code.m){download=""} · needs Symbolic Math Toolbox
 
 ```{.matlab filename="ch4_13_routh_array_in_code.m"}
 %% Ch.4 — Routh array in code
@@ -181,7 +181,7 @@ end
 
 ### Dead time in code
 
-[slide 19](ch4/ch4_stability.html#/18) · [⬇ ch4_18_dead_time_in_code.m](ch4/matlab/ch4_18_dead_time_in_code.m){download=}}{sym}
+[slide 19](ch4/ch4_stability.html#/18) · [⬇ ch4_18_dead_time_in_code.m](ch4/matlab/ch4_18_dead_time_in_code.m){download=""}
 
 ```{.matlab filename="ch4_18_dead_time_in_code.m"}
 %% Ch.4 — Dead time in code
@@ -202,7 +202,7 @@ Gd = tf(0.8, [5 1], 'InputDelay', 2);
 
 ### Example 4.7 in code
 
-[slide 36](ch4/ch4_stability.html#/35) · [⬇ ch4_35_example_4_7_in_code.m](ch4/matlab/ch4_35_example_4_7_in_code.m){download=}}{sym}
+[slide 36](ch4/ch4_stability.html#/35) · [⬇ ch4_35_example_4_7_in_code.m](ch4/matlab/ch4_35_example_4_7_in_code.m){download=""}
 
 ```{.matlab filename="ch4_35_example_4_7_in_code.m"}
 %% Ch.4 — Example 4.7 in code
@@ -222,11 +222,11 @@ stepinfo(feedback(Kc*G,1))
 
 ## 5. Frequency-Response Analysis & Design
 
-[⬇ Download all (3 scripts, zip)](ch5/matlab/ch5_matlab.zip){.btn-dl download=}}
+[⬇ Download all (3 scripts, zip)](ch5/matlab/ch5_matlab.zip){.btn-dl download=""}
 
 ### Bode and Nyquist in code
 
-[slide 17](ch5/ch5_frequency.html#/16) · [⬇ ch5_16_bode_and_nyquist_in_code.m](ch5/matlab/ch5_16_bode_and_nyquist_in_code.m){download=}}{sym}
+[slide 17](ch5/ch5_frequency.html#/16) · [⬇ ch5_16_bode_and_nyquist_in_code.m](ch5/matlab/ch5_16_bode_and_nyquist_in_code.m){download=""}
 
 ```{.matlab filename="ch5_16_bode_and_nyquist_in_code.m"}
 %% Ch.5 — Bode and Nyquist in code
@@ -252,7 +252,7 @@ end
 
 ### Margins in code
 
-[slide 29](ch5/ch5_frequency.html#/28) · [⬇ ch5_28_margins_in_code.m](ch5/matlab/ch5_28_margins_in_code.m){download=}}{sym}
+[slide 29](ch5/ch5_frequency.html#/28) · [⬇ ch5_28_margins_in_code.m](ch5/matlab/ch5_28_margins_in_code.m){download=""}
 
 ```{.matlab filename="ch5_28_margins_in_code.m"}
 %% Ch.5 — Margins in code
@@ -274,7 +274,7 @@ margin(L)                                   % Bode plot with margins marked
 
 ### Example 5.13 in code
 
-[slide 33](ch5/ch5_frequency.html#/32) · [⬇ ch5_32_example_5_13_in_code.m](ch5/matlab/ch5_32_example_5_13_in_code.m){download=}}{sym}
+[slide 33](ch5/ch5_frequency.html#/32) · [⬇ ch5_32_example_5_13_in_code.m](ch5/matlab/ch5_32_example_5_13_in_code.m){download=""}
 
 ```{.matlab filename="ch5_32_example_5_13_in_code.m"}
 %% Ch.5 — Example 5.13 in code
@@ -305,11 +305,11 @@ margin(Kc*Gs), stepinfo(feedback(Kc*Gs, 1))
 
 ## 6. Multi-loop Systems
 
-[⬇ Download all (4 scripts, zip)](ch6/matlab/ch6_matlab.zip){.btn-dl download=}}
+[⬇ Download all (4 scripts, zip)](ch6/matlab/ch6_matlab.zip){.btn-dl download=""}
 
 ### Example 6.1 in code
 
-[slide 12](ch6/ch6_multiloop.html#/11) · [⬇ ch6_11_example_6_1_in_code.m](ch6/matlab/ch6_11_example_6_1_in_code.m){download=}}{sym}
+[slide 12](ch6/ch6_multiloop.html#/11) · [⬇ ch6_11_example_6_1_in_code.m](ch6/matlab/ch6_11_example_6_1_in_code.m){download=""}
 
 ```{.matlab filename="ch6_11_example_6_1_in_code.m"}
 %% Ch.6 — Example 6.1 in code
@@ -332,7 +332,7 @@ step(load_single, load_cascade, 30), legend('single loop','cascade')
 
 ### Smith predictor in code
 
-[slide 26](ch6/ch6_multiloop.html#/25) · [⬇ ch6_25_smith_predictor_in_code.m](ch6/matlab/ch6_25_smith_predictor_in_code.m){download=}}{sym}
+[slide 26](ch6/ch6_multiloop.html#/25) · [⬇ ch6_25_smith_predictor_in_code.m](ch6/matlab/ch6_25_smith_predictor_in_code.m){download=""}
 
 ```{.matlab filename="ch6_25_smith_predictor_in_code.m"}
 %% Ch.6 — Smith predictor in code
@@ -355,7 +355,7 @@ step(T_smith, 40)
 
 ### RGA in code
 
-[slide 35](ch6/ch6_multiloop.html#/34) · [⬇ ch6_34_rga_in_code.m](ch6/matlab/ch6_34_rga_in_code.m){download=}}{sym}
+[slide 35](ch6/ch6_multiloop.html#/34) · [⬇ ch6_34_rga_in_code.m](ch6/matlab/ch6_34_rga_in_code.m){download=""}
 
 ```{.matlab filename="ch6_34_rga_in_code.m"}
 %% Ch.6 — RGA in code
@@ -378,7 +378,7 @@ rga(K66)                                     % [1.91 -0.91; -0.91 1.91]
 
 ### Decoupling in code
 
-[slide 41](ch6/ch6_multiloop.html#/40) · [⬇ ch6_40_decoupling_in_code.m](ch6/matlab/ch6_40_decoupling_in_code.m){download=}}{sym}
+[slide 41](ch6/ch6_multiloop.html#/40) · [⬇ ch6_40_decoupling_in_code.m](ch6/matlab/ch6_40_decoupling_in_code.m){download=""}
 
 ```{.matlab filename="ch6_40_decoupling_in_code.m"}
 %% Ch.6 — Decoupling in code

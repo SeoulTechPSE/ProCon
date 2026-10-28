@@ -240,11 +240,11 @@ def matlab():
             for _, _, name, text, _ in files:
                 z.writestr(zipfile.ZipInfo(f"{d}_matlab/{name}.m", stamp), text)
         page.append(f"## {n}. {ch['title']}\n")
-        page.append(f"[⬇ Download all ({len(files)} scripts, zip)]({d}/matlab/{d}_matlab.zip){{.btn-dl download=""}}\n")
+        page.append(f'[⬇ Download all ({len(files)} script{"s" if len(files) > 1 else ""}, zip)]({d}/matlab/{d}_matlab.zip){{.btn-dl download=""}}\n')
         for k, t, name, text, tbx in files:
             sym = " · needs Symbolic Math Toolbox" if "Symbolic" in tbx else ""
             page.append(f"### {t}\n")
-            page.append(f"[slide {k + 1}]({d}/{s}.html#/{k}) · [⬇ {name}.m]({d}/matlab/{name}.m){{download=""}}{sym}\n")
+            page.append(f'[slide {k + 1}]({d}/{s}.html#/{k}) · [⬇ {name}.m]({d}/matlab/{name}.m){{download=""}}{sym}\n')
             page.append(f'```{{.matlab filename="{name}.m"}}\n{text.rstrip()}\n```\n')
     return "\n".join(page)
 
