@@ -779,7 +779,7 @@ Rarely used directly; the underdamped one yields the characteristics on the next
 ::: {.ftab}
 | overshoot | peak time | rise time | period | settling time | decay ratio |
 |:-:|:-:|:-:|:-:|:-:|:-:|
-| $\dfrac ab=\exp\left(\dfrac{-\pi\zeta}{\sqrt{1-\zeta^2}}\right)$ | $t_p=\dfrac{\pi\tau}{\sqrt{1-\zeta^2}}$ | $t_r=\dfrac{\tau(\pi-\cos^{-1}\zeta)}{\sqrt{1-\zeta^2}}$ | $P=\dfrac{2\pi\tau}{\sqrt{1-\zeta^2}}$ | $t_s\approx\dfrac{3\tau}{\zeta}$ (5%), $\dfrac{4\tau}{\zeta}$ (2%) | $\dfrac ca=\text{OS}^2$ |
+| $\dfrac ab=\exp\left(\dfrac{-\pi\zeta}{\sqrt{1-\zeta^2}}\right)$ | $t_p=\dfrac{\pi\tau}{\sqrt{1-\zeta^2}}$ | $t_r=\dfrac{\tau(\pi-\cos^{-1}\zeta)}{\sqrt{1-\zeta^2}}$ | $P=\dfrac{2\pi\tau}{\sqrt{1-\zeta^2}}$ | <span style="font-size:0.82em">$t_s\approx$<br>$\dfrac{3\tau}{\zeta}$&nbsp;(5%)<br>$\dfrac{4\tau}{\zeta}$&nbsp;(2%)</span> | $\dfrac ca=\text{OS}^2$ |
 :::
 
 ::: {.tiny .navy}
