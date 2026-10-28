@@ -4,7 +4,7 @@
 
 Writes
     _chapters.md   chapter cards for index.qmd (topics, thumbnail, links, widgets, PDF sizes, last update)
-    _updates.md    recent changes (from git log) for index.qmd
+    _updates.md    announcements (UPDATES in tools/chapters.py) for index.qmd
     contents.qmd   every slide title of every deck, linked (searchable: reveal decks are not indexed)
     problems.qmd   homework problems of all chapters, linked to their slides
     README.md      chapter table between <!-- chapters:start --> and <!-- chapters:end -->
@@ -18,7 +18,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
-from chapters import CHAPTERS, SITE, REPO  # noqa: E402
+from chapters import CHAPTERS, SITE, REPO, UPDATES  # noqa: E402
 
 COLAB = f"https://colab.research.google.com/github/{REPO}/blob/main"
 
@@ -136,17 +136,11 @@ def cards():
     return "\n".join(out)
 
 
-def updates(n=8):
-    log = git("log", f"-{n}", "--format=%cs\t%s")
-    if not log:
+def updates():
+    """Hand-written announcements from tools/chapters.py (not the git log)."""
+    if not UPDATES:
         return ""
-    rows = [l.split("\t", 1) for l in log.split("\n") if "\t" in l]
-    def short(m, n=95):
-        head = m.split(": ", 1)[0]
-        if len(head) >= 20 and len(head) < len(m):            # "Add Ch.2 ...: slides, ..." -> "Add Ch.2 ..."
-            m = head
-        return m if len(m) <= n else m[:n].rsplit(" ", 1)[0].rstrip(",;") + " …"
-    items = "\n".join(f"- **{d}** — {short(m)}" for d, m in rows)
+    items = "\n".join(f"- **{d}** — {m}" for d, m in UPDATES)
     return f"## Recent updates\n\n{items}\n"
 
 
