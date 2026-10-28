@@ -7,6 +7,7 @@ Writes
     _updates.md    announcements (UPDATES in tools/chapters.py) for index.qmd
     contents.qmd   every slide title of every deck, linked (searchable: reveal decks are not indexed)
     problems.qmd   homework problems of all chapters, linked to their slides
+    matlab.qmd     every MATLAB code tab, by chapter, + chN/matlab/*.m and chN/matlab/chN_matlab.zip
     README.md      chapter table between <!-- chapters:start --> and <!-- chapters:end -->
 Only the standard library is required (Pillow is used for thumbnails when available).
 """
@@ -14,6 +15,7 @@ import html
 import re
 import subprocess
 import sys
+import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -173,6 +175,80 @@ def problems():
     return "\n".join(out)
 
 
+# MATLAB snippets that use variables defined on an earlier slide: prepend that setup to the .m file
+MATLAB_SETUP = {
+    (5, "Example 5.13 in code"): [
+        "% --- setup from the slide 'Margins in code' ---",
+        "G = tf([-6 3], conv([10 1],[5 1]));",
+        "[Ku,~,wc] = margin(G);   Pu = 2*pi/wc;",
+        "% ---"],
+}
+
+
+def matlab_blocks(qmd):
+    """[(slide index, title, code)] for every ```{.matlab} block of a deck."""
+    out = []
+    for k, lev, t, body in slides(qmd):
+        i = 0
+        while i < len(body):
+            if body[i].strip() in ("```{.matlab}", "```matlab"):
+                j = i + 1
+                while not body[j].strip().startswith("```"):
+                    j += 1
+                out.append((k, t, "\n".join(body[i + 1:j]).rstrip()))
+                i = j
+            i += 1
+    return out
+
+
+def slugify(t):
+    import unicodedata
+    t = unicodedata.normalize("NFKD", re.sub(r"\$[^$]*\$", "", t)).encode("ascii", "ignore").decode()
+    return re.sub(r"[^a-z0-9]+", "_", t.lower()).strip("_")[:40].rstrip("_")
+
+
+def matlab():
+    page = ['---', 'title: "MATLAB scripts"',
+            'subtitle: "Every MATLAB code tab of the slides, by chapter — download a chapter and run the scripts in MATLAB"', '---', '',
+            'Each script is self-contained (`clear; close all` at the top) and named after its slide. '
+            'All need the **Control System Toolbox**; scripts with `syms` also need the **Symbolic Math Toolbox**. '
+            'The Python versions of the same calculations are in each chapter\'s Colab notebook.', '']
+    stamp = (2026, 1, 1, 0, 0, 0)                               # fixed zip timestamps: no spurious diffs
+    for ch in CHAPTERS:
+        n, d, s = ch["n"], f"ch{ch['n']}", ch["slug"]
+        blocks = matlab_blocks(f"{d}/{s}.qmd")
+        if not blocks:
+            continue
+        mdir = ROOT / d / "matlab"; mdir.mkdir(exist_ok=True)
+        for old in mdir.glob("*.m"):
+            old.unlink()
+        files, seen = [], {}
+        for k, t, code in blocks:
+            name = f"{d}_{k:02d}_{slugify(t)}"
+            seen[name] = seen.get(name, 0) + 1
+            if seen[name] > 1:
+                name += f"_{seen[name]}"
+            tbx = "Control System Toolbox" + (", Symbolic Math Toolbox" if re.search(r"\bsyms\b", code) else "")
+            setup = MATLAB_SETUP.get((n, t), [])
+            text = "\n".join([f"%% Ch.{n} — {t}", f"% Process Dynamics and Control, SeoulTech — slide {k + 1}",
+                              f"% {SITE}{d}/{s}.html#/{k}", f"% Requires: {tbx}", "", "clear; close all; clc", "",
+                              *setup, *([""] if setup else []), code, ""])
+            (mdir / f"{name}.m").write_text(text, encoding="utf-8")
+            files.append((k, t, name, text, tbx))
+        zpath = mdir / f"{d}_matlab.zip"
+        with zipfile.ZipFile(zpath, "w", zipfile.ZIP_DEFLATED) as z:
+            for _, _, name, text, _ in files:
+                z.writestr(zipfile.ZipInfo(f"{d}_matlab/{name}.m", stamp), text)
+        page.append(f"## {n}. {ch['title']}\n")
+        page.append(f"[⬇ Download all ({len(files)} scripts, zip)]({d}/matlab/{d}_matlab.zip){{.btn-dl download=""}}\n")
+        for k, t, name, text, tbx in files:
+            sym = " · needs Symbolic Math Toolbox" if "Symbolic" in tbx else ""
+            page.append(f"### {t}\n")
+            page.append(f"[slide {k + 1}]({d}/{s}.html#/{k}) · [⬇ {name}.m]({d}/matlab/{name}.m){{download=""}}{sym}\n")
+            page.append(f'```{{.matlab filename="{name}.m"}}\n{text.rstrip()}\n```\n')
+    return "\n".join(page)
+
+
 def readme():
     rows = ["| Chapter | Topics | Slides | PDF | Notebook |", "|:--|:--|:--|:--|:--|"]
     for ch in CHAPTERS:
@@ -196,5 +272,6 @@ if __name__ == "__main__":
     write("_updates.md", updates())
     write("contents.qmd", contents())
     write("problems.qmd", problems())
+    write("matlab.qmd", matlab())
     readme()
     print("index pieces written for", len(CHAPTERS), "chapters")

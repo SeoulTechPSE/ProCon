@@ -18,5 +18,6 @@ Lecture notes for **Process Dynamics and Control (공정제어)**. Slides are Qu
 - **Handout** — A4, three slides per page with ruled note space, for printing.
 - **Colab** — opens the chapter notebook in Google Colab; run all cells to reproduce the figures.
 - **[Slide contents](contents.qmd)** lists every slide (searchable) and **[Homework problems](problems.qmd)** collects the problems of all chapters.
+- **[MATLAB scripts](matlab.qmd)** — every MATLAB code tab as a ready-to-run `.m` file, downloadable per chapter (zip).
 
 {{< include _updates.md >}}

@@ -418,7 +418,7 @@ t, y = smith(5, 5)                           # Kc = 5 > Kcu: still stable
 ```{.matlab}
 s  = tf('s');
 G0 = 0.8/(5*s + 1);                  % model without delay
-Gd = G0*exp(-2*s);                   % plant with delay
+Gd = ss(G0*exp(-2*s));               % plant with delay (ss: internal delays)
 Gc = 5*(1 + 1/(5*s));                % PI, Kc = 5, tauI = 5
 
 C_smith = feedback(Gc, G0 - Gd);     % controller + dead-time compensator
@@ -753,7 +753,7 @@ D_static  = [1, 0.714; 0.667, 1];                          % M = D * u
 D_dynamic = [1, 0.714*(12*s+1)/(15*s+1);
              0.667*(10*s+1)/(11*s+1)*exp(-2*s), 1];
 for D = {eye(2), D_static, D_dynamic}
-    T = feedback(G*D{1}*C, eye(2));
+    T = feedback(ss(G)*D{1}*C, eye(2));               % ss: mixed delays
     step(T(:,1), 80), hold on                              % step in r1 (x_D)
 end
 ```

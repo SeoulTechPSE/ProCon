@@ -1,0 +1,403 @@
+---
+title: "MATLAB scripts"
+subtitle: "Every MATLAB code tab of the slides, by chapter — download a chapter and run the scripts in MATLAB"
+---
+
+Each script is self-contained (`clear; close all` at the top) and named after its slide. All need the **Control System Toolbox**; scripts with `syms` also need the **Symbolic Math Toolbox**. The Python versions of the same calculations are in each chapter's Colab notebook.
+
+## 1. Mathematical Preliminaries & Dynamic Response
+
+[⬇ Download all (3 scripts, zip)](ch1/matlab/ch1_matlab.zip){.btn-dl download=}}
+
+### Partial fractions by computer
+
+[slide 20](ch1/ch1_dynamics.html#/19) · [⬇ ch1_19_partial_fractions_by_computer.m](ch1/matlab/ch1_19_partial_fractions_by_computer.m){download=}}{sym}
+
+```{.matlab filename="ch1_19_partial_fractions_by_computer.m"}
+%% Ch.1 — Partial fractions by computer
+% Process Dynamics and Control, SeoulTech — slide 20
+% https://seoultechpse.github.io/ProCon/ch1/ch1_dynamics.html#/19
+% Requires: Control System Toolbox, Symbolic Math Toolbox
+
+clear; close all; clc
+
+[r, p, k] = residue([6 0 -12], [1 1 -4 -4])      % Ex 1.5: residues and poles
+roots([1 1 -4 -4])                               % 2, -2, -1
+
+syms s t
+ilaplace((s + 5)/(s^2 + 4*s + 13))               % Ex 1.6
+ilaplace(2/((s + 1)^3*(s + 2)))                  % Ex 1.7
+partfrac(2/((s + 1)^3*(s + 2)), s)
+```
+
+### Second-order responses in code
+
+[slide 37](ch1/ch1_dynamics.html#/36) · [⬇ ch1_36_second_order_responses_in_code.m](ch1/matlab/ch1_36_second_order_responses_in_code.m){download=}}{sym}
+
+```{.matlab filename="ch1_36_second_order_responses_in_code.m"}
+%% Ch.1 — Second-order responses in code
+% Process Dynamics and Control, SeoulTech — slide 37
+% https://seoultechpse.github.io/ProCon/ch1/ch1_dynamics.html#/36
+% Requires: Control System Toolbox
+
+clear; close all; clc
+
+t = 0:0.01:15;
+step(tf(1, [1 1 1]), tf(1, [1 2 1]), tf(1, [1 3 1]), t)   % zeta = 0.5, 1, 1.5
+legend('\zeta = 0.5', '\zeta = 1', '\zeta = 1.5')
+
+S = stepinfo(tf(1, [1 0.6 1]))                             % zeta = 0.3
+% Simulink: Step -> three Transfer Fcn blocks in parallel -> Scope
+```
+
+### Example 1.10 Padé approximation of $e^{-3s}/(10s+1)$
+
+[slide 41](ch1/ch1_dynamics.html#/40) · [⬇ ch1_40_example_1_10_pade_approximation_of.m](ch1/matlab/ch1_40_example_1_10_pade_approximation_of.m){download=}}{sym}
+
+```{.matlab filename="ch1_40_example_1_10_pade_approximation_of.m"}
+%% Ch.1 — Example 1.10 Padé approximation of $e^{-3s}/(10s+1)$
+% Process Dynamics and Control, SeoulTech — slide 41
+% https://seoultechpse.github.io/ProCon/ch1/ch1_dynamics.html#/40
+% Requires: Control System Toolbox
+
+clear; close all; clc
+
+G  = tf(1, [10 1]);
+P1 = tf([-1.5 1], [1.5 1]);   % pade(3,1)
+step(G*P1); hold on
+step(G*exp(-3*tf('s')))      % exact delay
+legend('Pade 1/1', 'exact')
+```
+
+## 2. Analysis of Single-Loop Control Systems
+
+[⬇ Download all (1 scripts, zip)](ch2/matlab/ch2_matlab.zip){.btn-dl download=}}
+
+### Example 2.6 Closed-loop simulation
+
+[slide 31](ch2/ch2_analysis.html#/30) · [⬇ ch2_30_example_2_6_closed_loop_simulation.m](ch2/matlab/ch2_30_example_2_6_closed_loop_simulation.m){download=}}{sym}
+
+```{.matlab filename="ch2_30_example_2_6_closed_loop_simulation.m"}
+%% Ch.2 — Example 2.6 Closed-loop simulation
+% Process Dynamics and Control, SeoulTech — slide 31
+% https://seoultechpse.github.io/ProCon/ch2/ch2_analysis.html#/30
+% Requires: Control System Toolbox
+
+clear; close all; clc
+
+Gp = tf(0.8, [5 1]);
+
+Gc  = 10;                        % P
+Gcl = feedback(Gp*Gc, 1);
+step(Gcl); hold on
+
+Gc  = tf([10 10], [1 0]);        % PI: 10(1 + 1/s)
+Gcl = feedback(Gp*Gc, 1);
+step(Gcl)
+```
+
+## 3. Tuning of Single-Loop Control Systems
+
+[⬇ Download all (2 scripts, zip)](ch3/matlab/ch3_matlab.zip){.btn-dl download=}}
+
+### Van de Vusse in code
+
+[slide 13](ch3/ch3_tuning.html#/12) · [⬇ ch3_12_van_de_vusse_in_code.m](ch3/matlab/ch3_12_van_de_vusse_in_code.m){download=}}{sym}
+
+```{.matlab filename="ch3_12_van_de_vusse_in_code.m"}
+%% Ch.3 — Van de Vusse in code
+% Process Dynamics and Control, SeoulTech — slide 13
+% https://seoultechpse.github.io/ProCon/ch3/ch3_tuning.html#/12
+% Requires: Control System Toolbox
+
+clear; close all; clc
+
+Gp = tf(0.5858*[-0.3549 1], [0.1858 0.8627 1]);
+[Kcu, ~, wu] = margin(Gp);   Tu = 2*pi/wu;      % 4.150, 1.462
+
+C_P   = 0.5*Kcu;
+C_PI  = pidstd(0.455*Kcu, 0.833*Tu);
+C_PID = pidstd(0.6*Kcu, 0.5*Tu, 0.125*Tu, 10);  % N = 10 <-> alpha = 0.1
+step(feedback(C_P*Gp,1), feedback(C_PI*Gp,1), feedback(C_PID*Gp,1), 5)
+legend('P','PI','PID')
+```
+
+### Tuning rules in code
+
+[slide 16](ch3/ch3_tuning.html#/15) · [⬇ ch3_15_tuning_rules_in_code.m](ch3/matlab/ch3_15_tuning_rules_in_code.m){download=}}{sym}
+
+```{.matlab filename="ch3_15_tuning_rules_in_code.m"}
+%% Ch.3 — Tuning rules in code
+% Process Dynamics and Control, SeoulTech — slide 16
+% https://seoultechpse.github.io/ProCon/ch3/ch3_tuning.html#/15
+% Requires: Control System Toolbox
+
+clear; close all; clc
+
+G = tf(1, conv(conv([2 1],[1 1]),[0.5 1]));
+[y, t] = step(G, 30);
+t28 = t(find(y >= 0.283, 1));   t63 = t(find(y >= 0.632, 1));
+tau = 1.5*(t63 - t28);   theta = t63 - tau;   K = y(end);   % 2.57, 1.14, 1
+
+r = theta/tau;                                    % ITAE set point, PID
+Kc = 0.965/K*(1/r)^0.855;  tI = tau/(0.796 - 0.147*r);  tD = 0.308*tau*r^0.929;
+C = pidstd(Kc, tI, tD, 10);
+figure, step(feedback(C*G, 1)),  figure, margin(C*G)
+```
+
+## 4. Stability of Closed-Loop Systems
+
+[⬇ Download all (3 scripts, zip)](ch4/matlab/ch4_matlab.zip){.btn-dl download=}}
+
+### Routh array in code
+
+[slide 14](ch4/ch4_stability.html#/13) · [⬇ ch4_13_routh_array_in_code.m](ch4/matlab/ch4_13_routh_array_in_code.m){download=}}{sym}
+
+```{.matlab filename="ch4_13_routh_array_in_code.m"}
+%% Ch.4 — Routh array in code
+% Process Dynamics and Control, SeoulTech — slide 14
+% https://seoultechpse.github.io/ProCon/ch4/ch4_stability.html#/13
+% Requires: Control System Toolbox, Symbolic Math Toolbox
+
+clear; close all; clc
+
+syms s Kc tI positive
+p = sym2poly_sym(expand((s+3)*(s+2)*(s+1) + Kc), s);   % [1 6 11 Kc+6]
+R = routh_array(p);   R(:,1)                         % first column
+
+function c = sym2poly_sym(P, s), c = coeffs(P, s, 'All'); end
+
+function R = routh_array(p)            % basic version (no special cases)
+  n = numel(p)-1;  cols = floor(n/2)+1;  R = sym(zeros(n+1, cols));
+  R(1,1:numel(p(1:2:end))) = p(1:2:end);
+  R(2,1:numel(p(2:2:end))) = p(2:2:end);
+  for i = 3:n+1
+    for j = 1:cols-1
+      R(i,j) = simplify((R(i-1,1)*R(i-2,j+1) - R(i-2,1)*R(i-1,j+1))/R(i-1,1));
+    end
+  end
+end
+```
+
+### Dead time in code
+
+[slide 19](ch4/ch4_stability.html#/18) · [⬇ ch4_18_dead_time_in_code.m](ch4/matlab/ch4_18_dead_time_in_code.m){download=}}{sym}
+
+```{.matlab filename="ch4_18_dead_time_in_code.m"}
+%% Ch.4 — Dead time in code
+% Process Dynamics and Control, SeoulTech — slide 19
+% https://seoultechpse.github.io/ProCon/ch4/ch4_stability.html#/18
+% Requires: Control System Toolbox
+
+clear; close all; clc
+
+wu  = fzero(@(w) 2*w + atan(5*w) - pi, [0.1 2]);
+Kcu = sqrt(1 + 25*wu^2)/0.8                % 5.73
+
+G = tf(0.8, [5 1]);
+[n1,d1] = pade(2,1);   [Gm1,~,Wcg1] = margin(G*tf(n1,d1))     % 7.50, 1.18
+Gd = tf(0.8, [5 1], 'InputDelay', 2);
+[Gm, ~, Wcg] = margin(Gd)                                     % exact: 5.73, 0.895
+```
+
+### Example 4.7 in code
+
+[slide 36](ch4/ch4_stability.html#/35) · [⬇ ch4_35_example_4_7_in_code.m](ch4/matlab/ch4_35_example_4_7_in_code.m){download=}}{sym}
+
+```{.matlab filename="ch4_35_example_4_7_in_code.m"}
+%% Ch.4 — Example 4.7 in code
+% Process Dynamics and Control, SeoulTech — slide 36
+% https://seoultechpse.github.io/ProCon/ch4/ch4_stability.html#/35
+% Requires: Control System Toolbox
+
+clear; close all; clc
+
+G = tf(1, conv([2 1],[4 1]));
+rlocus(G); axis([-0.8 0 -1 1]); sgrid(0.7, 0:0.2:1)
+zeta = 0.7;
+Kc = 9/(8*zeta^2) - 1                 % exact: 1.296  (rlocfind click: ~1.23)
+pole(feedback(Kc*G,1))
+stepinfo(feedback(Kc*G,1))
+```
+
+## 5. Frequency-Response Analysis & Design
+
+[⬇ Download all (3 scripts, zip)](ch5/matlab/ch5_matlab.zip){.btn-dl download=}}
+
+### Bode and Nyquist in code
+
+[slide 17](ch5/ch5_frequency.html#/16) · [⬇ ch5_16_bode_and_nyquist_in_code.m](ch5/matlab/ch5_16_bode_and_nyquist_in_code.m){download=}}{sym}
+
+```{.matlab filename="ch5_16_bode_and_nyquist_in_code.m"}
+%% Ch.5 — Bode and Nyquist in code
+% Process Dynamics and Control, SeoulTech — slide 17
+% https://seoultechpse.github.io/ProCon/ch5/ch5_frequency.html#/16
+% Requires: Control System Toolbox
+
+clear; close all; clc
+
+G = tf(1, [2 1]);                       % Ex 5.2
+figure(1), bode(G)
+figure(2), nyquist(G)
+
+G6 = tf(1, [10 1], 'InputDelay', 2);    % Ex 5.6: exact dead time
+figure(3), bode(G6)
+figure(4), nyquist(G6)
+
+K = 1; tau = 2;                         % Ex 5.3: family in zeta
+for zeta = [1.2 1.0 0.8 0.6 0.4 0.2]
+    bode(tf(K, [tau^2 2*zeta*tau 1])), hold on
+end
+```
+
+### Margins in code
+
+[slide 29](ch5/ch5_frequency.html#/28) · [⬇ ch5_28_margins_in_code.m](ch5/matlab/ch5_28_margins_in_code.m){download=}}{sym}
+
+```{.matlab filename="ch5_28_margins_in_code.m"}
+%% Ch.5 — Margins in code
+% Process Dynamics and Control, SeoulTech — slide 29
+% https://seoultechpse.github.io/ProCon/ch5/ch5_frequency.html#/28
+% Requires: Control System Toolbox
+
+clear; close all; clc
+
+G = tf([-6 3], conv([10 1],[5 1]));
+[Ku,~,wc] = margin(G);   Pu = 2*pi/wc;      % 2.5, 15.2 s
+
+Kc = Ku/2.2;   tI = Pu/1.2;                 % Ziegler-Nichols PI
+L = Kc*tf([tI 1],[tI 0])*G;
+[GM,PM,wc,wg] = margin(L)                   % 1.63, 19.4 deg
+theta_max = PM*pi/180/wg                    % 1.43 s
+margin(L)                                   % Bode plot with margins marked
+```
+
+### Example 5.13 in code
+
+[slide 33](ch5/ch5_frequency.html#/32) · [⬇ ch5_32_example_5_13_in_code.m](ch5/matlab/ch5_32_example_5_13_in_code.m){download=}}{sym}
+
+```{.matlab filename="ch5_32_example_5_13_in_code.m"}
+%% Ch.5 — Example 5.13 in code
+% Process Dynamics and Control, SeoulTech — slide 33
+% https://seoultechpse.github.io/ProCon/ch5/ch5_frequency.html#/32
+% Requires: Control System Toolbox
+
+clear; close all; clc
+
+% --- setup from the slide 'Margins in code' ---
+G = tf([-6 3], conv([10 1],[5 1]));
+[Ku,~,wc] = margin(G);   Pu = 2*pi/wc;
+% ---
+
+tI = Pu/1.2;
+Gs = tf([tI 1],[tI 0])*G;                       % G* = everything except Kc
+
+Kcu = margin(Gs);   Kc_GM = Kcu/2;              % 1.86 -> 0.93
+
+w = logspace(-3, 1, 1e5);
+[m, p] = bode(Gs, w);   m = squeeze(m);   p = squeeze(p);
+[~, i] = min(abs(p + 135));                     % phase = -135 deg
+Kc_PM = 1/m(i)                                  % 0.60
+
+Kc = min(Kc_GM, Kc_PM);
+margin(Kc*Gs), stepinfo(feedback(Kc*Gs, 1))
+```
+
+## 6. Multi-loop Systems
+
+[⬇ Download all (4 scripts, zip)](ch6/matlab/ch6_matlab.zip){.btn-dl download=}}
+
+### Example 6.1 in code
+
+[slide 12](ch6/ch6_multiloop.html#/11) · [⬇ ch6_11_example_6_1_in_code.m](ch6/matlab/ch6_11_example_6_1_in_code.m){download=}}{sym}
+
+```{.matlab filename="ch6_11_example_6_1_in_code.m"}
+%% Ch.6 — Example 6.1 in code
+% Process Dynamics and Control, SeoulTech — slide 12
+% https://seoultechpse.github.io/ProCon/ch6/ch6_multiloop.html#/11
+% Requires: Control System Toolbox
+
+clear; close all; clc
+
+Gp = tf(0.8,[2 1]);  Gv = tf(0.5,[1 1]);  GL = tf(0.75,[1 1]);
+Kc2 = 18;
+Gv_s = feedback(Kc2*Gv, 1);                % G_v*
+GL_s = minreal(GL/(1 + Kc2*Gv));           % G_L*
+
+Kc = 3;  tI = 0.5;  Gc = Kc*tf([tI 1],[tI 0]);
+load_single  = minreal(GL*Gp/(1 + Gc*Gv*Gp));
+load_cascade = minreal(GL_s*Gp/(1 + Gc*Gv_s*Gp));
+step(load_single, load_cascade, 30), legend('single loop','cascade')
+```
+
+### Smith predictor in code
+
+[slide 26](ch6/ch6_multiloop.html#/25) · [⬇ ch6_25_smith_predictor_in_code.m](ch6/matlab/ch6_25_smith_predictor_in_code.m){download=}}{sym}
+
+```{.matlab filename="ch6_25_smith_predictor_in_code.m"}
+%% Ch.6 — Smith predictor in code
+% Process Dynamics and Control, SeoulTech — slide 26
+% https://seoultechpse.github.io/ProCon/ch6/ch6_multiloop.html#/25
+% Requires: Control System Toolbox
+
+clear; close all; clc
+
+s  = tf('s');
+G0 = 0.8/(5*s + 1);                  % model without delay
+Gd = ss(G0*exp(-2*s));               % plant with delay (ss: internal delays)
+Gc = 5*(1 + 1/(5*s));                % PI, Kc = 5, tauI = 5
+
+C_smith = feedback(Gc, G0 - Gd);     % controller + dead-time compensator
+T_smith = feedback(C_smith*Gd, 1);   % = Gc*G0/(1+Gc*G0) * exp(-2s)
+T_plain = feedback(Gc*Gd, 1);        % unstable
+step(T_smith, 40)
+```
+
+### RGA in code
+
+[slide 35](ch6/ch6_multiloop.html#/34) · [⬇ ch6_34_rga_in_code.m](ch6/matlab/ch6_34_rga_in_code.m){download=}}{sym}
+
+```{.matlab filename="ch6_34_rga_in_code.m"}
+%% Ch.6 — RGA in code
+% Process Dynamics and Control, SeoulTech — slide 35
+% https://seoultechpse.github.io/ProCon/ch6/ch6_multiloop.html#/34
+% Requires: Control System Toolbox
+
+clear; close all; clc
+
+rga = @(K) K .* inv(K).';                    % Lambda = K o (K^-1)^T
+
+m1 = 0.1;  m2 = 10;  F = m1 + m2;
+K = [m2/F^2, -m1/F^2;
+     1,       1     ];
+rga(K)                                       % [0.9901 0.0099; 0.0099 0.9901]
+
+K66 = [0.07 -0.05; 0.1 -0.15];               % distillation, Ex 6.6
+rga(K66)                                     % [1.91 -0.91; -0.91 1.91]
+```
+
+### Decoupling in code
+
+[slide 41](ch6/ch6_multiloop.html#/40) · [⬇ ch6_40_decoupling_in_code.m](ch6/matlab/ch6_40_decoupling_in_code.m){download=}}{sym}
+
+```{.matlab filename="ch6_40_decoupling_in_code.m"}
+%% Ch.6 — Decoupling in code
+% Process Dynamics and Control, SeoulTech — slide 41
+% https://seoultechpse.github.io/ProCon/ch6/ch6_multiloop.html#/40
+% Requires: Control System Toolbox
+
+clear; close all; clc
+
+s = tf('s');
+G = [0.07*exp(-3*s)/(12*s+1), -0.05*exp(-s)/(15*s+1);
+     0.10*exp(-4*s)/(11*s+1), -0.15*exp(-2*s)/(10*s+1)];
+C = blkdiag(29.8*(1 + 1/(12.1*s)), -17.1*(1 + 1/(10.0*s)));
+
+D_static  = [1, 0.714; 0.667, 1];                          % M = D * u
+D_dynamic = [1, 0.714*(12*s+1)/(15*s+1);
+             0.667*(10*s+1)/(11*s+1)*exp(-2*s), 1];
+for D = {eye(2), D_static, D_dynamic}
+    T = feedback(ss(G)*D{1}*C, eye(2));               % ss: mixed delays
+    step(T(:,1), 80), hold on                              % step in r1 (x_D)
+end
+```

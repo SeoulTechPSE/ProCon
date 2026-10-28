@@ -6,10 +6,12 @@ project:
     - index.qmd
     - contents.qmd
     - problems.qmd
+    - matlab.qmd
     - ch*/ch*_*.qmd
   resources:
     - "ch*/*.pdf"
     - "ch*/interactive/*.html"
+    - "ch*/matlab/*"
     - "assets/og-card.png"
     - "assets/apple-touch-icon.png"
 
@@ -30,6 +32,8 @@ website:
         text: Slide contents
       - href: problems.qmd
         text: Problems
+      - href: matlab.qmd
+        text: MATLAB
     right:
       - icon: github
         href: "https://github.com/SeoulTechPSE/ProCon"

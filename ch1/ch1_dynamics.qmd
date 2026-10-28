@@ -462,7 +462,7 @@ print(np.round(r, 4), np.round(p, 4))                   # [3, 2, 1]  at  [-2, -1
 ### MATLAB
 
 ```{.matlab}
-[r, p, k] = residue([6 0 -12], [1 1 -4 -4])     % Ex 1.5: residues and poles
+[r, p, k] = residue([6 0 -12], [1 1 -4 -4])      % Ex 1.5: residues and poles
 roots([1 1 -4 -4])                               % 2, -2, -1
 
 syms s t
