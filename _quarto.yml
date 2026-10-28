@@ -1,13 +1,11 @@
 project:
   type: website
-  output-dir: docs
+  output-dir: _site
   render:
     - index.qmd
     - ch*/ch*_*.qmd
   resources:
     - "ch*/*.pdf"
-    - "ch*/*.ipynb"
-    - "ch*/*.py"
     - "ch*/interactive/*.html"
 
 website:

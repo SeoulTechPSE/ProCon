@@ -1,9 +1,0 @@
-[
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Process Dynamics and Control",
-    "section": "",
-    "text": "Lecture notes for Process Dynamics and Control (공정제어). Slides are Quarto/reveal.js decks; every calculation is reproduced in a Python notebook (MATLAB code is shown alongside).\n\n\n\nChapter\nSlides\nPDF\nNotebook\n\n\n\n\n4. Stability of Closed-Loop Systems\nHTML\nslides · handout\n\n\n\n5. Frequency-Response Analysis & Design\nHTML\nslides · handout\n\n\n\n\nHow to use\n\nHTML slides — the main version: interactive widgets, Python/MATLAB code tabs with copy buttons. Press F for full screen, S for speaker view, Esc for the slide overview.\nPDF (slides) — one slide per page, for tablets (GoodNotes, Notability, …).\nPDF (handout) — A4, three slides per page with ruled note space, for printing.\nNotebook — opens in Google Colab; run all cells to reproduce the figures."
-  }
-]

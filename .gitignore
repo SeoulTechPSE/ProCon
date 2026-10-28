@@ -8,3 +8,7 @@ ch*/*_files/
 ch*/ch*_*.html
 
 /.quarto/
+
+# rendered site (built and deployed by GitHub Actions)
+/_site/
+/docs/

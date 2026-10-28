@@ -222,8 +222,8 @@ $|e^{-j\omega\theta}|=1,\ \angle e^{-j\omega\theta}=-\omega\theta$ (rad): the ph
 |:--|:--:|:--:|:--:|:--:|
 | $K$ | $K$ | $0$ | $0$ | $0$ |
 | $\dfrac{1}{\tau s+1}$ | $\dfrac{1}{\sqrt{1+\omega^2\tau^2}}$ | $-\tan^{-1}\omega\tau$ | $-1$ | $0\to-90^\circ$ |
-| $\tau s+1$ (LHP zero) | $\sqrt{1+\omega^2\tau^2}$ | $+\tan^{-1}\omega\tau$ | $+1$ | $0\to+90^\circ$ |
-| $-\tau s+1$ (RHP zero) | $\sqrt{1+\omega^2\tau^2}$ | $-\tan^{-1}\omega\tau$ | $+1$ | $0\to-90^\circ$ |
+| $\tau s+1$<br>(LHP zero) | $\sqrt{1+\omega^2\tau^2}$ | $+\tan^{-1}\omega\tau$ | $+1$ | $0\to+90^\circ$ |
+| $-\tau s+1$<br>(RHP zero) | $\sqrt{1+\omega^2\tau^2}$ | $-\tan^{-1}\omega\tau$ | $+1$ | $0\to-90^\circ$ |
 | $\dfrac{1}{s}$ | $\dfrac1\omega$ | $-90^\circ$ | $-1$ | — |
 | $s$ | $\omega$ | $+90^\circ$ | $+1$ | — |
 | $\dfrac{1}{\tau^2s^2+2\zeta\tau s+1}$ | see Ex 5.3 | | $-2$ | $0\to-180^\circ$ |
@@ -254,10 +254,10 @@ For real poles and zeros the asymptotes are within 3 dB of the exact curve (larg
 Corners: $0.1$ (pole), $0.2$ (zero), $0.5$ (pole)
 
 | $\omega$ range | slope |
-|:--|:--:|
-| $<0.1$ | 0 |
+|:--|--:|
+| $<0.1$ | $0$ |
 | $0.1$–$0.2$ | $-1$ |
-| $0.2$–$0.5$ | 0 |
+| $0.2$–$0.5$ | $0$ |
 | $>0.5$ | $-1$ |
 
 High frequency: $|G|\to\dfrac{5}{20\omega}$, $\ \phi\to-90^\circ$
@@ -494,7 +494,7 @@ K_c=\frac{K_u}{2.2}=1.14,\qquad \tau_I=\frac{P_u}{1.2}=12.7\ \text{s}
 $$
 
 ::: {.boxr}
-GM $=1.63$, PM $=19.4^\circ$ — **too small** (GM > 2, PM > 30°)
+GM $=1.63$, PM $=19.4^\circ$<br>— **too small** (GM > 2, PM > 30°)
 
 → 62 % overshoot, slow-decaying oscillation
 :::
@@ -558,7 +558,7 @@ $$
 ::: {.box}
 **From a PM spec**
 
-Find $\omega_g$ where $\angle G^*=-180^\circ+\mathrm{PM}$ (e.g. $-135^\circ$ for 45°):
+Find $\omega_g$ where $\angle G^*=-180^\circ+\mathrm{PM}$ <br>(e.g. $-135^\circ$ for 45°):
 
 $$
 K_c=\frac{1}{|G^*(j\omega_g)|}
