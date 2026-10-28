@@ -8,6 +8,7 @@ Lecture notes for **Process Dynamics and Control (공정제어)**. Slides are Qu
 
 | Chapter | Slides | PDF | Notebook |
 |:--|:--:|:--:|:--:|
+| 3. Tuning of Single-Loop Control Systems | [HTML](ch3/ch3_tuning.html) | [slides](ch3/ch3_tuning.pdf) · [handout](ch3/ch3_tuning_handout.pdf) | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch3/ch3_tuning.ipynb) |
 | 4. Stability of Closed-Loop Systems | [HTML](ch4/ch4_stability.html) | [slides](ch4/ch4_stability.pdf) · [handout](ch4/ch4_stability_handout.pdf) | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch4/ch4_stability.ipynb) |
 | 5. Frequency-Response Analysis & Design | [HTML](ch5/ch5_frequency.html) | [slides](ch5/ch5_frequency.pdf) · [handout](ch5/ch5_frequency_handout.pdf) | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch5/ch5_frequency.ipynb) |
 | 6. Multi-loop Systems | [HTML](ch6/ch6_multiloop.html) | [slides](ch6/ch6_multiloop.pdf) · [handout](ch6/ch6_multiloop_handout.pdf) | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch6/ch6_multiloop.ipynb) |

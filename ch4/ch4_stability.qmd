@@ -418,7 +418,7 @@ The ultimate gain and period are the basis of **closed-loop (Ziegler–Nichols) 
 
 ::: {.small}
 - In the plant, $K_{cu}$ and $P_u$ are found **experimentally** (gain ramp-up, or a relay test) — no model needed.
-- ZN settings give a quarter-decay response: a *starting point*, usually detuned afterwards (tuning rules: later chapter).
+- ZN settings give a quarter-decay response: a *starting point*, usually detuned afterwards (tuning rules: Ch 3).
 :::
 
 # 4.4 Root-Locus Analysis

@@ -1,0 +1,82 @@
+```{=html}
+<div id="tnw" class="tnw">
+  <div class="tnw-ctrl">
+    <label>controller <select id="tnw-c"><option>PI</option><option selected>PID</option></select></label>
+    <label><i>θ/τ</i> = <b id="tnw-rv"></b><input id="tnw-r" type="range" min="0.1" max="1.5" step="0.01" value="0.44"></label>
+    <label>IMC <i>τ</i><sub>c</sub>/<i>θ</i> = <b id="tnw-cv"></b><input id="tnw-tc" type="range" min="0.2" max="3" step="0.05" value="1"></label>
+    <span class="tnw-note">⚠ = still oscillating at t = 30τ · plant <i>e</i><sup>−θs</sup>/(τs+1), τ = 1 · set-point step at 0, load step at <i>t</i> = 15τ</span>
+  </div>
+  <div class="tnw-body">
+    <canvas id="tnw-cv-plot" width="820" height="400"></canvas>
+    <table id="tnw-tab"></table>
+  </div>
+</div>
+<style>
+.tnw{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;color:#222}
+.tnw-ctrl{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-bottom:6px}
+.tnw-ctrl input{width:150px;vertical-align:middle}
+.tnw select{font-size:15px}
+.tnw-note{color:#666;font-size:14px}
+.tnw-body{display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap}
+.tnw canvas{border:1px solid #ddd;border-radius:4px;max-width:100%;height:auto;background:#fff}
+.tnw table{border-collapse:collapse;font-size:14px;font-family:ui-monospace,Menlo,monospace}
+.tnw td,.tnw th{padding:3px 7px;text-align:right;border-bottom:1px solid #eee}
+.tnw th{color:#333399;font-family:system-ui,sans-serif}
+.tnw td.n{text-align:left;font-family:system-ui,sans-serif;font-weight:600}
+.tnw input[type=checkbox]{vertical-align:middle}
+</style>
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const COL=['#333399','#C00000','#2E7D32','#E07B00','#7b1fa2'];
+const ITAE={'sp,PI':[0.586,0.916,1.03,0.165,0,0],'sp,PID':[0.965,0.855,0.796,0.147,0.308,0.929],
+            'ld,PI':[0.859,0.977,0.674,0.680,0,0],'ld,PID':[1.357,0.947,0.842,0.738,0.381,0.995]};
+function itae(m,c,t,th){const[a1,b1,a2,b2,a3,b3]=ITAE[m+','+c],q=th/t;
+  return[a1*Math.pow(1/q,b1),m==='ld'?t/a2*Math.pow(q,b2):t/(a2-b2*q),a3?a3*t*Math.pow(q,b3):0];}
+const RULES=[
+ ['Ziegler–Nichols',(c,t,th)=>c==='PI'?[0.9*t/th,3.3*th,0]:[1.2*t/th,2*th,0.5*th]],
+ ['Cohen–Coon',(c,t,th)=>{const r=t/th,q=th/t;return c==='PI'?[0.9*r+1/12,th*(30+3*q)/(9+20*q),0]:[4/3*r+0.25,th*(32+6*q)/(13+8*q),th*4/(11+2*q)];}],
+ ['ITAE set point',(c,t,th)=>itae('sp',c,t,th)],
+ ['ITAE load',(c,t,th)=>itae('ld',c,t,th)],
+ ['IMC',(c,t,th,tc)=>c==='PI'?[t/(tc+th),t,0]:[(2*t/th+1)/(2*tc/th+1),t+th/2,t/(2*t/th+1)]]];
+const show=RULES.map(()=>true);
+function sim(Kc,tI,tD,th){ // plant e^{-th s}/(s+1), ideal PID with filtered D (alpha=0.1), load step at process input
+  const dt=0.004,T=30,n=Math.round(T/dt),nd=Math.max(0,Math.round(th/dt)),buf=new Array(nd).fill(0);
+  let x=0,I=0,df=0,eprev=0;const y=new Float32Array(n+1),a=0.1;
+  for(let k=0;k<=n;k++){const t=k*dt,e=1-x;I+=e*dt;
+    let D=0;if(tD>0){const tf=a*tD;df+=dt*((tD*(e-eprev)/dt)-df)/tf; /* filtered derivative */ D=df;} eprev=e;
+    let u=Kc*(e+I/tI+D);u=Math.max(-1e4,Math.min(1e4,u));
+    const ul=u+(t>=15?1:0);buf.push(ul);const ud=nd?buf.shift():ul;
+    x+=dt*(-x+ud);y[k]=x;}
+  return y;
+}
+function status(y){let m=0,M=0;for(let k=0;k<y.length;k++)M=Math.max(M,Math.abs(y[k]));for(let k=y.length-1500;k<y.length;k++)m=Math.max(m,Math.abs(y[k]-1));
+  return(!isFinite(M)||M>20)?'unstable':(m>0.05?'slow':'ok');}
+const cv=$('tnw-cv-plot'),g=cv.getContext('2d');
+function draw(){
+  const c=$('tnw-c').value,th=+$('tnw-r').value,tcf=+$('tnw-tc').value,tc=tcf*th;
+  $('tnw-rv').textContent=th.toFixed(2);$('tnw-cv').textContent=tcf.toFixed(2);
+  const W=cv.width,H=cv.height,x0=50,x1=W-12,y0=12,y1=H-36,lo=-0.2,hi=2;
+  g.clearRect(0,0,W,H);const X=t=>x0+t/30*(x1-x0),Y=v=>y1-(v-lo)/(hi-lo)*(y1-y0);
+  g.font='13px system-ui';g.fillStyle='#555';g.textAlign='right';
+  for(let v=0;v<=2.001;v+=0.5){g.strokeStyle='#eee';g.beginPath();g.moveTo(x0,Y(v));g.lineTo(x1,Y(v));g.stroke();g.fillText(v.toFixed(1),x0-5,Y(v)+4);}
+  g.textAlign='center';for(let t=0;t<=30;t+=5)g.fillText(t,X(t),y1+16);g.fillText('time / τ',(x0+x1)/2,H-4);
+  g.strokeStyle='#999';g.strokeRect(x0,y0,x1-x0,y1-y0);
+  g.setLineDash([5,4]);g.strokeStyle='#999';g.beginPath();g.moveTo(x0,Y(1));g.lineTo(x1,Y(1));g.moveTo(X(15),y0);g.lineTo(X(15),y1);g.stroke();g.setLineDash([]);
+  g.fillStyle='#888';g.fillText('load step',X(15)+32,y0+14);
+  let rows='<tr><th></th><th></th><th>K<sub>c</sub>K</th><th>τ<sub>I</sub>/τ</th><th>τ<sub>D</sub>/τ</th><th>IAE</th></tr>';
+  RULES.forEach(([nm,f],i)=>{
+    const [Kc,tI,tD]=f(c,1,th,tc),y=sim(Kc,tI,c==='PI'?0:tD,th),st=status(y);
+    let iae=0;for(let k=0;k<y.length;k++)iae+=Math.abs(1-y[k])*0.004;
+    if(show[i]){g.save();g.beginPath();g.rect(x0,y0,x1-x0,y1-y0);g.clip();g.strokeStyle=COL[i];g.lineWidth=2;g.beginPath();
+      for(let k=0;k<y.length;k+=4){const px=X(k*0.004),py=Y(Math.max(lo-1,Math.min(hi+1,y[k])));k?g.lineTo(px,py):g.moveTo(px,py);}g.stroke();g.restore();}
+    rows+=`<tr><td><input type="checkbox" data-i="${i}" ${show[i]?'checked':''}></td><td class="n" style="color:${COL[i]}">${nm}${nm==='IMC'?' (τ<sub>c</sub>='+tcf.toFixed(2)+'θ)':''}</td>`+
+      `<td>${Kc.toFixed(2)}</td><td>${tI.toFixed(2)}</td><td>${c==='PI'?'—':tD.toFixed(2)}</td><td style="color:${st==='ok'?'#222':'#C00000'}">${st==='unstable'?'unstable':iae.toFixed(2)+(st==='slow'?' ⚠':'')}</td></tr>`;});
+  $('tnw-tab').innerHTML=rows;
+  $('tnw-tab').querySelectorAll('input').forEach(b=>b.addEventListener('change',e=>{show[+e.target.dataset.i]=e.target.checked;draw();}));
+}
+['tnw-c','tnw-r','tnw-tc'].forEach(id=>$(id).addEventListener('input',draw));
+draw();
+})();
+</script>
+```
