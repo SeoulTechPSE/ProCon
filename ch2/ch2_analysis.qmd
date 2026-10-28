@@ -5,7 +5,11 @@ author: "Kee-Youn Yoo<br><br>Department of Chemical & Biomolecular Engineering, 
 format:
   revealjs:
     css: ../assets/procon.css
-    slide-number: true
+    slide-number: c/t
+    logo: ../assets/seoultech_logo.png
+    chalkboard:
+      buttons: true
+    menu: true
     width: 1280
     height: 800
     margin: 0.06
@@ -292,7 +296,7 @@ $$
 :::
 :::
 
-![](figures/f03_p_control.png){width="76%" fig-align="center"}
+![](figures/f03_p_control.png){width="72%" fig-align="center"}
 
 ## Proportional-integral control
 

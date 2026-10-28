@@ -62,3 +62,11 @@ html.print-pdf .reveal .code-copy-button { display: none; }
 /* compact formula tables (tuning-rule tables) */
 .reveal .ftab table { font-size: 0.8em; }
 .reveal .ftab td, .reveal .ftab th { padding: 0.25em 0.9em; }
+
+/* ---------- frame: page number top-right, school logo bottom-right, tools bottom-left ---------- */
+.reveal .slide-number { top: 14px !important; bottom: auto !important; right: 18px !important; left: auto !important;
+  background: transparent !important; color: #555 !important; font-size: 17px !important; }
+.reveal .slide-number a { color: #555 !important; }
+.reveal .slide-logo { max-height: 28px !important; height: 28px !important; bottom: 5px !important; right: 10px !important; }
+html.print-pdf .reveal .slide-logo { max-height: 26px !important; height: 26px !important; bottom: 3px !important; right: 8px !important; }
+html.print-pdf .slide-chalkboard-buttons, html.print-pdf .slide-menu-button { display: none !important; }

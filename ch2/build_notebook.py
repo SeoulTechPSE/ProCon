@@ -75,13 +75,14 @@ md("## 2.3 Closed-loop responses — Examples 2.1–2.5 with sympy")
 code(r"""Kc, Kp, tp, tI, tD, t1, t2 = sp.symbols('K_c K_p tau_p tau_I tau_D tau_1 tau_2', positive=True)
 CL = lambda Gc_, Gp_: sp.factor(sp.cancel(Gc_*Gp_/(1 + Gc_*Gp_)))
 G1 = Kp/(tp*s + 1)
-for name, Gc_, Gp_ in [('2.1\\ P,\\ 1st', Kc, G1),
-                       ('2.2\\ P,\\ 2nd', Kc, Kp/((t1*s + 1)*(t2*s + 1))),
-                       ('2.3\\ PI,\\ 1st', Kc*(1 + 1/(tI*s)), G1),
-                       ('2.4\\ PD,\\ 1st', Kc*(1 + tD*s), G1),
-                       ('2.5\\ P,\\ K_p/s', Kc, Kp/s)]:
+for ex, Gc_, Gp_ in [('2.1', Kc, G1),
+                     ('2.2', Kc, Kp/((t1*s + 1)*(t2*s + 1))),
+                     ('2.3', Kc*(1 + 1/(tI*s)), G1),
+                     ('2.4', Kc*(1 + tD*s), G1),
+                     ('2.5', Kc, Kp/s)]:
     T_ = CL(Gc_, Gp_)
-    display(Math(rf'\text{{Ex {name}}}:\quad \frac{{C}}{{R}} = {sp.latex(T_)}, \qquad e(\infty) = {sp.latex(sp.simplify(1 - T_.subs(s, 0)))}'))""")
+    display(Math(rf'\text{{Ex {ex}:}}\ G_c = {sp.latex(Gc_)},\ G_p = {sp.latex(Gp_)}:\quad '
+                 rf'\frac{{C}}{{R}} = {sp.latex(T_)}, \qquad e(\infty) = {sp.latex(sp.simplify(1 - T_.subs(s, 0)))}'))""")
 
 md("### Example 2.2 — $K_c$ for $\\zeta = 0.7$")
 code(r"""den = sp.Poly(sp.expand((2*s + 1)*(4*s + 1) + Kc), s).all_coeffs()     # a2 s^2 + a1 s + a0
