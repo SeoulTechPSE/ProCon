@@ -37,6 +37,9 @@ website:
     right:
       - icon: github
         href: "https://github.com/SeoulTechPSE/ProCon"
+      - href: "https://seoultechpse.github.io/"      # PSL home
+        text: '<img src="assets/psl-logo-compact.svg" alt="PSL home" class="psl-home-logo">'
+        aria-label: "PSL home"
   page-footer:
     left: "© 2026 Kee-Youn Yoo<br>Department of Chemical & Biomolecular Engineering, SeoulTech"
     right:
