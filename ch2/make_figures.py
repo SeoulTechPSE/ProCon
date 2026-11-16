@@ -251,7 +251,7 @@ def fig_bumpless():
     """Manual -> auto at t = 5 (y at 0.5 with p = 0.625); set-point step 0.5 -> 0.7 at t = 15."""
     dt, Kc, tI, T = 0.05, 2.0, 5.0, 30.0
     a = np.exp(-dt / 5); fig, axs = plt.subplots(1, 2, figsize=(12, 4.0), sharex=True)
-    for form, c in (("position, bias not initialised", RED), ("velocity (incremental)", NAVY)):
+    for form, c in (("position, bias not initialized", RED), ("velocity (incremental)", NAVY)):
         y, p, I, e1 = 0.5, 0.625, 0.0, 0.0; ts, ys, ps = [], [], []
         for k in range(int(T / dt)):
             t = k * dt; r = 0.5 if t < 15 else 0.7; e = r - y

@@ -18,7 +18,7 @@
 <article class="chapter-card">
   <a class="thumb" href="ch2/ch2_analysis.html"><img src="assets/thumbs/ch2.png" alt="Chapter 2 figure" loading="lazy"></a>
   <div class="card-body">
-    <div class="card-num">Chapter 2<span class="updated">updated 2026-11-16</span></div>
+    <div class="card-num">Chapter 2<span class="updated">updated 2026-11-17</span></div>
     <h3><a href="ch2/ch2_analysis.html">Analysis of Single-Loop Control Systems</a></h3>
     <p class="topics">block diagrams · closed-loop transfer functions · P / PI / PD / PID · offset, reset windup, derivative kick</p>
     <div class="links">

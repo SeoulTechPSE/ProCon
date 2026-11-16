@@ -26,7 +26,7 @@ def locus(num, den, kmax=1e4, n=4000, kmin=0.0):
     for k in ks[1:]:
         r = np.roots(den + k * num)
         out = np.empty_like(prev); used = set()
-        for i, p in enumerate(prev):                     # nearest-neighbour matching
+        for i, p in enumerate(prev):                     # nearest-neighbor matching
             d = [abs(p - q) if j not in used else np.inf for j, q in enumerate(r)]
             j = int(np.argmin(d)); used.add(j); out[i] = r[j]
         R.append(out); prev = out

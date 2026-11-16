@@ -27,16 +27,16 @@
   <text x="520" y="272" font-family="'Times New Roman', 'STIX Two Text', serif" font-style="italic" font-size="24" fill="#222" text-anchor="middle" dominant-baseline="central">G<tspan dy="0.32em" font-size="72%">m</tspan><tspan dy="-0.32em">​</tspan></text>
   <path d="M6,160 L60.0,160" fill="none" stroke="#555" stroke-width="2" marker-end="url(#std_loop-arr)"/>
   <path d="M130.0,160 L182,160" fill="none" stroke="#555" stroke-width="2" marker-end="url(#std_loop-arr)"/>
-  <text x="150" y="182" font-size="13" fill="#888888" text-anchor="middle" font-weight="400" dominant-baseline="central">[mA]</text>
+  <text x="156" y="138" font-size="13" fill="#888888" text-anchor="middle" font-weight="400" dominant-baseline="central">[mA]</text>
   <path d="M208,160 L245.0,160" fill="none" stroke="#555" stroke-width="2" marker-end="url(#std_loop-arr)"/>
-  <text x="228" y="138" font-family="'Times New Roman', 'STIX Two Text', serif" font-style="italic" font-size="20" fill="#222" text-anchor="middle" dominant-baseline="central">E</text>
-  <text x="240" y="184" font-size="13" fill="#888888" text-anchor="middle" font-weight="400" dominant-baseline="central">[mA]</text>
+  <text x="228" y="136" font-family="'Times New Roman', 'STIX Two Text', serif" font-style="italic" font-size="20" fill="#222" text-anchor="middle" dominant-baseline="central">E</text>
+  <text x="228" y="114" font-size="13" fill="#888888" text-anchor="middle" font-weight="400" dominant-baseline="central">[mA]</text>
   <path d="M325.0,160 L390.0,160" fill="none" stroke="#555" stroke-width="2" marker-end="url(#std_loop-arr)"/>
-  <text x="358" y="138" font-family="'Times New Roman', 'STIX Two Text', serif" font-style="italic" font-size="20" fill="#222" text-anchor="middle" dominant-baseline="central">P</text>
-  <text x="358" y="182" font-size="13" fill="#888888" text-anchor="middle" font-weight="400" dominant-baseline="central">[mA]</text>
+  <text x="358" y="136" font-family="'Times New Roman', 'STIX Two Text', serif" font-style="italic" font-size="20" fill="#222" text-anchor="middle" dominant-baseline="central">P</text>
+  <text x="358" y="114" font-size="13" fill="#888888" text-anchor="middle" font-weight="400" dominant-baseline="central">[mA]</text>
   <path d="M470.0,160 L545.0,160" fill="none" stroke="#555" stroke-width="2" marker-end="url(#std_loop-arr)"/>
   <text x="508" y="136" font-family="'Times New Roman', 'STIX Two Text', serif" font-style="italic" font-size="20" fill="#222" text-anchor="middle" dominant-baseline="central">M</text>
-  <text x="508" y="182" font-size="13" fill="#888888" text-anchor="middle" font-weight="400" dominant-baseline="central">T<tspan dy="0.32em" font-size="72%">H</tspan><tspan dy="-0.32em">​</tspan> [°C]</text>
+  <text x="508" y="114" font-size="13" fill="#888888" text-anchor="middle" font-weight="400" dominant-baseline="central">T<tspan dy="0.32em" font-size="72%">H</tspan><tspan dy="-0.32em">​</tspan> [°C]</text>
   <path d="M625.0,160 L687,160" fill="none" stroke="#555" stroke-width="2" marker-end="url(#std_loop-arr)"/>
   <path d="M713,160 L900,160" fill="none" stroke="#555" stroke-width="2" marker-end="url(#std_loop-arr)"/>
   <text x="880" y="136" font-family="'Times New Roman', 'STIX Two Text', serif" font-style="italic" font-size="22" fill="#222" text-anchor="middle" dominant-baseline="central">C</text>
@@ -49,9 +49,9 @@
   <path d="M800,160 L800,272 L560.0,272" fill="none" stroke="#555" stroke-width="2" marker-end="url(#std_loop-arr)"/>
   <path d="M480.0,272 L195,272 L195,173" fill="none" stroke="#555" stroke-width="2" marker-end="url(#std_loop-arr)"/>
   <text x="330" y="252" font-family="'Times New Roman', 'STIX Two Text', serif" font-style="italic" font-size="20" fill="#222" text-anchor="middle" dominant-baseline="central">C<tspan dy="0.32em" font-size="72%">m</tspan><tspan dy="-0.32em">​</tspan></text>
-  <text x="330" y="292" font-size="13" fill="#888888" text-anchor="middle" font-weight="400" dominant-baseline="central">[mA]</text>
-  <rect x="58" y="110" width="290" height="96" rx="6" fill="none" stroke="#888888" stroke-dasharray="6 4"/>
-  <text x="203" y="98" font-size="14" fill="#888888" text-anchor="middle" font-weight="400" dominant-baseline="central">controller</text>
+  <text x="372" y="252" font-size="13" fill="#888888" text-anchor="middle" font-weight="400" dominant-baseline="central">[mA]</text>
+  <rect x="58" y="96" width="280" height="110" rx="6" fill="none" stroke="#888888" stroke-dasharray="6 4"/>
+  <text x="198" y="84" font-size="14" fill="#888888" text-anchor="middle" font-weight="400" dominant-baseline="central">controller</text>
   <rect x="530" y="40" width="210" height="166" rx="6" fill="none" stroke="#888888" stroke-dasharray="6 4"/>
   <text x="635" y="222" font-size="14" fill="#888888" text-anchor="middle" font-weight="400" dominant-baseline="central">process (plant)</text>
   <text x="430" y="205" font-size="14" fill="#888888" text-anchor="middle" font-weight="400" dominant-baseline="central">actuator</text>

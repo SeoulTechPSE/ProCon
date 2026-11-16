@@ -961,7 +961,7 @@ S = stepinfo(tf(1, [1 0.6 1]))                             % zeta = 0.3
 ::: {.column width="52%"}
 {{< include diagrams/_dead_time_pipe.md >}}
 
-Caused by fluid travelling down a pipe or a slow analyzer: **시간지연 / 수송지연**.
+Caused by fluid traveling down a pipe or a slow analyzer: **시간지연 / 수송지연**.
 $$
 y(t)=x(t-t_d)\quad\Rightarrow\quad \frac{Y(s)}{X(s)}=e^{-t_ds}
 $$

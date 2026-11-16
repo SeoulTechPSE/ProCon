@@ -27,24 +27,24 @@
   <text x="660" y="50" font-family="'Times New Roman', 'STIX Two Text', serif" font-style="italic" font-size="20" fill="#222" text-anchor="middle" dominant-baseline="central">K<tspan dy="0.32em" font-size="72%">1</tspan><tspan dy="-0.32em">​</tspan>/(τs+1)</text>
   <path d="M4,140 L63.0,140" fill="none" stroke="#555" stroke-width="2" marker-end="url(#problem2-arr)"/>
   <path d="M127.0,140 L177,140" fill="none" stroke="#555" stroke-width="2" marker-end="url(#problem2-arr)"/>
-  <text x="146" y="110" font-family="'Times New Roman', 'STIX Two Text', serif" font-style="italic" font-size="17" fill="#222" text-anchor="middle" dominant-baseline="central">T̃'<tspan dy="0.32em" font-size="72%">sp</tspan><tspan dy="-0.32em">​</tspan></text>
-  <text x="150" y="162" font-size="13" fill="#888888" text-anchor="middle" font-weight="400" dominant-baseline="central">[mA]</text>
+  <text x="150" y="108" font-family="'Times New Roman', 'STIX Two Text', serif" font-style="italic" font-size="17" fill="#222" text-anchor="middle" dominant-baseline="central">T̃'<tspan dy="0.32em" font-size="72%">sp</tspan><tspan dy="-0.32em">​</tspan></text>
+  <text x="150" y="86" font-size="13" fill="#888888" text-anchor="middle" font-weight="400" dominant-baseline="central">[mA]</text>
   <path d="M203,140 L243.0,140" fill="none" stroke="#555" stroke-width="2" marker-end="url(#problem2-arr)"/>
-  <text x="225" y="118" font-family="'Times New Roman', 'STIX Two Text', serif" font-style="italic" font-size="18" fill="#222" text-anchor="middle" dominant-baseline="central">E</text>
-  <text x="236" y="164" font-size="13" fill="#888888" text-anchor="middle" font-weight="400" dominant-baseline="central">[mA]</text>
+  <text x="225" y="116" font-family="'Times New Roman', 'STIX Two Text', serif" font-style="italic" font-size="18" fill="#222" text-anchor="middle" dominant-baseline="central">E</text>
+  <text x="225" y="94" font-size="13" fill="#888888" text-anchor="middle" font-weight="400" dominant-baseline="central">[mA]</text>
   <path d="M307.0,140 L360.0,140" fill="none" stroke="#555" stroke-width="2" marker-end="url(#problem2-arr)"/>
-  <text x="335" y="118" font-family="'Times New Roman', 'STIX Two Text', serif" font-style="italic" font-size="18" fill="#222" text-anchor="middle" dominant-baseline="central">P'</text>
-  <text x="335" y="162" font-size="13" fill="#888888" text-anchor="middle" font-weight="400" dominant-baseline="central">[mA]</text>
+  <text x="335" y="116" font-family="'Times New Roman', 'STIX Two Text', serif" font-style="italic" font-size="18" fill="#222" text-anchor="middle" dominant-baseline="central">P'</text>
+  <text x="335" y="94" font-size="13" fill="#888888" text-anchor="middle" font-weight="400" dominant-baseline="central">[mA]</text>
   <path d="M430.0,140 L483.0,140" fill="none" stroke="#555" stroke-width="2" marker-end="url(#problem2-arr)"/>
-  <text x="455" y="118" font-family="'Times New Roman', 'STIX Two Text', serif" font-style="italic" font-size="18" fill="#222" text-anchor="middle" dominant-baseline="central">P'<tspan dy="0.32em" font-size="72%">t</tspan><tspan dy="-0.32em">​</tspan></text>
-  <text x="455" y="162" font-size="13" fill="#888888" text-anchor="middle" font-weight="400" dominant-baseline="central">[psi]</text>
+  <text x="455" y="116" font-family="'Times New Roman', 'STIX Two Text', serif" font-style="italic" font-size="18" fill="#222" text-anchor="middle" dominant-baseline="central">P'<tspan dy="0.32em" font-size="72%">t</tspan><tspan dy="-0.32em">​</tspan></text>
+  <text x="455" y="94" font-size="13" fill="#888888" text-anchor="middle" font-weight="400" dominant-baseline="central">[psi]</text>
   <path d="M547.0,140 L596.0,140" fill="none" stroke="#555" stroke-width="2" marker-end="url(#problem2-arr)"/>
-  <text x="570" y="118" font-family="'Times New Roman', 'STIX Two Text', serif" font-style="italic" font-size="18" fill="#222" text-anchor="middle" dominant-baseline="central">P'<tspan dy="0.32em" font-size="72%">s</tspan><tspan dy="-0.32em">​</tspan></text>
-  <text x="570" y="162" font-size="13" fill="#888888" text-anchor="middle" font-weight="400" dominant-baseline="central">[psi]</text>
+  <text x="570" y="116" font-family="'Times New Roman', 'STIX Two Text', serif" font-style="italic" font-size="18" fill="#222" text-anchor="middle" dominant-baseline="central">P'<tspan dy="0.32em" font-size="72%">s</tspan><tspan dy="-0.32em">​</tspan></text>
+  <text x="570" y="94" font-size="13" fill="#888888" text-anchor="middle" font-weight="400" dominant-baseline="central">[psi]</text>
   <path d="M724.0,140 L777,140" fill="none" stroke="#555" stroke-width="2" marker-end="url(#problem2-arr)"/>
   <path d="M803,140 L975,140" fill="none" stroke="#555" stroke-width="2" marker-end="url(#problem2-arr)"/>
-  <text x="950" y="116" font-family="'Times New Roman', 'STIX Two Text', serif" font-style="italic" font-size="19" fill="#222" text-anchor="middle" dominant-baseline="central">T'</text>
-  <text x="950" y="162" font-size="13" fill="#888888" text-anchor="middle" font-weight="400" dominant-baseline="central">[°F]</text>
+  <text x="940" y="116" font-family="'Times New Roman', 'STIX Two Text', serif" font-style="italic" font-size="19" fill="#222" text-anchor="middle" dominant-baseline="central">T'</text>
+  <text x="940" y="94" font-size="13" fill="#888888" text-anchor="middle" font-weight="400" dominant-baseline="central">[°F]</text>
   <path d="M520,50 L596.0,50" fill="none" stroke="#555" stroke-width="2" marker-end="url(#problem2-arr)"/>
   <text x="500" y="50" font-family="'Times New Roman', 'STIX Two Text', serif" font-style="italic" font-size="18" fill="#222" text-anchor="end" dominant-baseline="central">T'<tspan dy="0.32em" font-size="72%">i</tspan><tspan dy="-0.32em">​</tspan></text>
   <path d="M724.0,50 L790,50 L790,127" fill="none" stroke="#555" stroke-width="2" marker-end="url(#problem2-arr)"/>
@@ -54,6 +54,6 @@
   <path d="M890,140 L890,240 L592.0,240" fill="none" stroke="#555" stroke-width="2" marker-end="url(#problem2-arr)"/>
   <path d="M528.0,240 L190,240 L190,153" fill="none" stroke="#555" stroke-width="2" marker-end="url(#problem2-arr)"/>
   <text x="400" y="222" font-family="'Times New Roman', 'STIX Two Text', serif" font-style="italic" font-size="18" fill="#222" text-anchor="middle" dominant-baseline="central">T'<tspan dy="0.32em" font-size="72%">m</tspan><tspan dy="-0.32em">​</tspan></text>
-  <text x="400" y="262" font-size="13" fill="#888888" text-anchor="middle" font-weight="400" dominant-baseline="central">[mA]</text>
+  <text x="440" y="222" font-size="13" fill="#888888" text-anchor="middle" font-weight="400" dominant-baseline="central">[mA]</text>
 </svg>
 ```

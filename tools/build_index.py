@@ -159,7 +159,7 @@ def cards():
 
 
 # ------------------------------------------------------------------ course map
-ROADMAP = {   # chapter -> (centre x, centre y, short title, two topic lines)
+ROADMAP = {   # chapter -> (center x, center y, short title, two topic lines)
     1: (130, 205, "Dynamic Response", ["Laplace, transfer functions", "1st/2nd order, dead time"]),
     2: (410, 205, "Single-Loop Analysis", ["closed loop, block diagrams", "P / PI / PID modes"]),
     3: (690, 95, "Tuning", ["ZN, Cohen–Coon, ITAE", "direct synthesis, IMC"]),

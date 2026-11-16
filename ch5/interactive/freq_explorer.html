@@ -114,7 +114,7 @@ function drawBode(R){
 }
 function drawNyq(R){
   const c=$('frw-n'),g=c.getContext('2d'),Wd=c.width,H=c.height;g.clearRect(0,0,Wd,H);
-  // square window centred near -0.5 that always shows -1; far excursions are clipped
+  // square window centered near -0.5 that always shows -1; far excursions are clipped
   let hs=1.6;R.z.forEach(v=>{if(Math.hypot(v[0],v[1])<4)hs=Math.max(hs,Math.abs(v[0]+0.5)*1.05,Math.abs(v[1])*1.05);});
   hs=Math.min(hs,3.2);const xmin=-0.5-hs,xmax=-0.5+hs,ymin=-hs,ymax=hs;
   const pad=34,sx=(Wd-pad-10)/(xmax-xmin),sy=(H-pad-10)/(ymax-ymin),s=Math.min(sx,sy);

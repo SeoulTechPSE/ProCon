@@ -517,7 +517,7 @@ $$
 :::
 ::: {.column width="50%"}
 ::: {.box}
-Perfect model: $\;\dfrac{C}{R}=\dfrac{\tilde G_{p+}}{(\tau_cs+1)^r}$. The non-invertible part is **kept**, not cancelled. Choose $r$ so that $G_c^*$ is proper.
+Perfect model: $\;\dfrac{C}{R}=\dfrac{\tilde G_{p+}}{(\tau_cs+1)^r}$. The non-invertible part is **kept**, not canceled. Choose $r$ so that $G_c^*$ is proper.
 :::
 :::
 :::

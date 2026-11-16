@@ -47,7 +47,7 @@
 .print-only { display: none; }
 html.print-pdf .print-only { display: block; }
 html.print-pdf .screen-only { display: none !important; }
-/* show every code tab, stacked and labelled */
+/* show every code tab, stacked and labeled */
 html.print-pdf .panel-tabset .panel-tabset-tabby, html.print-pdf .panel-tabset .nav-tabs { display: none; }
 html.print-pdf .panel-tabset .tab-content > div { display: block !important; opacity: 1 !important; }
 html.print-pdf .panel-tabset .tab-content > div::before {
