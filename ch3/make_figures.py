@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import control as ct
 from pathlib import Path
-from tuning import RULES, pid_tf, fit_two_point, fit_tangent, imc
+from tuning import RULES, pid_tf, fit_two_point, fit_tangent, imc, simc, simc_integrating, simulate, pi_law, relay_law
 
 OUT = Path(__file__).parent / "figures"; OUT.mkdir(exist_ok=True)
 NAVY, RED, GREEN, ORANGE, GRAY, PURPLE = "#333399", "#C00000", "#2E7D32", "#E07B00", "#888888", "#7b1fa2"
@@ -132,7 +132,65 @@ def fig_imc():
     fig.tight_layout(); fig.savefig(OUT / "f08_imc_vdv.png"); plt.close(fig)
 
 
+
+def save_(fig, name):
+    fig.tight_layout(); fig.savefig(OUT / name); plt.close(fig)
+
+
+# ---------------------------------------------------------------- relay autotuning
+def fig_relay():
+    t, y, u = simulate(GT, 0, relay_law(1.0), 25, r=lambda t: 0.1)
+    m = t > 12; a = (y[m].max() - y[m].min()) / 2
+    sw = t[m][np.where(np.diff(u[m]) != 0)[0]]; P = 2 * np.mean(np.diff(sw))
+    Kcu, _, wc, _ = ct.margin(GT)
+    fig, ax = plt.subplots(figsize=(11.5, 3.2))
+    ax.plot(t, u, color=RED, lw=1.6, label=r"relay output $p$ ($\pm h$, $h=1$)")
+    ax.plot(t, 5 * y, color=NAVY, lw=2.4, label=r"measured output $\times5$")
+    ax.axhline(0, color="k", lw=0.6)
+    i0 = np.argmax((t > 15) & (np.r_[False, np.diff(np.sign(np.diff(y))) < 0, False]))
+    ax.annotate("", xy=(t[i0], 5 * y.max()), xytext=(t[i0], 5 * y[m].min()), arrowprops=dict(arrowstyle="<->", color=NAVY))
+    ax.text(t[i0] + 0.2, 0.0, r"$2a$", color=NAVY, fontsize=14)
+    ax.annotate("", xy=(sw[2] + P, 1.25), xytext=(sw[2], 1.25), arrowprops=dict(arrowstyle="<->", color=RED))
+    ax.text(sw[2] + P / 2, 1.33, r"$P_u$", color=RED, fontsize=14, ha="center")
+    ax.set_ylim(-1.5, 1.6); ax.set_xlabel("time"); ax.legend(fontsize=10.5, loc="lower right", ncol=2)
+    ax.set_title(rf"Relay test on $1/[(2s+1)(s+1)(0.5s+1)]$: $K_{{cu}}\approx4h/(\pi a)={4 / (np.pi * a):.2f}$ "
+                 rf"(exact {Kcu:.2f}), $P_u={P:.2f}$ (exact {2 * np.pi / wc:.2f})")
+    save_(fig, "f09_relay.png")
+
+
+def fig_simc():
+    s_ = ct.tf("s"); G = 1 / (20 * s_ + 1); th = 1.0
+    sets = [("IMC  ($\\tau_I=\\tau=20$)", (10.0, 20.0), NAVY), ("SIMC ($\\tau_I=4(\\tau_c+\\theta)=8$)", simc("PI", 1, 20, 1)[:2], RED)]
+    fig, axs = plt.subplots(1, 2, figsize=(12, 3.9))
+    for lab, (Kc, tI), c in sets:
+        t, y, _ = simulate(G, th, pi_law(Kc, tI), 25)
+        axs[0].plot(t, y, color=c, lw=2.2, label=lab)
+        t, y, _ = simulate(G, th, pi_law(Kc, tI), 60, r=lambda t: 0.0, load=lambda t: 1.0)
+        axs[1].plot(t, y, color=c, lw=2.2, label=f"{lab}: IAE {np.trapezoid(abs(y), t):.2f}")
+    axs[0].axhline(1, color=GRAY, ls=":"); axs[1].axhline(0, color=GRAY, lw=0.6)
+    axs[0].set_title(r"set-point step ($K_c=10$ in both)"); axs[1].set_title("unit load step at the process input")
+    for a in axs: a.set_xlabel("time"); a.legend(fontsize=10, loc="lower right" if a is axs[0] else "upper right")
+    fig.suptitle(r"Lag-dominant process $e^{-s}/(20s+1)$, $\tau_c=\theta=1$", y=1.02)
+    save_(fig, "f10_simc_lag.png")
+
+
+def fig_integrating():
+    s_ = ct.tf("s"); G = 0.2 / s_; th = 1.0
+    Kc, tI = simc_integrating(0.2, th)
+    fig, ax = plt.subplots(figsize=(8.6, 5.4))
+    for lab, law, c in ((rf"SIMC PI: $K_c={Kc:.1f},\ \tau_I={tI:.0f}$", pi_law(Kc, tI), NAVY),
+                        (r"$\tau_I=2$ (too much integral action)", pi_law(Kc, 2.0), RED),
+                        (r"P only ($\tau_I\to\infty$)", lambda e, dt: Kc * e, GREEN)):
+        t, y, _ = simulate(G, th, law, 70, load=lambda t: -0.5 if t >= 35 else 0.0)
+        ax.plot(t, y, color=c, lw=2.2, label=lab)
+    ax.axhline(1, color=GRAY, ls=":"); ax.axvline(35, color=GRAY, ls="--", lw=1)
+    ax.text(35.5, 0.12, "load step $-0.5$", color=GRAY)
+    ax.text(50, 0.68, r"P only: offset $=0.5/K_c=0.2$", color=GREEN)
+    ax.set_xlabel("time"); ax.set_ylim(0, 2.0); ax.legend(fontsize=10.5, loc="upper right")
+    ax.set_title(r"$0.2e^{-s}/s$: set-point step at 0, load step at 35")
+    save_(fig, "f11_integrating.png")
+
 if __name__ == "__main__":
-    for f in (fig_prc, fig_ultimate, fig_vdv, fig_integrals, fig_compare, fig_imc):
+    for f in (fig_prc, fig_ultimate, fig_vdv, fig_integrals, fig_compare, fig_imc, fig_relay, fig_simc, fig_integrating):
         f(); print("ok", f.__name__)
     print("VdV Kcu", KCU, "Tu", TU)

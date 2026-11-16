@@ -3,7 +3,7 @@
 <article class="chapter-card">
   <a class="thumb" href="ch1/ch1_dynamics.html"><img src="assets/thumbs/ch1.png" alt="Chapter 1 figure" loading="lazy"></a>
   <div class="card-body">
-    <div class="card-num">Chapter 1<span class="updated">updated 2026-11-16</span></div>
+    <div class="card-num">Chapter 1<span class="updated">updated 2026-11-17</span></div>
     <h3><a href="ch1/ch1_dynamics.html">Mathematical Preliminaries &amp; Dynamic Response</a></h3>
     <p class="topics">Laplace transform · partial fractions · poles &amp; zeros · 1st/2nd-order response · dead time &amp; Padé · FOPDT approximation</p>
     <div class="links">
@@ -33,13 +33,13 @@
 <article class="chapter-card">
   <a class="thumb" href="ch3/ch3_tuning.html"><img src="assets/thumbs/ch3.png" alt="Chapter 3 figure" loading="lazy"></a>
   <div class="card-body">
-    <div class="card-num">Chapter 3<span class="updated">updated 2026-11-16</span></div>
+    <div class="card-num">Chapter 3<span class="updated">updated 2026-11-17</span></div>
     <h3><a href="ch3/ch3_tuning.html">Tuning of Single-Loop Control Systems</a></h3>
     <p class="topics">process reaction curve · Ziegler–Nichols, Cohen–Coon, ITAE · direct synthesis · IMC</p>
     <div class="links">
       <a class="btn primary" href="ch3/ch3_tuning.html">Slides</a>
-      <a class="btn" href="ch3/ch3_tuning.pdf">PDF <small>1.9 MB</small></a>
-      <a class="btn" href="ch3/ch3_tuning_handout.pdf">Handout <small>1.9 MB</small></a>
+      <a class="btn" href="ch3/ch3_tuning.pdf">PDF <small>2.2 MB</small></a>
+      <a class="btn" href="ch3/ch3_tuning_handout.pdf">Handout <small>2.2 MB</small></a>
       <a class="btn" href="https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch3/ch3_tuning.ipynb">Colab</a>
     </div>
     <div class="widgets"><a class="chip" href="ch3/interactive/tuning_explorer.html">▶ Tuning explorer</a></div>
@@ -48,7 +48,7 @@
 <article class="chapter-card">
   <a class="thumb" href="ch4/ch4_stability.html"><img src="assets/thumbs/ch4.png" alt="Chapter 4 figure" loading="lazy"></a>
   <div class="card-body">
-    <div class="card-num">Chapter 4<span class="updated">updated 2026-11-16</span></div>
+    <div class="card-num">Chapter 4<span class="updated">updated 2026-11-17</span></div>
     <h3><a href="ch4/ch4_stability.html">Stability of Closed-Loop Systems</a></h3>
     <p class="topics">characteristic equation · Routh–Hurwitz · root locus · dead time &amp; RHP zeros</p>
     <div class="links">
@@ -63,7 +63,7 @@
 <article class="chapter-card">
   <a class="thumb" href="ch5/ch5_frequency.html"><img src="assets/thumbs/ch5.png" alt="Chapter 5 figure" loading="lazy"></a>
   <div class="card-body">
-    <div class="card-num">Chapter 5<span class="updated">updated 2026-11-16</span></div>
+    <div class="card-num">Chapter 5<span class="updated">updated 2026-11-17</span></div>
     <h3><a href="ch5/ch5_frequency.html">Frequency-Response Analysis &amp; Design</a></h3>
     <p class="topics">Bode &amp; Nyquist plots · Bode/Nyquist stability · gain &amp; phase margins · tuning by margins</p>
     <div class="links">

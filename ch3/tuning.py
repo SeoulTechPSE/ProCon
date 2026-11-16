@@ -76,3 +76,43 @@ def fit_tangent(t, y, du=1.0):
     dy = np.gradient(y, t); i = int(np.argmax(dy))
     theta = t[i] - y[i] / dy[i]
     return K, yinf / dy[i], theta
+
+
+def simc(ctrl, K, tau, theta, tauc=None, tau2=0.0):
+    """SIMC (Skogestad 2003). FOPDT: PI; SOPDT (tau2 > 0): series PID with tauD = tau2.
+    Default tau_c = theta (tight but robust control)."""
+    tauc = theta if tauc is None else tauc
+    Kc = tau / (K * (tauc + theta))
+    tI = min(tau, 4 * (tauc + theta))
+    return (Kc, tI, tau2 if ctrl == "PID" else 0.0)
+
+
+def simc_integrating(Kp, theta, tauc=None):
+    """SIMC PI for an integrating process Kp e^{-theta s}/s."""
+    tauc = theta if tauc is None else tauc
+    return 1 / (Kp * (tauc + theta)), 4 * (tauc + theta)
+
+
+def simulate(G, theta, law, T, dt=0.002, r=lambda t: 1.0, load=lambda t: 0.0):
+    """Closed loop with an exact dead time: process G(s) e^{-theta s}, load added at the process input.
+    law(e, dt) -> u is called every step (it may keep its own state). Returns t, y, u."""
+    A, B, C, D = (np.asarray(m, float) for m in ct.ssdata(ct.c2d(ct.ss(G), dt)))
+    x = np.zeros(A.shape[0]); nd = int(round(theta / dt)); buf = [0.0] * nd
+    n = int(round(T / dt)); ts, ys, us = np.arange(n) * dt, np.zeros(n), np.zeros(n)
+    for k, t in enumerate(ts):
+        y = float((C @ x).item()); u = law(r(t) - y, dt)
+        buf.append(u + load(t)); ud = buf.pop(0)
+        x = A @ x + B.ravel() * ud; ys[k], us[k] = y, u
+    return ts, ys, us
+
+
+def pi_law(Kc, tI):
+    I = [0.0]
+    def law(e, dt):
+        I[0] += e * dt
+        return Kc * (e + I[0] / tI)
+    return law
+
+
+def relay_law(h):
+    return lambda e, dt: h if e >= 0 else -h

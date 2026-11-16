@@ -74,6 +74,15 @@ for col, ctrl in enumerate(('PI', 'PID')):
     axs[0, col].set_title(f'{ctrl}: set-point step'); axs[1, col].set_title(f'{ctrl}: load step')
 axs[0, 0].legend(fontsize=9); fig.tight_layout()""")
 
+md("### Relay autotuning (Åström–Hägglund)")
+code(r"""s_ = ct.tf('s'); Gr = 1/((2*s_ + 1)*(s_ + 1)*(0.5*s_ + 1))
+t, y, u = simulate(Gr, 0, relay_law(1.0), 25, r=lambda t: 0.1)
+m = t > 12; a = (y[m].max() - y[m].min())/2
+Pu = 2*np.mean(np.diff(t[m][1:][np.diff(u[m]) != 0]))
+Kcu, _, wu, _ = ct.margin(Gr)
+print(f'relay: Kcu ~ {4/(np.pi*a):.2f} (exact {Kcu:.2f}),  Pu ~ {Pu:.2f} (exact {2*np.pi/wu:.2f})')
+plt.plot(t, u, label='relay output'); plt.plot(t, 5*y, label='output x5'); plt.legend(); plt.xlabel('time');""")
+
 md("## 3.2 Direct synthesis and IMC\n### Examples 3.1–3.4 with sympy")
 code(r"""s, Kp, tp, t1, t2, tc, th, z, tau_ = sp.symbols('s K_p tau_p tau_1 tau_2 tau_c theta zeta tau', positive=True)
 ds = lambda Gp, CR: sp.factor(sp.simplify(1/Gp * CR/(1 - CR)))
@@ -98,6 +107,17 @@ plt.legend(); plt.xlabel('time');
 # IMC-PI on an exact FOPDT: loop = e^{-theta s}/(2 theta s) for tau_c = theta  ->  GM = pi, PM = 61 deg
 w = np.pi/2/theta; print('GM =', 1/abs(np.exp(-1j*w*theta)/(2*theta*1j*w)),
                          ' PM =', 180 + np.degrees(-np.pi/2 - 1/(2*theta)*theta))""")
+md("### SIMC — lag-dominant and integrating processes")
+code(r"""Gl = 1/(20*s_ + 1)
+for name, (Kc, tI) in [('IMC ', (10.0, 20.0)), ('SIMC', simc('PI', 1, 20, 1)[:2])]:
+    t, y, _ = simulate(Gl, 1.0, pi_law(Kc, tI), 60, r=lambda t: 0.0, load=lambda t: 1.0)
+    print(f'{name}: Kc = {Kc}, tauI = {tI},  load IAE = {np.trapezoid(abs(y), t):.2f}')
+    plt.plot(t, y, label=name)
+plt.legend(); plt.xlabel('time'); plt.title('unit load step'); plt.show()
+Kc, tI = simc_integrating(0.2, 1.0); print('integrating 0.2e^{-s}/s: Kc =', Kc, ' tauI =', tI)
+t, y, _ = simulate(0.2/s_, 1.0, pi_law(Kc, tI), 70, load=lambda t: -0.5 if t >= 35 else 0.0)
+plt.plot(t, y); plt.xlabel('time');""")
+
 md("### Example 3.7 — IMC for the Van de Vusse reactor")
 code(r"""tcv = sp.symbols('tau_c', positive=True)
 Gm_vv = sp.Rational(5858, 10000)/(sp.Rational(1858, 10000)*s**2 + sp.Rational(8627, 10000)*s + 1)

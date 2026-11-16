@@ -146,12 +146,13 @@ subtitle: "Every slide of every chapter — use the search box (top right) to fi
 - [Minimum-ITAE tuning relations](ch3/ch3_tuning.html#/2/6)
 - [Ziegler–Nichols ultimate-cycle method (closed-loop test)](ch3/ch3_tuning.html#/2/7)
 - [Ziegler–Nichols ultimate-cycle settings](ch3/ch3_tuning.html#/2/8)
-- [Example: the Van de Vusse reactor](ch3/ch3_tuning.html#/2/9)
-- [Van de Vusse in code](ch3/ch3_tuning.html#/2/10)
-- [Example 3.6 Same plant, five tuning rules](ch3/ch3_tuning.html#/2/11)
-- [Example 3.6: responses](ch3/ch3_tuning.html#/2/12)
-- [Tuning rules in code](ch3/ch3_tuning.html#/2/13)
-- [Interactive: compare the rules yourself](ch3/ch3_tuning.html#/2/14)
+- [Relay autotuning (Åström–Hägglund)](ch3/ch3_tuning.html#/2/9)
+- [Example: the Van de Vusse reactor](ch3/ch3_tuning.html#/2/10)
+- [Van de Vusse in code](ch3/ch3_tuning.html#/2/11)
+- [Example 3.6 Same plant, five tuning rules](ch3/ch3_tuning.html#/2/12)
+- [Example 3.6: responses](ch3/ch3_tuning.html#/2/13)
+- [Tuning rules in code](ch3/ch3_tuning.html#/2/14)
+- [Interactive: compare the rules yourself](ch3/ch3_tuning.html#/2/15)
 
 **[3.2 Direct Synthesis and Internal Model Control](ch3/ch3_tuning.html#/3)**
 
@@ -165,10 +166,14 @@ subtitle: "Every slide of every chapter — use the search box (top right) to fi
 - [IMC closed loop and the model controller](ch3/ch3_tuning.html#/3/8)
 - [Example 3.5 IMC for a FOPDT process](ch3/ch3_tuning.html#/3/9)
 - [Choosing $\tau_c$](ch3/ch3_tuning.html#/3/10)
-- [Example 3.7 IMC for the Van de Vusse reactor](ch3/ch3_tuning.html#/3/11)
-- [Summary: which method when?](ch3/ch3_tuning.html#/3/12)
-- [Problem #1 (homework)](ch3/ch3_tuning.html#/3/13)
-- [Resources](ch3/ch3_tuning.html#/3/14)
+- [SIMC tuning rules (Skogestad)](ch3/ch3_tuning.html#/3/11)
+- [SIMC vs IMC on a lag-dominant process](ch3/ch3_tuning.html#/3/12)
+- [Integrating processes](ch3/ch3_tuning.html#/3/13)
+- [SIMC and the relay test in code](ch3/ch3_tuning.html#/3/14)
+- [Example 3.7 IMC for the Van de Vusse reactor](ch3/ch3_tuning.html#/3/15)
+- [Summary: which method when?](ch3/ch3_tuning.html#/3/16)
+- [Problem #1 (homework)](ch3/ch3_tuning.html#/3/17)
+- [Resources](ch3/ch3_tuning.html#/3/18)
 
 ## 4. Stability of Closed-Loop Systems
 

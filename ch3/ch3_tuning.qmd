@@ -196,6 +196,29 @@ With valve saturation (d) the oscillation stays bounded and *looks* sustained [e
 Advantages: no model is needed, and the test is done on the real loop. Drawbacks: the plant is pushed to the edge of instability, and it takes time.
 :::
 
+## Relay autotuning (Åström–Hägglund)
+
+Replace the controller by an **on–off relay** ($\pm h$): the loop settles into a small limit cycle at $\omega_u$.
+
+![](figures/f09_relay.png){width="90%" fig-align="center"}
+
+::: {.columns}
+::: {.column width="50%"}
+::: {.box .small}
+Describing function of a relay: $N(a)=\dfrac{4h}{\pi a}$, so
+$$
+K_{cu}\approx\frac{4h}{\pi a},\qquad T_u=P_u
+$$
+then use the ZN (or any $K_{cu}$, $T_u$) table.
+:::
+:::
+::: {.column width="50%" .small}
+- the amplitude is set by $h$: no need to push the plant to the stability limit
+- one test takes a few periods; built into most commercial PID controllers ("autotune" button)
+- accuracy within a few percent here (the relay output is a square wave, not a sine)
+:::
+:::
+
 ## Example: the Van de Vusse reactor
 
 $$
@@ -204,7 +227,7 @@ $$
 
 ::: {.columns}
 ::: {.column width="45%" .small}
-Raising $K_c$ under P control (ultimate-cycle figure, two slides back):
+Raising $K_c$ under P control (ultimate-cycle figure above):
 
 $$
 K_{cu}=4.150,\qquad T_u=1.46
@@ -577,6 +600,107 @@ $$
 :::
 :::
 
+## SIMC tuning rules (Skogestad)
+
+"Simple IMC": the IMC-PI of Ex 3.5 with **one change** to $\tau_I$, so that slow load disturbances are also removed quickly.
+
+::: {.ftab}
+| Process | $K_c$ | $\tau_I$ | $\tau_D$ |
+|:--|:--:|:--:|:--:|
+| $\dfrac{Ke^{-\theta s}}{\tau s+1}$ | $\dfrac{\tau}{K(\tau_c+\theta)}$ | $\min\{\tau,\ 4(\tau_c+\theta)\}$ | — |
+| $\dfrac{Ke^{-\theta s}}{(\tau_1s+1)(\tau_2s+1)}$ | $\dfrac{\tau_1}{K(\tau_c+\theta)}$ | $\min\{\tau_1,\ 4(\tau_c+\theta)\}$ | $\tau_2$ |
+| $\dfrac{K'e^{-\theta s}}{s}$ | $\dfrac{1}{K'(\tau_c+\theta)}$ | $4(\tau_c+\theta)$ | — |
+:::
+
+::: {.columns}
+::: {.column width="50%" .small}
+- $\tau\le8\theta$: identical to IMC-PI
+- **lag-dominant** ($\tau>8\theta$): IMC keeps $\tau_I=\tau$, so load recovery is very slow; SIMC caps $\tau_I$
+:::
+::: {.column width="50%" .small}
+- higher-order models: reduce to FOPDT/SOPDT with the **half rule** (Ch 1)
+- PID in series form; default $\tau_c=\theta$ gives GM ≈ 3, PM ≈ 47–61°
+:::
+:::
+
+## SIMC vs IMC on a lag-dominant process
+
+![](figures/f10_simc_lag.png){width="96%" fig-align="center"}
+
+::: {.columns}
+::: {.column width="50%" .small}
+- same $K_c=10$; only $\tau_I$ differs
+- load: IAE 0.80 (SIMC) vs 1.89 (IMC); IMC needs ~50 time units to recover
+:::
+::: {.column width="50%" .small}
+- price: 17% set-point overshoot instead of 4%
+- remedy: set-point weighting or a set-point filter $1/(\tau_I s+1)$ (two-degree-of-freedom PI)
+:::
+:::
+
+## Integrating processes
+
+::: {.columns}
+::: {.column width="40%" .small}
+Liquid levels, gas pressure in a closed vessel, batch inventories: $G=\dfrac{K'e^{-\theta s}}{s}$.
+
+- no steady-state gain and no $\tau$: FOPDT rules (ZN-PRC, Cohen–Coon, ITAE) **do not apply**
+- P only removes set-point offset but **not load offset** (Ch 2)
+- too much integral action ($\tau_I$ small) gives slow oscillations
+
+::: {.box}
+**SIMC**
+$$
+K_c=\frac{1}{K'(\tau_c+\theta)},\qquad \tau_I=4(\tau_c+\theta)
+$$
+:::
+:::
+::: {.column width="60%"}
+![](figures/f11_integrating.png){width="100%"}
+
+::: {.small}
+$K'=0.2$, $\theta=1$, $\tau_c=1$: $K_c=2.5$, $\tau_I=8$. The set-point overshoot (28%) is typical of PI on an integrator; a set-point filter removes it.
+:::
+:::
+:::
+
+## SIMC and the relay test in code
+
+::: {.panel-tabset}
+### Python
+
+```{.python}
+import numpy as np, control as ct
+from tuning import simc, simc_integrating, simulate, pi_law, relay_law   # tuning.py in ch3/
+
+print(simc('PI', K=1, tau=20, theta=1))        # (10.0, 8, 0.0): Kc, tauI, tauD
+print(simc_integrating(Kp=0.2, theta=1))        # (2.5, 8)
+
+s = ct.tf('s')
+G = 1/((2*s + 1)*(s + 1)*(0.5*s + 1))
+t, y, u = simulate(G, 0, relay_law(1.0), 25, r=lambda t: 0.1)   # relay test, h = 1
+m = t > 12
+a = (y[m].max() - y[m].min())/2
+Pu = 2*np.mean(np.diff(t[m][1:][np.diff(u[m]) != 0]))   # time between relay switches
+print('Kcu ~', 4/(np.pi*a), '  Pu ~', Pu)       # ~10.9 (exact 11.25), ~3.4 (exact 3.36)
+```
+
+### MATLAB
+
+```{.matlab}
+% SIMC, FOPDT K e^{-theta s}/(tau s + 1), tau_c = theta
+K = 1; tau = 20; theta = 1; tc = theta;
+Kc = tau/(K*(tc + theta));   tI = min(tau, 4*(tc + theta))          % 10, 8
+G = tf(1, [tau 1], 'InputDelay', theta);
+C = pidstd(Kc, tI);
+step(feedback(G, C))                                                % unit load at the process input
+
+% relay test: Simulink Relay block (+-1) in place of the controller, or
+Gp = tf(1, conv(conv([2 1], [1 1]), [0.5 1]));
+[Kcu, ~, wu] = margin(Gp);  Tu = 2*pi/wu                            % exact values to compare
+```
+:::
+
 ## [Example 3.7]{.ex} &nbsp; IMC for the Van de Vusse reactor
 
 ::: {.columns}
@@ -608,7 +732,9 @@ No overshoot, and $\tau_c$ sets the depth of the inverse response: $-0.67$ for $
 |:--|:--|:--|
 | a step test is allowed | ZN / Cohen–Coon / ITAE from a FOPDT fit | fit by the two-point method |
 | loop cannot be opened; plant tolerates cycling | ZN ultimate cycle | $K_{cu}$, $T_u$; Ch 4–5 compute them from a model |
+| loop cannot be opened; cycling must stay small | **relay autotuning** | $K_{cu}\approx4h/\pi a$; small amplitude |
 | a model is available | **IMC** (or direct synthesis) | one physical knob $\tau_c$; handles RHP zeros and dead time |
+| lag-dominant or integrating process | **SIMC** | $\tau_I=\min\{\tau,4(\tau_c+\theta)\}$; good load rejection |
 | robustness matters most | ITAE set point, IMC with $\tau_c\ge\theta$ | check GM and PM (Ch 5) |
 | load rejection matters most | ITAE load, Cohen–Coon | expect more overshoot on set-point changes |
 

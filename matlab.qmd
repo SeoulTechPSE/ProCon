@@ -180,16 +180,16 @@ step(Gcl)
 
 ## 3. Tuning of Single-Loop Control Systems
 
-[⬇ Download all (2 scripts, zip)](ch3/matlab/ch3_matlab.zip){.btn-dl download=""}
+[⬇ Download all (3 scripts, zip)](ch3/matlab/ch3_matlab.zip){.btn-dl download=""}
 
 ### Van de Vusse in code
 
-[slide 13](ch3/ch3_tuning.html#/2/10) · [⬇ ch3_12_van_de_vusse_in_code.m](ch3/matlab/ch3_12_van_de_vusse_in_code.m){download=""}
+[slide 14](ch3/ch3_tuning.html#/2/11) · [⬇ ch3_13_van_de_vusse_in_code.m](ch3/matlab/ch3_13_van_de_vusse_in_code.m){download=""}
 
-```{.matlab filename="ch3_12_van_de_vusse_in_code.m"}
+```{.matlab filename="ch3_13_van_de_vusse_in_code.m"}
 %% Ch.3 — Van de Vusse in code
-% Process Dynamics and Control, SeoulTech — slide 13
-% https://seoultechpse.github.io/ProCon/ch3/ch3_tuning.html#/2/10
+% Process Dynamics and Control, SeoulTech — slide 14
+% https://seoultechpse.github.io/ProCon/ch3/ch3_tuning.html#/2/11
 % Requires: Control System Toolbox
 
 clear; close all; clc
@@ -206,12 +206,12 @@ legend('P','PI','PID')
 
 ### Tuning rules in code
 
-[slide 16](ch3/ch3_tuning.html#/2/13) · [⬇ ch3_15_tuning_rules_in_code.m](ch3/matlab/ch3_15_tuning_rules_in_code.m){download=""}
+[slide 17](ch3/ch3_tuning.html#/2/14) · [⬇ ch3_16_tuning_rules_in_code.m](ch3/matlab/ch3_16_tuning_rules_in_code.m){download=""}
 
-```{.matlab filename="ch3_15_tuning_rules_in_code.m"}
+```{.matlab filename="ch3_16_tuning_rules_in_code.m"}
 %% Ch.3 — Tuning rules in code
-% Process Dynamics and Control, SeoulTech — slide 16
-% https://seoultechpse.github.io/ProCon/ch3/ch3_tuning.html#/2/13
+% Process Dynamics and Control, SeoulTech — slide 17
+% https://seoultechpse.github.io/ProCon/ch3/ch3_tuning.html#/2/14
 % Requires: Control System Toolbox
 
 clear; close all; clc
@@ -225,6 +225,30 @@ r = theta/tau;                                    % ITAE set point, PID
 Kc = 0.965/K*(1/r)^0.855;  tI = tau/(0.796 - 0.147*r);  tD = 0.308*tau*r^0.929;
 C = pidstd(Kc, tI, tD, 10);
 figure, step(feedback(C*G, 1)),  figure, margin(C*G)
+```
+
+### SIMC and the relay test in code
+
+[slide 33](ch3/ch3_tuning.html#/3/14) · [⬇ ch3_32_simc_and_the_relay_test_in_code.m](ch3/matlab/ch3_32_simc_and_the_relay_test_in_code.m){download=""}
+
+```{.matlab filename="ch3_32_simc_and_the_relay_test_in_code.m"}
+%% Ch.3 — SIMC and the relay test in code
+% Process Dynamics and Control, SeoulTech — slide 33
+% https://seoultechpse.github.io/ProCon/ch3/ch3_tuning.html#/3/14
+% Requires: Control System Toolbox
+
+clear; close all; clc
+
+% SIMC, FOPDT K e^{-theta s}/(tau s + 1), tau_c = theta
+K = 1; tau = 20; theta = 1; tc = theta;
+Kc = tau/(K*(tc + theta));   tI = min(tau, 4*(tc + theta))          % 10, 8
+G = tf(1, [tau 1], 'InputDelay', theta);
+C = pidstd(Kc, tI);
+step(feedback(G, C))                                                % unit load at the process input
+
+% relay test: Simulink Relay block (+-1) in place of the controller, or
+Gp = tf(1, conv(conv([2 1], [1 1]), [0.5 1]));
+[Kcu, ~, wu] = margin(Gp);  Tu = 2*pi/wu                            % exact values to compare
 ```
 
 ## 4. Stability of Closed-Loop Systems

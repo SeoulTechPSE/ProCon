@@ -21,7 +21,7 @@ subtitle: "All problems by chapter, linked to the slide where they are posed"
 
 ## 3. Tuning of Single-Loop Control Systems
 
-- **[Problem #1](ch3/ch3_tuning.html#/3/13)** — A process stream is heated in a shell-and-tube exchanger, and $T_2$ is controlled with the steam valve. In an open-loop test the steam pressure $P_s$ was stepped from 18 to 20 psig. Valve $K_v=0.9$ psi/psi, I/P transducer …
+- **[Problem #1](ch3/ch3_tuning.html#/3/17)** — A process stream is heated in a shell-and-tube exchanger, and $T_2$ is controlled with the steam valve. In an open-loop test the steam pressure $P_s$ was stepped from 18 to 20 psig. Valve $K_v=0.9$ psi/psi, I/P transducer …
 
 ## 4. Stability of Closed-Loop Systems
 
