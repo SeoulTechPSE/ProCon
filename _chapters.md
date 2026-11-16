@@ -53,8 +53,8 @@
     <p class="topics">characteristic equation · Routh–Hurwitz · root locus · dead time &amp; RHP zeros</p>
     <div class="links">
       <a class="btn primary" href="ch4/ch4_stability.html">Slides</a>
-      <a class="btn" href="ch4/ch4_stability.pdf">PDF <small>2.1 MB</small></a>
-      <a class="btn" href="ch4/ch4_stability_handout.pdf">Handout <small>2.1 MB</small></a>
+      <a class="btn" href="ch4/ch4_stability.pdf">PDF <small>2.4 MB</small></a>
+      <a class="btn" href="ch4/ch4_stability_handout.pdf">Handout <small>2.4 MB</small></a>
       <a class="btn" href="https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch4/ch4_stability.ipynb">Colab</a>
     </div>
     <div class="widgets"><a class="chip" href="ch4/interactive/rlocus_explorer.html">▶ Root-locus explorer</a></div>

@@ -66,6 +66,31 @@ show_routh(R, s)
 boundary = sp.solve(sp.Eq(R[2][0], 0), tIp)[0]
 boundary   # tau_I > Kc / (2 (1 + Kc))""")
 
+md("### Stability region of PI control in the $(K_c, \\tau_I)$ plane")
+code(r"""s, Kc, tI = sp.symbols('s K_c tau_I', positive=True)
+R = routh_array(tI*s*(s**3 + 6*s**2 + 11*s + 6) + Kc*(tI*s + 1), s)
+bound = sp.solve(sp.numer(sp.together(R[3][0])), tI)[0]; display(Math(r'\tau_I > ' + sp.latex(bound)))
+f = sp.lambdify(Kc, bound); K = np.linspace(0.1, 59.5, 400)
+plt.fill_between(K, f(K), 10, alpha=0.15, color='g'); plt.plot(K, f(K), 'r'); plt.axvline(60, color='r', ls='--')
+plt.ylim(0, 10); plt.xlabel('$K_c$'); plt.ylabel(r'$\tau_I$'); plt.plot(27, 1.58, 'k*', ms=12);""")
+
+md("### Exothermic CSTR (Ex 1.3) at its unstable upper steady state")
+code(r"""from scipy.integrate import solve_ivp
+from scipy.optimize import fsolve
+q, V, cAi, Ti, rhoCp, dH, ER, k0, UA = 100, 100, 1.0, 350, 239, -5e4, 8750, 7.2e10, 5e4
+def f(t, x, Tc):
+    cA, T = x;  k = k0*np.exp(-ER/T)
+    return [q/V*(cAi - cA) - k*cA, q/V*(Ti - T) - dH/rhoCp*k*cA + UA/(V*rhoCp)*(Tc - T)]
+cAs, Ts = fsolve(lambda x: f(0, x, 300), [0.2, 370]); k = k0*np.exp(-ER/Ts); kp = k*ER/Ts**2
+A = [[-q/V - k, -kp*cAs], [-dH*k/rhoCp, -q/V - UA/(V*rhoCp) - dH*kp*cAs/rhoCp]]
+G = ct.tf(ct.ss(A, [[0], [UA/(V*rhoCp)]], [[0, 1]], 0)); print(G, 'open-loop poles', ct.poles(G).round(3))
+print('Kc_min =', -G.den[0][0][1]/G.num[0][0][0])
+t = np.linspace(0, 8, 1601)
+for K in (0, 1.0, 3.0):
+    sol = solve_ivp(lambda tt, x: f(tt, x, 300 - K*(x[1] - Ts)), [0, 8], [cAs, Ts + 2], t_eval=t, max_step=0.005)
+    plt.plot(t, sol.y[1], label=f'Kc = {K}')
+plt.legend(); plt.xlabel('time (min)'); plt.ylabel('T (K)');""")
+
 md("## 4.3 Direct substitution\n### Example 4.2A")
 code(r"""eq = sp.expand(((s+1)*(s+2)*(s+3) + Kc).subs(s, sp.I*w))
 sp.solve([sp.re(eq), sp.im(eq)], [w, Kc], dict=True)""")

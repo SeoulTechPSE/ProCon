@@ -253,16 +253,16 @@ Gp = tf(1, conv(conv([2 1], [1 1]), [0.5 1]));
 
 ## 4. Stability of Closed-Loop Systems
 
-[⬇ Download all (3 scripts, zip)](ch4/matlab/ch4_matlab.zip){.btn-dl download=""}
+[⬇ Download all (4 scripts, zip)](ch4/matlab/ch4_matlab.zip){.btn-dl download=""}
 
 ### Routh array in code
 
-[slide 14](ch4/ch4_stability.html#/3/7) · [⬇ ch4_13_routh_array_in_code.m](ch4/matlab/ch4_13_routh_array_in_code.m){download=""} · needs Symbolic Math Toolbox
+[slide 16](ch4/ch4_stability.html#/3/9) · [⬇ ch4_15_routh_array_in_code.m](ch4/matlab/ch4_15_routh_array_in_code.m){download=""} · needs Symbolic Math Toolbox
 
-```{.matlab filename="ch4_13_routh_array_in_code.m"}
+```{.matlab filename="ch4_15_routh_array_in_code.m"}
 %% Ch.4 — Routh array in code
-% Process Dynamics and Control, SeoulTech — slide 14
-% https://seoultechpse.github.io/ProCon/ch4/ch4_stability.html#/3/7
+% Process Dynamics and Control, SeoulTech — slide 16
+% https://seoultechpse.github.io/ProCon/ch4/ch4_stability.html#/3/9
 % Requires: Control System Toolbox, Symbolic Math Toolbox
 
 clear; close all; clc
@@ -285,13 +285,41 @@ function R = routh_array(p)            % basic version (no special cases)
 end
 ```
 
+### Stability region and the CSTR in code
+
+[slide 17](ch4/ch4_stability.html#/3/10) · [⬇ ch4_16_stability_region_and_the_cstr_in_code.m](ch4/matlab/ch4_16_stability_region_and_the_cstr_in_code.m){download=""}
+
+```{.matlab filename="ch4_16_stability_region_and_the_cstr_in_code.m"}
+%% Ch.4 — Stability region and the CSTR in code
+% Process Dynamics and Control, SeoulTech — slide 17
+% https://seoultechpse.github.io/ProCon/ch4/ch4_stability.html#/3/10
+% Requires: Control System Toolbox
+
+clear; close all; clc
+
+% stability boundary of PI on 1/((s+1)(s+2)(s+3))
+Kc = linspace(0.1, 59.9, 300);
+tImin = 36*Kc./(360 + 54*Kc - Kc.^2);
+area(Kc, tImin), axis([0 65 0 10]), xlabel('K_c'), ylabel('\tau_I')
+
+for pt = [10 1; 10 0.3; 30 3; 45 3]'
+    p = roots([pt(2) 6*pt(2) 11*pt(2) pt(2)*(6 + pt(1)) pt(1)]);
+    fprintf('Kc = %g, tauI = %g: max Re = %.3f\n', pt(1), pt(2), max(real(p)))
+end
+
+% CSTR, upper steady state
+G = tf([2.092 10.02], [1 -2.715 4.215]);
+pole(G)                                     % 1.36 +- 1.54j: open-loop unstable
+for k = [1 1.3 3], pole(feedback(k*G, 1)), end
+```
+
 ### Dead time in code
 
-[slide 19](ch4/ch4_stability.html#/4/4) · [⬇ ch4_18_dead_time_in_code.m](ch4/matlab/ch4_18_dead_time_in_code.m){download=""}
+[slide 22](ch4/ch4_stability.html#/4/4) · [⬇ ch4_21_dead_time_in_code.m](ch4/matlab/ch4_21_dead_time_in_code.m){download=""}
 
-```{.matlab filename="ch4_18_dead_time_in_code.m"}
+```{.matlab filename="ch4_21_dead_time_in_code.m"}
 %% Ch.4 — Dead time in code
-% Process Dynamics and Control, SeoulTech — slide 19
+% Process Dynamics and Control, SeoulTech — slide 22
 % https://seoultechpse.github.io/ProCon/ch4/ch4_stability.html#/4/4
 % Requires: Control System Toolbox
 
@@ -308,11 +336,11 @@ Gd = tf(0.8, [5 1], 'InputDelay', 2);
 
 ### Example 4.7 in code
 
-[slide 36](ch4/ch4_stability.html#/6/3) · [⬇ ch4_35_example_4_7_in_code.m](ch4/matlab/ch4_35_example_4_7_in_code.m){download=""}
+[slide 39](ch4/ch4_stability.html#/6/3) · [⬇ ch4_38_example_4_7_in_code.m](ch4/matlab/ch4_38_example_4_7_in_code.m){download=""}
 
-```{.matlab filename="ch4_35_example_4_7_in_code.m"}
+```{.matlab filename="ch4_38_example_4_7_in_code.m"}
 %% Ch.4 — Example 4.7 in code
-% Process Dynamics and Control, SeoulTech — slide 36
+% Process Dynamics and Control, SeoulTech — slide 39
 % https://seoultechpse.github.io/ProCon/ch4/ch4_stability.html#/6/3
 % Requires: Control System Toolbox
 

@@ -259,6 +259,60 @@ $K_c>0,\ \tau_I>0,\quad \tau_I>\dfrac{K_c}{2(1+K_c)}$
 :::
 :::
 
+## Stability region in the $(K_c,\tau_I)$ plane
+
+::: {.columns}
+::: {.column width="55%" .small}
+PI control of the Ex 4.2 process $1/[(s+1)(s+2)(s+3)]$:
+$$
+\tau_Is^4+6\tau_Is^3+11\tau_Is^2+\tau_I(6+K_c)s+K_c=0
+$$
+:::
+::: {.column width="45%"}
+::: {.box .small}
+Routh, first column: $\;0<K_c<60\;$ and
+$$
+\tau_I>\frac{36K_c}{360+54K_c-K_c^2}
+$$
+:::
+:::
+:::
+
+![](figures/f12_pi_region.png){width="88%" fig-align="center"}
+
+::: {.small .navy}
+Integral action shrinks the stable range: at $K_c=10$ a small $\tau_I$ (B) is unstable; near $K_{cu}$ (D) even $\tau_I=3$ is barely stable. The ZN-PI setting (★) sits inside, with a moderate margin.
+:::
+
+## Exothermic CSTR: stabilizing an unstable steady state
+
+::: {.columns}
+::: {.column width="42%" .small}
+CSTR of Ex 1.3 at $T_c=300$ K, **upper** steady state $c_{As}=0.209$, $T_s=369.7$ K. Linearized:
+$$
+\frac{T'(s)}{T_c'(s)}=\frac{2.092s+10.02}{s^2-2.715s+4.215}
+$$
+poles $1.36\pm1.54j$: **open-loop unstable**.
+
+P control of the coolant, $T_c'=-K_cT'$:
+$$
+s^2+(2.092K_c-2.715)s+(4.215+10.02K_c)=0
+$$
+Second order: stable iff all coefficients are positive
+:::
+::: {.column width="58%"}
+::: {.box}
+$K_c>\dfrac{2.715}{2.092}=1.30$ K/K: a **minimum** gain, as in Ex 4.1
+:::
+
+![](figures/f13_cstr_unstable.png){width="100%"}
+:::
+:::
+
+::: {.small .navy}
+Without control the reactor drops to the lower (extinguished) steady state, 324 K. With $K_c=3$ the nonlinear reactor is held at 369.7 K. In practice coolant and sensor lags add an **upper** gain limit too.
+:::
+
 ## Routh array in code
 
 ::: {.panel-tabset}
@@ -298,6 +352,50 @@ function R = routh_array(p)            % basic version (no special cases)
     end
   end
 end
+```
+:::
+
+## Stability region and the CSTR in code
+
+::: {.panel-tabset}
+### Python
+
+```{.python}
+import numpy as np, sympy as sp, control as ct
+from routh import routh_array
+
+s, Kc, tI = sp.symbols('s K_c tau_I', positive=True)
+R = routh_array(tI*s*(s**3 + 6*s**2 + 11*s + 6) + Kc*(tI*s + 1), s)
+print(sp.solve(sp.numer(sp.together(R[3][0])), tI))       # boundary 36Kc/(360 + 54Kc - Kc^2)
+
+# brute-force check on a grid: largest real part of the closed-loop poles
+for k, ti in [(10, 1.0), (10, 0.3), (30, 3.0), (45, 3.0)]:
+    p = np.roots([ti, 6*ti, 11*ti, ti*(6 + k), k])
+    print(k, ti, 'stable' if p.real.max() < 0 else 'unstable')
+
+# CSTR, upper steady state: T'/Tc' = (2.092 s + 10.02)/(s^2 - 2.715 s + 4.215)
+G = ct.tf([2.092, 10.02], [1, -2.715, 4.215])
+for k in (1.0, 1.3, 3.0):
+    print(k, ct.poles(ct.feedback(k*G, 1)).round(3))     # stable for Kc > 1.30
+```
+
+### MATLAB
+
+```{.matlab}
+% stability boundary of PI on 1/((s+1)(s+2)(s+3))
+Kc = linspace(0.1, 59.9, 300);
+tImin = 36*Kc./(360 + 54*Kc - Kc.^2);
+area(Kc, tImin), axis([0 65 0 10]), xlabel('K_c'), ylabel('\tau_I')
+
+for pt = [10 1; 10 0.3; 30 3; 45 3]'
+    p = roots([pt(2) 6*pt(2) 11*pt(2) pt(2)*(6 + pt(1)) pt(1)]);
+    fprintf('Kc = %g, tauI = %g: max Re = %.3f\n', pt(1), pt(2), max(real(p)))
+end
+
+% CSTR, upper steady state
+G = tf([2.092 10.02], [1 -2.715 4.215]);
+pole(G)                                     % 1.36 +- 1.54j: open-loop unstable
+for k = [1 1.3 3], pole(feedback(k*G, 1)), end
 ```
 :::
 

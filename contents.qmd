@@ -193,7 +193,10 @@ subtitle: "Every slide of every chapter — use the search box (top right) to fi
 - [Example 4.2 P control of a third-order process](ch4/ch4_stability.html#/3/4)
 - [Example 4.2 at $K_c=60$: a row of zeros](ch4/ch4_stability.html#/3/5)
 - [Example 4.3 PI control of a critically damped process](ch4/ch4_stability.html#/3/6)
-- [Routh array in code](ch4/ch4_stability.html#/3/7)
+- [Stability region in the $(K_c,\tau_I)$ plane](ch4/ch4_stability.html#/3/7)
+- [Exothermic CSTR: stabilizing an unstable steady state](ch4/ch4_stability.html#/3/8)
+- [Routh array in code](ch4/ch4_stability.html#/3/9)
+- [Stability region and the CSTR in code](ch4/ch4_stability.html#/3/10)
 
 **[4.3 Direct-Substitution Analysis](ch4/ch4_stability.html#/4)**
 

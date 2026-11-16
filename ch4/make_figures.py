@@ -258,6 +258,75 @@ def fig_rhpz():
     fig.tight_layout(); fig.savefig(OUT / "f10_rhp_zero.png"); plt.close(fig)
 
 
+
+ORANGE = "#E07B00"
+y_ = lambda G, t: np.asarray(ct.step_response(G, t).outputs, float).ravel()
+
+
+def save_(fig, name):
+    fig.tight_layout(); fig.savefig(OUT / name); plt.close(fig)
+
+
+# ---------------------------------------------------------------- PI stability region (Ex 4.2 plant)
+def tauI_min(Kc):
+    return 36 * Kc / (360 + 54 * Kc - Kc ** 2)
+
+
+def fig_region():
+    G = ct.tf(1, [1, 6, 11, 6]); s_ = ct.tf("s")
+    Kc = np.linspace(0.01, 59.5, 600)
+    fig, axs = plt.subplots(1, 2, figsize=(12.5, 4.4), gridspec_kw={"width_ratios": [1, 1.15]})
+    a = axs[0]
+    a.fill_between(Kc, tauI_min(Kc), 12, color=GREEN, alpha=0.12)
+    a.fill_between(Kc, 0, tauI_min(Kc), color=RED, alpha=0.08)
+    a.plot(Kc, tauI_min(Kc), color=RED, lw=2.4)
+    a.axvline(60, color=RED, lw=2.4, ls="--")
+    a.text(25, 6, "stable", color=GREEN, fontsize=16, weight="bold")
+    a.text(36, 0.35, "unstable", color=RED, fontsize=14, weight="bold")
+    a.text(61, 7.5, r"$K_{cu}=60$", color=RED, ha="left", fontsize=13)
+    pts = [(10, 1.0, NAVY, "A"), (10, 0.3, RED, "B"), (30, 3.0, GREEN, "C"), (45, 3.0, ORANGE, "D")]
+    for k, ti, c, lab in pts:
+        a.plot(k, ti, "o", color=c, ms=9); a.text(k + 1.2, ti + 0.25, lab, color=c, fontsize=14, weight="bold")
+    a.plot(27, 1.58, "*", color="k", ms=14); a.text(28.2, 1.75, "ZN-PI", fontsize=11)
+    a.set_xlim(0, 72); a.set_ylim(0, 10); a.set_xlabel(r"$K_c$"); a.set_ylabel(r"$\tau_I$")
+    a.set_title("PI on $1/[(s+1)(s+2)(s+3)]$: stability region")
+    a = axs[1]; t = np.linspace(0, 25, 2501)
+    for k, ti, c, lab in pts:
+        T = ct.feedback(k * (1 + 1 / (ti * s_)) * G, 1)
+        a.plot(t, np.clip(y_(T, t), -1, 3), color=c, lw=2.2, label=rf"{lab}: $K_c={k},\ \tau_I={ti}$")
+    a.axhline(1, color=GRAY, ls=":"); a.set_ylim(-0.6, 2.4); a.set_xlabel("time")
+    a.legend(fontsize=10, loc="upper right"); a.set_title("set-point responses")
+    save_(fig, "f12_pi_region.png")
+
+
+# ---------------------------------------------------------------- open-loop unstable CSTR
+CSTR = dict(q=100, V=100, cAi=1.0, Ti=350, rhoCp=239, dH=-5e4, ER=8750, k0=7.2e10, UA=5e4)
+
+
+def cstr_rhs(t, x, Tc, p=CSTR):
+    cA, T = x; k = p["k0"] * np.exp(-p["ER"] / T)
+    return [p["q"] / p["V"] * (p["cAi"] - cA) - k * cA,
+            p["q"] / p["V"] * (p["Ti"] - T) - p["dH"] / p["rhoCp"] * k * cA + p["UA"] / (p["V"] * p["rhoCp"]) * (Tc - T)]
+
+
+def cstr_upper():
+    from scipy.optimize import fsolve
+    return fsolve(lambda x: cstr_rhs(0, x, 300), [0.2, 370])
+
+
+def fig_cstr_unstable():
+    from scipy.integrate import solve_ivp
+    cA, Ts = cstr_upper(); t = np.linspace(0, 8, 1601)
+    fig, ax = plt.subplots(figsize=(8.0, 5.2))
+    for K, c, lab in ((0, RED, "no control ($T_c=300$ K fixed)"), (1.0, ORANGE, r"P control $K_c=1.0<1.30$"),
+                      (3.0, NAVY, r"P control $K_c=3$")):
+        sol = solve_ivp(lambda tt, x: cstr_rhs(tt, x, 300 - K * (x[1] - Ts)), [0, 8], [cA, Ts + 2], t_eval=t, max_step=0.005)
+        ax.plot(t, sol.y[1], color=c, lw=2.3, label=lab)
+    ax.axhline(Ts, color=GRAY, ls=":", label=r"upper steady state $T_s=369.7$ K")
+    ax.set_xlabel("time (min)"); ax.set_ylabel("$T$ (K)"); ax.legend(fontsize=10.5, loc="lower right")
+    ax.set_title(r"$T_c=300$ K, started 2 K above the upper steady state")
+    save_(fig, "f13_cstr_unstable.png")
+
 if __name__ == "__main__":
-    for f in [fig_splane, fig_ex42, fig_ex44, fig_gallery, fig_zero, fig_ex43, fig_ex47, fig_ex48, fig_spec, fig_rhpz]:
+    for f in [fig_splane, fig_ex42, fig_ex44, fig_gallery, fig_zero, fig_ex43, fig_ex47, fig_ex48, fig_spec, fig_rhpz, fig_region, fig_cstr_unstable]:
         f(); print("ok", f.__name__)

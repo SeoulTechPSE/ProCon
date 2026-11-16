@@ -1,5 +1,5 @@
 %% Ch.4 — Dead time in code
-% Process Dynamics and Control, SeoulTech — slide 19
+% Process Dynamics and Control, SeoulTech — slide 22
 % https://seoultechpse.github.io/ProCon/ch4/ch4_stability.html#/4/4
 % Requires: Control System Toolbox
 
