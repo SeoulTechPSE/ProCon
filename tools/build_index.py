@@ -281,6 +281,16 @@ def problems():
 
 # MATLAB snippets that use variables defined on an earlier slide: prepend that setup to the .m file
 MATLAB_SETUP = {
+    (1, "State-space form"): [
+        "% --- setup from the slide 'Example 1.3 in code' ---",
+        "q = 100; V = 100; cAi = 1; Ti = 350; rhoCp = 239; dH = -5e4; ER = 8750; k0 = 7.2e10; UA = 5e4;",
+        "f = @(t, x, Tc) [q/V*(cAi - x(1)) - k0*exp(-ER/x(2))*x(1);",
+        "                 q/V*(Ti - x(2)) - dH/rhoCp*k0*exp(-ER/x(2))*x(1) + UA/(V*rhoCp)*(Tc - x(2))];",
+        "[~, x] = ode45(@(t, x) f(t, x, 290), [0 50], [0.95; 320]);  xs = x(end, :)';",
+        "k = k0*exp(-ER/xs(2));  kp = k*ER/xs(2)^2;",
+        "A = [-q/V - k, -kp*xs(1); -dH*k/rhoCp, -q/V - UA/(V*rhoCp) - dH*kp*xs(1)/rhoCp];",
+        "B = [0; UA/(V*rhoCp)];",
+        "% ---"],
     (5, "Example 5.13 in code"): [
         "% --- setup from the slide 'Margins in code' ---",
         "G = tf([-6 3], conv([10 1],[5 1]));",

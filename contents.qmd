@@ -14,7 +14,10 @@ subtitle: "Every slide of every chapter — use the search box (top right) to fi
 - [Example 1.1 Linearize a mixed vessel](ch1/ch1_dynamics.html#/2/3)
 - [Example 1.2 Stirred-tank heater](ch1/ch1_dynamics.html#/2/4)
 - [Example 1.3 Non-isothermal CSTR](ch1/ch1_dynamics.html#/2/5)
-- [Problem #1 (homework)](ch1/ch1_dynamics.html#/2/6)
+- [Example 1.3 with numbers: how good is the linear model?](ch1/ch1_dynamics.html#/2/6)
+- [Example 1.3 in code](ch1/ch1_dynamics.html#/2/7)
+- [State-space form](ch1/ch1_dynamics.html#/2/8)
+- [Problem #1 (homework)](ch1/ch1_dynamics.html#/2/9)
 
 **[1.2 Laplace Transform](ch1/ch1_dynamics.html#/3)**
 

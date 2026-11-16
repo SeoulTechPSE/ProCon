@@ -273,9 +273,50 @@ def fig_parallel():
     save(fig, "f15_parallel.png")
 
 
+
+# ---------------------------------------------------------------- Ex 1.3 with numbers
+CSTR = dict(q=100, V=100, cAi=1.0, Ti=350, rho=1000, Cp=0.239, dH=-5e4, ER=8750, k0=7.2e10, UA=5e4)
+
+
+def cstr_rhs(t, x, Tc, p=CSTR):
+    cA, T = x; k = p["k0"] * np.exp(-p["ER"] / T)
+    return [p["q"] / p["V"] * (p["cAi"] - cA) - k * cA,
+            p["q"] / p["V"] * (p["Ti"] - T) + (-p["dH"]) / (p["rho"] * p["Cp"]) * k * cA
+            + p["UA"] / (p["V"] * p["rho"] * p["Cp"]) * (Tc - T)]
+
+
+def cstr_linear(Tc0=290, p=CSTR):
+    from scipy.optimize import fsolve
+    cA, T = fsolve(lambda x: cstr_rhs(0, x, Tc0), [0.95, 320])
+    k = p["k0"] * np.exp(-p["ER"] / T); kp = k * p["ER"] / T ** 2; a = p["rho"] * p["Cp"]
+    A = np.array([[-p["q"] / p["V"] - k, -kp * cA],
+                  [(-p["dH"]) * k / a, -p["q"] / p["V"] - p["UA"] / (p["V"] * a) + (-p["dH"]) * kp * cA / a]])
+    B = np.array([[0.0], [p["UA"] / (p["V"] * a)]])
+    return np.array([cA, T]), A, B
+
+
+def fig_cstr_linear():
+    from scipy.integrate import solve_ivp
+    xs, A, B = cstr_linear()
+    sys = ct.ss(A, B, np.eye(2), 0)
+    t = np.linspace(0, 10, 1001)
+    fig, axs = plt.subplots(1, 2, figsize=(12.5, 4.2))
+    for ax, steps in ((axs[0], (2, 10, -10)), (axs[1], (20,))):
+        for d, c in zip(steps, (NAVY, RED, GREEN) if len(steps) > 1 else (RED,)):
+            nl = solve_ivp(cstr_rhs, [0, 10], xs, args=(290 + d,), t_eval=t, max_step=0.01).y[1] - xs[1]
+            li = np.asarray(ct.forced_response(sys, t, d * np.ones_like(t)).outputs[1]).ravel()
+            ax.plot(t, nl, color=c, lw=2.4, label=rf"$T_c'={d:+d}$ K: nonlinear")
+            ax.plot(t, li, color=c, lw=1.8, ls="--", label="linear")
+        ax.axhline(0, color="k", lw=0.6); ax.set_xlabel("time (min)")
+    axs[0].set_ylabel(r"$T'$ (K)"); axs[0].legend(fontsize=10, ncol=3, loc="upper center", bbox_to_anchor=(0.5, -0.2), frameon=False)
+    axs[0].set_title(r"$\pm2$ K: linear model exact; $\pm10$ K: error and asymmetry")
+    axs[1].set_title(r"$+20$ K: the reactor ignites; the linear model misses it")
+    axs[1].legend(fontsize=10, loc="lower right")
+    save(fig, "f17_cstr_linear.png")
+
 if __name__ == "__main__":
     for f in (fig_linearize, fig_inputs, fig_terms, fig_poles, fig_first_order, fig_ramp, fig_two_tanks,
               fig_second_order, fig_features, fig_pade, fig_tanks_series, fig_lowfit, fig_interacting,
-              fig_leadlag, fig_parallel):
+              fig_leadlag, fig_parallel, fig_cstr_linear):
         f()
     print(sorted(p.name for p in OUT.glob("*.png")))

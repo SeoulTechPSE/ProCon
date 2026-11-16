@@ -1,5 +1,5 @@
 %% Ch.1 — Partial fractions by computer
-% Process Dynamics and Control, SeoulTech — slide 20
+% Process Dynamics and Control, SeoulTech — slide 23
 % https://seoultechpse.github.io/ProCon/ch1/ch1_dynamics.html#/4/5
 % Requires: Control System Toolbox, Symbolic Math Toolbox
 

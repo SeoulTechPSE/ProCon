@@ -1,5 +1,5 @@
 %% Ch.1 — Second-order responses in code
-% Process Dynamics and Control, SeoulTech — slide 37
+% Process Dynamics and Control, SeoulTech — slide 40
 % https://seoultechpse.github.io/ProCon/ch1/ch1_dynamics.html#/7/5
 % Requires: Control System Toolbox
 

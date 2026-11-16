@@ -34,6 +34,29 @@ X = (s*sp.eye(2) - A).inv()*B
 show(r"\frac{C_A'}{T_c'}", sp.factor(sp.simplify(X[0])))
 show(r"\frac{T'}{T_c'}", sp.factor(sp.simplify(X[1])))""")
 
+md("### Example 1.3 with numbers — nonlinear vs linearized CSTR, and the state-space form")
+code(r"""from scipy.integrate import solve_ivp
+from scipy.optimize import fsolve
+q, V, cAi, Ti, rhoCp, dH, ER, k0, UA = 100, 100, 1.0, 350, 239, -5e4, 8750, 7.2e10, 5e4
+def f(t, x, Tc):
+    cA, T = x;  k = k0*np.exp(-ER/T)
+    return [q/V*(cAi - cA) - k*cA, q/V*(Ti - T) - dH/rhoCp*k*cA + UA/(V*rhoCp)*(Tc - T)]
+cAs, Ts = fsolve(lambda x: f(0, x, 290), [0.95, 320])
+k = k0*np.exp(-ER/Ts);  kp = k*ER/Ts**2
+A = np.array([[-q/V - k, -kp*cAs], [-dH*k/rhoCp, -q/V - UA/(V*rhoCp) - dH*kp*cAs/rhoCp]])
+B = np.array([[0], [UA/(V*rhoCp)]])
+print('steady state', round(cAs, 3), round(Ts, 1), '  poles = eig(A):', np.linalg.eigvals(A).round(3))
+sys = ct.ss(A, B, np.eye(2), 0); print(ct.tf(sys))
+t = np.linspace(0, 10, 1001)
+fig, axs = plt.subplots(1, 2, figsize=(12, 4))
+for ax, steps in ((axs[0], (2, 10, -10)), (axs[1], (20,))):
+    for d in steps:
+        Tnl = solve_ivp(f, [0, 10], [cAs, Ts], args=(290 + d,), t_eval=t, max_step=0.01).y[1] - Ts
+        Tli = np.asarray(ct.forced_response(sys, t, d*np.ones_like(t)).outputs[1]).ravel()
+        l, = ax.plot(t, Tnl, label=f'{d:+d} K nonlinear'); ax.plot(t, Tli, '--', color=l.get_color(), label='linear')
+    ax.legend(); ax.set_xlabel('time (min)')
+axs[0].set_ylabel("T' (K)");""")
+
 md("## 1.2 Laplace transforms")
 code(r"""a, w = sp.symbols('a omega', positive=True)
 for f in [sp.S(1), sp.exp(-a*tp), tp, sp.sin(w*tp), sp.cos(w*tp), sp.exp(-a*tp)*sp.sin(w*tp)]:

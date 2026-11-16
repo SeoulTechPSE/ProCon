@@ -8,8 +8,8 @@
     <p class="topics">Laplace transform · partial fractions · poles &amp; zeros · 1st/2nd-order response · dead time &amp; Padé · FOPDT approximation</p>
     <div class="links">
       <a class="btn primary" href="ch1/ch1_dynamics.html">Slides</a>
-      <a class="btn" href="ch1/ch1_dynamics.pdf">PDF <small>2.9 MB</small></a>
-      <a class="btn" href="ch1/ch1_dynamics_handout.pdf">Handout <small>2.9 MB</small></a>
+      <a class="btn" href="ch1/ch1_dynamics.pdf">PDF <small>3.1 MB</small></a>
+      <a class="btn" href="ch1/ch1_dynamics_handout.pdf">Handout <small>3.1 MB</small></a>
       <a class="btn" href="https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch1/ch1_dynamics.ipynb">Colab</a>
     </div>
     <div class="widgets"><a class="chip" href="ch1/interactive/response_explorer.html">▶ Response explorer</a></div>

@@ -206,6 +206,121 @@ Second order: the two balances are coupled.
 :::
 :::
 
+## [Example 1.3]{.ex} &nbsp; with numbers: how good is the linear model?
+
+::: {.columns}
+::: {.column width="50%" .small}
+$q=V=100$, $c_{Ai}=1$ mol/L, $T_i=350$ K, $\rho C_p=239$ J/(L·K), $-\Delta H_R=5\times10^4$ J/mol, $E/R=8750$ K, $k_0=7.2\times10^{10}$ min$^{-1}$, $UA=5\times10^4$ J/(min·K)
+
+At $T_c=290$ K: $\;c_{As}=0.952$ mol/L, $\;T_s=312.7$ K
+:::
+::: {.column width="50%" .small}
+$$
+\mathbf A=\begin{bmatrix}-1.051&-0.0043\\10.56&-2.192\end{bmatrix},\quad
+\mathbf B=\begin{bmatrix}0\\2.092\end{bmatrix}
+$$
+$$
+\frac{T'(s)}{T_c'(s)}=\frac{2.092(s+1.051)}{(s+1.092)(s+2.151)}
+$$
+:::
+:::
+
+![](figures/f17_cstr_linear.png){width="92%" fig-align="center"}
+
+::: {.small .navy .center}
+A linear model is a **local** model: excellent near the operating point, wrong far from it, and blind to phenomena such as ignition.
+:::
+
+## Example 1.3 in code
+
+::: {.panel-tabset}
+### Python
+
+```{.python}
+import numpy as np, control as ct
+from scipy.integrate import solve_ivp
+from scipy.optimize import fsolve
+q, V, cAi, Ti, rhoCp, dH, ER, k0, UA = 100, 100, 1.0, 350, 239, -5e4, 8750, 7.2e10, 5e4
+def f(t, x, Tc):                                       # nonlinear CSTR
+    cA, T = x;  k = k0*np.exp(-ER/T)
+    return [q/V*(cAi - cA) - k*cA,
+            q/V*(Ti - T) - dH/rhoCp*k*cA + UA/(V*rhoCp)*(Tc - T)]
+
+cAs, Ts = fsolve(lambda x: f(0, x, 290), [0.95, 320])   # steady state 0.952, 312.7
+k = k0*np.exp(-ER/Ts);  kp = k*ER/Ts**2
+A = [[-q/V - k, -kp*cAs], [-dH*k/rhoCp, -q/V - UA/(V*rhoCp) - dH*kp*cAs/rhoCp]]
+B = [[0], [UA/(V*rhoCp)]]
+lin = ct.ss(A, B, [[0, 1]], 0)                         # output T'
+t = np.linspace(0, 10, 1001)
+for dTc in (2, 10, -10, 20):
+    Tnl = solve_ivp(f, [0, 10], [cAs, Ts], args=(290 + dTc,), t_eval=t).y[1] - Ts
+    Tli = ct.forced_response(lin, t, dTc*np.ones_like(t)).outputs
+```
+
+### MATLAB
+
+```{.matlab}
+q = 100; V = 100; cAi = 1; Ti = 350; rhoCp = 239; dH = -5e4; ER = 8750; k0 = 7.2e10; UA = 5e4;
+f = @(t, x, Tc) [q/V*(cAi - x(1)) - k0*exp(-ER/x(2))*x(1);
+                 q/V*(Ti - x(2)) - dH/rhoCp*k0*exp(-ER/x(2))*x(1) + UA/(V*rhoCp)*(Tc - x(2))];
+[~, x] = ode45(@(t, x) f(t, x, 290), [0 50], [0.95; 320]);
+xs = x(end, :)';                                        % steady state 0.952, 312.7
+k = k0*exp(-ER/xs(2));  kp = k*ER/xs(2)^2;
+A = [-q/V - k, -kp*xs(1); -dH*k/rhoCp, -q/V - UA/(V*rhoCp) - dH*kp*xs(1)/rhoCp];
+B = [0; UA/(V*rhoCp)];
+lin = ss(A, B, [0 1], 0);                               % output T'
+t = linspace(0, 10, 1001)';
+for dTc = [2 10 -10 20]
+    [~, x] = ode45(@(t, x) f(t, x, 290 + dTc), t, xs);
+    plot(t, x(:,2) - xs(2), t, lsim(lin, dTc*ones(size(t)), t), '--'), hold on
+end
+xlabel('time (min)'), ylabel('T'' (K)')
+```
+:::
+
+## State-space form
+
+The linearized balances are already in **state-space form**:
+$$
+\frac{d\mathbf x}{dt}=\mathbf A\mathbf x+\mathbf B\mathbf u,\qquad \mathbf y=\mathbf C\mathbf x+\mathbf D\mathbf u
+\quad\Longrightarrow\quad
+\mathbf G(s)=\mathbf C(s\mathbf I-\mathbf A)^{-1}\mathbf B+\mathbf D
+$$
+
+::: {.columns}
+::: {.column width="50%"}
+::: {.box .small}
+- $(s\mathbf I-\mathbf A)^{-1}=\dfrac{\operatorname{adj}(s\mathbf I-\mathbf A)}{\det(s\mathbf I-\mathbf A)}$: every transfer function has the **same denominator**
+- **poles = eigenvalues of $\mathbf A$**
+- CSTR at $T_c=290$ K: $\lambda=-1.092,\ -2.151$, stable
+:::
+:::
+::: {.column width="50%"}
+::: {.box .small}
+- At $T_c=300$ K the same reactor has an **upper** steady state with $\lambda=1.36\pm1.54j$: **unstable** operating point (Ch 4)
+- With several inputs and outputs, $\mathbf G(s)$ is a **matrix** of transfer functions (Ch 6)
+:::
+:::
+:::
+
+::: {.panel-tabset}
+### Python
+
+```{.python}
+sys = ct.ss(A, B, np.eye(2), 0)          # outputs c_A', T'
+print(np.linalg.eigvals(A))              # poles: -1.092, -2.151
+print(ct.tf(sys))                        # T'/Tc' = (2.092 s + 2.198)/(s^2 + 3.243 s + 2.348)
+```
+
+### MATLAB
+
+```{.matlab}
+sys = ss(A, B, eye(2), 0);               % outputs c_A', T'
+eig(A)                                   % poles: -1.092, -2.151
+tf(sys)                                  % T'/Tc' = (2.092 s + 2.198)/(s^2 + 3.243 s + 2.348)
+```
+:::
+
 ## [Problem #1]{.ex} &nbsp; (homework)
 
 ::: {.box}

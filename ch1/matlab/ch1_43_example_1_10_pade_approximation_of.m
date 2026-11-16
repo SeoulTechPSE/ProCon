@@ -1,5 +1,5 @@
 %% Ch.1 — Example 1.10 Padé approximation of $e^{-3s}/(10s+1)$
-% Process Dynamics and Control, SeoulTech — slide 41
+% Process Dynamics and Control, SeoulTech — slide 44
 % https://seoultechpse.github.io/ProCon/ch1/ch1_dynamics.html#/8/2
 % Requires: Control System Toolbox
 
