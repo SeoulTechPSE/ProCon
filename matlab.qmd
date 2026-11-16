@@ -356,7 +356,7 @@ stepinfo(feedback(Kc*G,1))
 
 ## 5. Frequency-Response Analysis & Design
 
-[⬇ Download all (3 scripts, zip)](ch5/matlab/ch5_matlab.zip){.btn-dl download=""}
+[⬇ Download all (4 scripts, zip)](ch5/matlab/ch5_matlab.zip){.btn-dl download=""}
 
 ### Bode and Nyquist in code
 
@@ -435,6 +435,29 @@ Kc_PM = 1/m(i)                                  % 0.60
 
 Kc = min(Kc_GM, Kc_PM);
 margin(Kc*Gs), stepinfo(feedback(Kc*Gs, 1))
+```
+
+### Maximum sensitivity and bandwidth in code
+
+[slide 36](ch5/ch5_frequency.html#/5/6) · [⬇ ch5_35_maximum_sensitivity_and_bandwidth_in_cod.m](ch5/matlab/ch5_35_maximum_sensitivity_and_bandwidth_in_cod.m){download=""}
+
+```{.matlab filename="ch5_35_maximum_sensitivity_and_bandwidth_in_cod.m"}
+%% Ch.5 — Maximum sensitivity and bandwidth in code
+% Process Dynamics and Control, SeoulTech — slide 36
+% https://seoultechpse.github.io/ProCon/ch5/ch5_frequency.html#/5/6
+% Requires: Control System Toolbox
+
+clear; close all; clc
+
+G = tf([-6 3], conv([10 1], [5 1]));
+[Ku, ~, wc] = margin(G);  tI = 2*pi/wc/1.2;              % ZN tauI = 12.7
+for Kc = [Ku/2.2 0.93 0.60]
+    L = Kc*tf([tI 1], [tI 0])*G;
+    S = feedback(1, L);  T = feedback(L, 1);
+    Ms = getPeakGain(S);  wB = bandwidth(T);
+    fprintf('Kc = %.2f:  Ms = %.2f,  wB = %.2f\n', Kc, Ms, wB)
+end
+bodemag(feedback(1, L), feedback(L, 1)), legend('S', 'T')
 ```
 
 ## 6. Multi-loop Systems

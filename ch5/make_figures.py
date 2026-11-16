@@ -424,8 +424,36 @@ def fig_pm_zeta():
     fig.tight_layout(); fig.savefig(OUT / "f14_pm_zeta.png"); plt.close(fig)
 
 
+
+# ---------------------------------------------------------------- f16 sensitivity, Ms, bandwidth
+def fig_sensitivity():
+    Ku, _, wc, _ = ct.margin(G510); tI = 2 * np.pi / wc / 1.2
+    w = np.logspace(-3, 1, 6000)
+    cases = [(Ku / 2.2, RED, "ZN"), (0.93, ORANGE, "GM = 2"), (0.60, NAVY, "PM = 45°")]
+    fig, axs = plt.subplots(1, 3, figsize=(14, 4.4), gridspec_kw={"width_ratios": [1, 1.15, 1.15]})
+    a = axs[0]; th = np.linspace(0, 2 * np.pi, 300)
+    for K, c, lab in cases:
+        L = K * ct.tf([tI, 1], [tI, 0]) * G510
+        Lj = np.array([complex(L(1j * x)) for x in w]); S = 1 / (1 + Lj); T = Lj / (1 + Lj)
+        Ms = abs(S).max(); Mt = abs(T).max()
+        i = np.where(abs(T) < 1 / np.sqrt(2))[0]; wb = w[i[i > np.argmax(abs(T))][0]]
+        a.plot(Lj.real, Lj.imag, color=c, lw=1.9)
+        a.plot(-1 + np.cos(th) / Ms, np.sin(th) / Ms, color=c, lw=1, ls="--")
+        axs[1].loglog(w, abs(S), color=c, lw=2, label=rf"{lab}: $K_c={K:.2f}$, $M_s={Ms:.2f}$")
+        axs[2].loglog(w, abs(T), color=c, lw=2, label=rf"{lab}: $\omega_B={wb:.2f}$")
+        axs[2].plot(wb, 1 / np.sqrt(2), "o", color=c, ms=6)
+    a.plot(-1, 0, "k+", ms=12, mew=2); a.set_xlim(-2.2, 0.6); a.set_ylim(-1.6, 1.0); a.set_aspect("equal")
+    a.set_xlabel(r"Re $L$"); a.set_ylabel(r"Im $L$"); a.set_title(r"Nyquist: circle radius $1/M_s$ about $-1$")
+    axs[1].axhline(2, color=GRAY, ls=":"); axs[1].text(1.3e-3, 2.2, r"$M_s=2$ (upper guideline)", color=GRAY, fontsize=10)
+    axs[1].axhline(1, color="k", lw=0.6)
+    axs[1].set_title(r"sensitivity $|S|=1/|1+L|$"); axs[1].set_ylim(0.01, 6)
+    axs[2].axhline(1 / np.sqrt(2), color=GRAY, ls=":"); axs[2].set_title(r"$|T|=|L/(1+L)|$ and bandwidth $\omega_B$")
+    axs[2].set_ylim(0.01, 6)
+    for a in axs[1:]: a.set_xlabel(r"$\omega$ (rad/s)"); a.legend(fontsize=9.5, loc="lower right" if a is axs[1] else "lower left")
+    fig.tight_layout(); fig.savefig(OUT / "f16_sensitivity.png"); plt.close(fig)
+
 if __name__ == "__main__":
-    for f in [fig_sine, fig_first_order, fig_second_order, fig_blocks1, fig_blocks2, fig_asymptotic,
+    for f in [fig_sensitivity, fig_sine, fig_first_order, fig_second_order, fig_blocks1, fig_blocks2, fig_asymptotic,
               fig_ex511_time, fig_ex511_freq, fig_margins, fig_ex512_step, fig_ex513, fig_nyq_unstable,
               fig_ex44_bode, fig_pm_zeta]:
         r = f(); print("ok", f.__name__, r if r is not None else "")

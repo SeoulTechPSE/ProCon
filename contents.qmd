@@ -278,10 +278,13 @@ subtitle: "Every slide of every chapter — use the search box (top right) to fi
 - [Choosing $K_c$ without trial and error](ch5/ch5_frequency.html#/5/1)
 - [Example 5.13 Retuning Ex 5.12 for GM ≥ 2 and PM ≥ 45°](ch5/ch5_frequency.html#/5/2)
 - [Example 5.13 in code](ch5/ch5_frequency.html#/5/3)
-- [Interactive: move $K_c$, watch the margins](ch5/ch5_frequency.html#/5/4)
-- [A final word: frequency response or root locus?](ch5/ch5_frequency.html#/5/5)
-- [Problem #1 (homework)](ch5/ch5_frequency.html#/5/6)
-- [Resources](ch5/ch5_frequency.html#/5/7)
+- [Sensitivity function and maximum sensitivity $M_s$](ch5/ch5_frequency.html#/5/4)
+- [$|S|$, $|T|$ and the closed-loop bandwidth](ch5/ch5_frequency.html#/5/5)
+- [Maximum sensitivity and bandwidth in code](ch5/ch5_frequency.html#/5/6)
+- [Interactive: move $K_c$, watch the margins](ch5/ch5_frequency.html#/5/7)
+- [A final word: frequency response or root locus?](ch5/ch5_frequency.html#/5/8)
+- [Problem #1 (homework)](ch5/ch5_frequency.html#/5/9)
+- [Resources](ch5/ch5_frequency.html#/5/10)
 
 **[Appendix](ch5/ch5_frequency.html#/6)**
 

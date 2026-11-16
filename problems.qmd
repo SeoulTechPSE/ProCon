@@ -29,7 +29,7 @@ subtitle: "All problems by chapter, linked to the slide where they are posed"
 
 ## 5. Frequency-Response Analysis & Design
 
-- **[Problem #1](ch5/ch5_frequency.html#/5/6)** — $G_p=\frac{2e^{-s}}{10s+1},\qquad G_c=K_c\left(1+\frac{1}{\tau_Is}\right),\quad \tau_I=10$ (a) Show that $\tau_I=10$ makes $G_{OL}$ a pure integrator with dead time. Sketch its Bode plot by hand. (b) Find the phase crossover …
+- **[Problem #1](ch5/ch5_frequency.html#/5/9)** — $G_p=\frac{2e^{-s}}{10s+1},\qquad G_c=K_c\left(1+\frac{1}{\tau_Is}\right),\quad \tau_I=10$ (a) Show that $\tau_I=10$ makes $G_{OL}$ a pure integrator with dead time. Sketch its Bode plot by hand. (b) Find the phase crossover …
 
 ## 6. Multi-loop Systems
 

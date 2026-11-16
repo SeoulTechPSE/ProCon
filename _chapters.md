@@ -68,8 +68,8 @@
     <p class="topics">Bode &amp; Nyquist plots · Bode/Nyquist stability · gain &amp; phase margins · tuning by margins</p>
     <div class="links">
       <a class="btn primary" href="ch5/ch5_frequency.html">Slides</a>
-      <a class="btn" href="ch5/ch5_frequency.pdf">PDF <small>2.8 MB</small></a>
-      <a class="btn" href="ch5/ch5_frequency_handout.pdf">Handout <small>2.8 MB</small></a>
+      <a class="btn" href="ch5/ch5_frequency.pdf">PDF <small>3.0 MB</small></a>
+      <a class="btn" href="ch5/ch5_frequency_handout.pdf">Handout <small>3.0 MB</small></a>
       <a class="btn" href="https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch5/ch5_frequency.ipynb">Colab</a>
     </div>
     <div class="widgets"><a class="chip" href="ch5/interactive/freq_explorer.html">▶ Frequency-response explorer</a></div>

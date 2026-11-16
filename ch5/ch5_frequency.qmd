@@ -631,6 +631,98 @@ margin(Kc*Gs), stepinfo(feedback(Kc*Gs, 1))
 ```
 :::
 
+## Sensitivity function and maximum sensitivity $M_s$
+
+::: {.columns}
+::: {.column width="52%" .small}
+With $L=G_cG$ (unity feedback):
+$$
+S=\frac{1}{1+L},\qquad T=\frac{L}{1+L},\qquad S+T=1
+$$
+
+- $S$: effect of **load disturbances** on the output, and of model errors
+- $T$: set-point tracking ($C/R$), and of measurement noise
+- $\dfrac{1}{M_s}$ = **shortest distance** from $L(j\omega)$ to $-1$
+:::
+::: {.column width="48%"}
+::: {.box .small}
+$$
+M_s=\max_\omega|S(j\omega)|
+$$
+One number for robustness. It guarantees
+$$
+\mathrm{GM}\ge\frac{M_s}{M_s-1},\qquad \mathrm{PM}\ge2\sin^{-1}\frac{1}{2M_s}
+$$
+Typical target $1.2\le M_s\le2$
+
+$M_s=2$: GM $\ge2$ and PM $\ge29^\circ$
+:::
+:::
+:::
+
+::: {.ftab}
+| Ex 5.13 loop | $K_c$ | GM | PM | $M_s$ | $\omega_B$ | overshoot |
+|:--|:-:|:-:|:-:|:-:|:-:|:-:|
+| ZN | 1.14 | 1.63 | 19° | 3.91 | 0.44 | 62% |
+| GM = 2 | 0.93 | 2.00 | 27° | 2.89 | 0.39 | 47% |
+| PM = 45° | 0.60 | 3.10 | 45° | **1.93** | 0.28 | 23% |
+:::
+
+::: {.small .navy}
+Meeting GM = 2 alone still leaves $M_s=2.9$: the curve passes close to $-1$ at another frequency. $M_s$ catches what a single margin can miss.
+:::
+
+## $|S|$, $|T|$ and the closed-loop bandwidth
+
+![](figures/f16_sensitivity.png){width="100%"}
+
+::: {.columns}
+::: {.column width="50%" .small}
+- $|S|\ll1$ at low $\omega$: slow disturbances are rejected (integral action: $|S|\to0$)
+- $|S|>1$ near $\omega_c$: disturbances there are **amplified** by up to $M_s$
+- "waterbed": pushing $|S|$ down at one frequency raises it elsewhere
+:::
+::: {.column width="50%" .small}
+- **bandwidth** $\omega_B$: $|T(j\omega_B)|=1/\sqrt2$; the loop tracks set points slower than $\omega_B$
+- larger $\omega_B$ → faster response (rise time $\sim1/\omega_B$), but larger $M_s$ for this process
+- RHP zero at $s=0.5$ and dead time limit the achievable $\omega_B$
+:::
+:::
+
+## Maximum sensitivity and bandwidth in code
+
+::: {.panel-tabset}
+### Python
+
+```{.python}
+import numpy as np, control as ct
+G = ct.tf([-6, 3], np.polymul([10, 1], [5, 1]))
+Ku, _, wc, _ = ct.margin(G);  tI = 2*np.pi/wc/1.2          # ZN tauI = 12.7
+w = np.logspace(-3, 1, 20000)
+for Kc in (Ku/2.2, 0.93, 0.60):
+    L = Kc*ct.tf([tI, 1], [tI, 0])*G
+    Lj = L(1j*w)
+    S, T = 1/(1 + Lj), Lj/(1 + Lj)
+    Ms = abs(S).max()
+    wB = w[np.argmax(abs(T)) + np.argmax(abs(T[np.argmax(abs(T)):]) < 1/np.sqrt(2))]
+    print(f'Kc = {Kc:.2f}:  Ms = {Ms:.2f},  wB = {wB:.2f}')   # 3.91/0.44, 2.89/0.39, 1.93/0.28
+```
+
+### MATLAB
+
+```{.matlab}
+G = tf([-6 3], conv([10 1], [5 1]));
+[Ku, ~, wc] = margin(G);  tI = 2*pi/wc/1.2;              % ZN tauI = 12.7
+for Kc = [Ku/2.2 0.93 0.60]
+    L = Kc*tf([tI 1], [tI 0])*G;
+    S = feedback(1, L);  T = feedback(L, 1);
+    Ms = getPeakGain(S);  wB = bandwidth(T);
+    fprintf('Kc = %.2f:  Ms = %.2f,  wB = %.2f\n', Kc, Ms, wB)
+end
+bodemag(feedback(1, L), feedback(L, 1)), legend('S', 'T')
+```
+:::
+
 ## Interactive: move $K_c$, watch the margins
 
 ::: {.screen-only}

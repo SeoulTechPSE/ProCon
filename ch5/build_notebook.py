@@ -143,6 +143,17 @@ for K in (Kc, Kc_GM, Kc_PM):
     plt.plot(t, ct.step_response(ct.feedback(K*Gs, 1), t)[1], label=rf'$K_c={K:.2f}$')
 plt.legend();""")
 
+md("### Sensitivity, $M_s$ and closed-loop bandwidth (Ex 5.13 loop)")
+code(r"""Gs13 = ct.tf([-6, 3], np.polymul([10, 1], [5, 1]))
+Ku_, _, wc_, _ = ct.margin(Gs13); tI_ = 2*np.pi/wc_/1.2
+w_ = np.logspace(-3, 1, 20000)
+for Kc_ in (Ku_/2.2, 0.93, 0.60):
+    Lj = (Kc_*ct.tf([tI_, 1], [tI_, 0])*Gs13)(1j*w_); S_, T_ = 1/(1 + Lj), Lj/(1 + Lj)
+    Ms = abs(S_).max(); k0 = np.argmax(abs(T_)); wB = w_[k0 + np.argmax(abs(T_[k0:]) < 1/np.sqrt(2))]
+    print(f'Kc = {Kc_:.2f}: Ms = {Ms:.2f} (GM >= {Ms/(Ms - 1):.2f}, PM >= {np.degrees(2*np.arcsin(1/(2*Ms))):.0f} deg), wB = {wB:.2f}')
+    plt.loglog(w_, abs(S_), label=f'|S|, Kc = {Kc_:.2f}')
+plt.axhline(2, ls=':'); plt.legend(); plt.xlabel('w (rad/s)');""")
+
 md("## Problem #1 — (homework) start here\n$G_p = 2e^{-s}/(10s+1)$, PI with $\\tau_I = 10$")
 code(r"""Gp = ct.tf(2, [10, 1]); theta = 1.0; tI = 10
 w = np.logspace(-3, 2, 20000)
