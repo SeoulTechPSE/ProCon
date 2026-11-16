@@ -40,3 +40,15 @@
 
 /* PSL logo in the navbar (links to the lab home page) */
 .psl-home-logo { height: 24px; width: auto; vertical-align: middle; }
+
+/* course map */
+.roadmap-wrap { overflow-x: auto; margin: .6rem 0 .3rem; }
+.roadmap { width: 100%; min-width: 760px; height: auto; font-family: inherit; display: block; }
+.roadmap text { font-family: inherit; }
+.roadmap .rm-node rect:first-of-type { transition: stroke-width .15s; }
+.roadmap .rm-node:hover rect:first-of-type { stroke-width: 3.2; }
+.roadmap-legend { font-size: .85rem; color: #666; margin-bottom: 1rem; }
+.roadmap-legend span { display: inline-block; width: 28px; height: 0; vertical-align: middle; margin-right: .3rem; }
+.roadmap-legend .solid { border-top: 3px solid #333399; }
+.roadmap-legend .dash { border-top: 2px dashed #2E7D32; }
+.roadmap a, .roadmap a:hover { text-decoration: none; }

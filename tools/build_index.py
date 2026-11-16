@@ -4,6 +4,7 @@
 
 Writes
     _chapters.md   chapter cards for index.qmd (topics, thumbnail, links, widgets, PDF sizes, last update)
+    _roadmap.md    course map (inline SVG) for index.qmd
     _updates.md    announcements (UPDATES in tools/chapters.py) for index.qmd
     contents.qmd   every slide title of every deck, linked (searchable: reveal decks are not indexed)
     problems.qmd   homework problems of all chapters, linked to their slides
@@ -157,6 +158,90 @@ def cards():
     return "\n".join(out)
 
 
+# ------------------------------------------------------------------ course map
+ROADMAP = {   # chapter -> (centre x, centre y, short title, two topic lines)
+    1: (130, 205, "Dynamic Response", ["Laplace, transfer functions", "1st/2nd order, dead time"]),
+    2: (410, 205, "Single-Loop Analysis", ["closed loop, block diagrams", "P / PI / PID modes"]),
+    3: (690, 95, "Tuning", ["ZN, Cohen–Coon, ITAE", "direct synthesis, IMC"]),
+    4: (690, 315, "Stability", ["Routh–Hurwitz", "root locus"]),
+    5: (960, 315, "Frequency Response", ["Bode, Nyquist", "gain & phase margins"]),
+    6: (960, 95, "Multi-loop Systems", ["cascade, feedforward, Smith", "ratio, RGA, decoupling"]),
+}
+EDGES = [(1, 2, ""), (2, 3, ""), (2, 4, ""), (4, 5, ""), (3, 6, ""), (5, 6, "")]
+DASHED = [(4, 3, ['K<tspan dy="4" font-size="11">cu</tspan><tspan dy="-4">, T</tspan><tspan dy="4" font-size="11">u</tspan>',
+                  "→ ZN tuning"]),
+          (5, 3, ["tune by", "GM, PM"]),
+          (1, 3, ["FOPDT model"])]
+
+
+def roadmap():
+    W, H, bw, bh = 1100, 430, 228, 112
+    NAVY, RED, GREEN, GRAY = "#333399", "#C00000", "#2E7D32", "#888"
+    by = {c["n"]: c for c in CHAPTERS}
+    box = lambda n: ROADMAP[n][:2]
+    out = [f'<svg class="roadmap" viewBox="0 0 {W} {H}" xmlns="http://www.w3.org/2000/svg" role="img" '
+           f'aria-label="Course map: how the six chapters build on each other">',
+           '<defs><marker id="rm-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" '
+           'orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="context-stroke"/></marker>'
+           f'<filter id="rm-sh" x="-10%" y="-10%" width="130%" height="140%"><feDropShadow dx="0" dy="2" '
+           f'stdDeviation="3" flood-color="{NAVY}" flood-opacity="0.15"/></filter></defs>']
+    # stage bands
+    for x0, x1, lab in [(10, 262, "Foundations"), (282, 538, "Closed loop"), (558, 1090, "Design & analysis")]:
+        out.append(f'<rect x="{x0}" y="10" width="{x1 - x0}" height="{H - 20}" rx="12" fill="#f7f8fc"/>')
+        out.append(f'<text x="{(x0 + x1) / 2}" y="{H - 22}" text-anchor="middle" font-size="15" '
+                   f'font-weight="700" fill="{GRAY}" letter-spacing=".08em">{lab.upper()}</text>')
+
+    def edge(a, b, dashed=False, label=""):
+        (xa, ya), (xb, yb) = box(a), box(b)
+        if ya == yb:                                    # horizontal
+            sx = 1 if xb > xa else -1
+            p = f"M{xa + sx * bw / 2},{ya} L{xb - sx * bw / 2},{yb}"; lx, ly = (xa + xb) / 2, ya - 10
+        elif xa == xb:                                  # vertical
+            sy = 1 if yb > ya else -1
+            p = f"M{xa},{ya + sy * bh / 2} L{xb},{yb - sy * bh / 2}"; lx, ly = xa - 12, (ya + yb) / 2 - 6
+        else:                                           # elbow: out of the side, into top/bottom or side
+            sx = 1 if xb > xa else -1
+            if a == 1:                                   # long dashed route above everything
+                p = f"M{xa},{ya - bh / 2} L{xa},{40} L{xb - bw / 2 - 30},{40} L{xb - bw / 2 - 30},{yb - 30} L{xb - bw / 2},{yb - 30}"
+                lx, ly = (xa + xb) / 2 - 60, 32
+            elif a == 5:                                 # Ch5 -> Ch3 diagonal (dashed)
+                p = f"M{xa - bw / 2 + 20},{ya - bh / 2} L{xb + bw / 2 - 20},{yb + bh / 2}"
+                lx, ly = (xa + xb) / 2 + 48, (ya + yb) / 2 + 12
+            else:
+                xm = (xa + bw / 2 + xb - bw / 2) / 2
+                p = f"M{xa + sx * bw / 2},{ya} L{xm},{ya} L{xm},{yb} L{xb - sx * bw / 2},{yb}"
+                lx, ly = xm, yb
+        col = GREEN if dashed else NAVY
+        out.append(f'<path d="{p}" fill="none" stroke="{col}" stroke-width="{1.8 if dashed else 2.6}"'
+                   f'{" stroke-dasharray=\"7 5\"" if dashed else ""} marker-end="url(#rm-arr)"/>')
+        if label:
+            anchor = "end" if (xa == xb) else ("start" if a == 5 else "middle")
+            for k, ln in enumerate(label if isinstance(label, list) else [label]):
+                out.append(f'<text x="{lx}" y="{ly + 18 * k}" text-anchor="{anchor}" font-size="14" font-style="italic" '
+                           f'fill="{GREEN}">{ln}</text>')
+
+    for a, b, l in EDGES:
+        edge(a, b, False, l)
+    for a, b, l in DASHED:
+        edge(a, b, True, l)
+    for n, (cx, cy, title, lines) in ROADMAP.items():
+        c = by[n]; href = f"ch{n}/{c['slug']}.html"
+        x, y = cx - bw / 2, cy - bh / 2
+        out.append(f'<a href="{href}" class="rm-node"><title>{html.escape(c["title"])}</title>'
+                   f'<rect x="{x}" y="{y}" width="{bw}" height="{bh}" rx="10" fill="#fff" stroke="{NAVY}" '
+                   f'stroke-width="2" filter="url(#rm-sh)"/>'
+                   f'<rect x="{x}" y="{y}" width="8" height="{bh}" rx="3" fill="{RED}"/>'
+                   f'<text x="{x + 22}" y="{y + 26}" font-size="13" font-weight="700" fill="{RED}" '
+                   f'letter-spacing=".08em">CHAPTER {n}</text>'
+                   f'<text x="{x + 22}" y="{y + 52}" font-size="19" font-weight="700" fill="{NAVY}">{html.escape(title)}</text>'
+                   + "".join(f'<text x="{x + 22}" y="{y + 76 + 20 * i}" font-size="14.5" fill="#555">{html.escape(t)}</text>'
+                             for i, t in enumerate(lines)) + '</a>')
+    out.append('</svg>')
+    legend = ('<div class="roadmap-legend"><span class="solid"></span> builds on &nbsp;&nbsp;'
+              '<span class="dash"></span> feeds results into &nbsp;&nbsp;· click a box to open the slides</div>')
+    return "```{=html}\n<div class=\"roadmap-wrap\">" + "\n".join(out) + "</div>\n" + legend + "\n```\n"
+
+
 def updates():
     """Hand-written announcements from tools/chapters.py (not the git log)."""
     if not UPDATES:
@@ -288,6 +373,7 @@ def write(name, text):
 
 if __name__ == "__main__":
     write("_chapters.md", cards())
+    write("_roadmap.md", roadmap())
     write("_updates.md", updates())
     write("contents.qmd", contents())
     write("problems.qmd", problems())

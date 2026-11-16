@@ -9,6 +9,12 @@ description: "Lecture slides, PDFs, Colab notebooks and interactive explorers fo
 
 Lecture notes for **Process Dynamics and Control (공정제어)**. Slides are Quarto/reveal.js decks; every calculation is reproduced in a Python notebook (MATLAB code is shown alongside). Green chips open the interactive explorers on their own page.
 
+## Course map
+
+{{< include _roadmap.md >}}
+
+## Chapters
+
 {{< include _chapters.md >}}
 
 **How to use**
