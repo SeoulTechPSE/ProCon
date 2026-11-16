@@ -184,7 +184,7 @@ $$
 $$
 \rho VC_p\frac{dT}{dt}=\rho qC_p(T_i-T)+(-\Delta H_R)Vk(T)c_A+UA(T_c-T)
 $$
-$k(T)c_A$ is nonlinear in **both** states. With $q$, $c_{Ai}$, $T_i$ constant, linearize ($k_s'=k_sE/RT_s^2$):
+$k(T)c_A$ is nonlinear in **both** states. With $q$, $c_{Ai}$, $T_i$ constant, linearize:
 $$
 \frac{d}{dt}\begin{bmatrix}c_A'\\T'\end{bmatrix}=\begin{bmatrix}a_{11}&a_{12}\\a_{21}&a_{22}\end{bmatrix}\begin{bmatrix}c_A'\\T'\end{bmatrix}+\begin{bmatrix}0\\b_2\end{bmatrix}T_c'
 $$
@@ -193,6 +193,8 @@ $$
 
 ::: {.columns}
 ::: {.column width="56%" .tiny}
+$k_s=k(T_s),\quad k_s'=\dfrac{dk}{dT}\Big|_s=\dfrac{k_sE}{RT_s^2}$
+
 $a_{11}=-\dfrac qV-k_s,\quad a_{12}=-k_s'c_{As},\quad a_{21}=\dfrac{(-\Delta H_R)k_s}{\rho C_p}$
 $a_{22}=-\dfrac qV-\dfrac{UA}{\rho VC_p}+\dfrac{(-\Delta H_R)k_s'c_{As}}{\rho C_p},\quad b_2=\dfrac{UA}{\rho VC_p}$
 :::
@@ -210,9 +212,17 @@ Second order: the two balances are coupled.
 
 ::: {.columns}
 ::: {.column width="50%" .small}
-$q=V=100$, $c_{Ai}=1$ mol/L, $T_i=350$ K, $\rho C_p=239$ J/(L·K), $-\Delta H_R=5\times10^4$ J/mol, $E/R=8750$ K, $k_0=7.2\times10^{10}$ min$^{-1}$, $UA=5\times10^4$ J/(min·K)
+$$
+\begin{aligned}
+q&=100\ \text{L/min} & V&=100\ \text{L}\\
+c_{Ai}&=1\ \text{mol/L} & T_i&=350\ \text{K}\\
+\rho C_p&=239\ \text{J/(L K)} & {-\Delta H_R}&=5\times10^4\ \text{J/mol}\\
+k_0&=7.2\times10^{10}\ \text{min}^{-1} & E/R&=8750\ \text{K}\\
+UA&=5\times10^4\ \text{J/(min K)} & T_c&=290\ \text{K}
+\end{aligned}
+$$
 
-At $T_c=290$ K: $\;c_{As}=0.952$ mol/L, $\;T_s=312.7$ K
+Steady state: $\;c_{As}=0.952$ mol/L, $\;T_s=312.7$ K
 :::
 ::: {.column width="50%" .small}
 $$
@@ -400,7 +410,9 @@ Try: derive $\mathcal L[\cos\omega t]$ from $\cos\omega t=(e^{j\omega t}+e^{-j\o
 ::: {.columns}
 ::: {.column width="50%" .small}
 - **Pulse**: $A[u(t)-u(t-T)]\ \Rightarrow\ \dfrac As(1-e^{-sT})$
-- **Impulse**: $\delta(t)=\displaystyle\lim_{T\to0}\frac{u(t)-u(t-T)}{T}$, so $\mathcal L[\delta]=\displaystyle\lim_{T\to0}\frac{1-e^{-sT}}{Ts}=1$
+- **Impulse**: $\delta(t)=\displaystyle\lim_{T\to0}\frac{u(t)-u(t-T)}{T}$,
+
+  so $\mathcal L[\delta]=\displaystyle\lim_{T\to0}\frac{1-e^{-sT}}{Ts}=1$
 :::
 ::: {.column width="50%" .small}
 - $\displaystyle\int_{-\infty}^\infty\delta\,dt=1$, $\quad\displaystyle\int_{-\infty}^\infty f(t)\delta(t-t_0)\,dt=f(t_0)$
@@ -538,7 +550,9 @@ $$
 $$
 Set $s=-1$, then differentiate and set $s=-1$ again:
 
-$\alpha_3=2,\quad \alpha_2=\left.-\dfrac2{(s+2)^2}\right|_{-1}=-2,\quad \alpha_1=\dfrac12\left.\dfrac4{(s+2)^3}\right|_{-1}=2$
+$\alpha_3=2,\quad \alpha_2=\left.-\dfrac2{(s+2)^2}\right|_{-1}=-2,$
+
+$\alpha_1=\dfrac12\left.\dfrac4{(s+2)^3}\right|_{-1}=2$
 :::
 ::: {.column width="50%"}
 $$
@@ -704,7 +718,9 @@ $$
 a_1\frac{dy}{dt}+a_0y=bx(t)\quad\Rightarrow\quad \tau\frac{dy}{dt}+y=Kx(t),\qquad G(s)=\frac{Y(s)}{X(s)}=\frac{K}{\tau s+1}
 $$
 
-$\tau=a_1/a_0$: **time constant** (시간상수), $K=b/a_0$: **steady-state gain** (정상상태 이득), one real pole at $-1/\tau$.
+$\tau=a_1/a_0$: **time constant** (시간상수), $K=b/a_0$: **steady-state gain** (정상상태 이득)
+
+One real pole at $s=-1/\tau$.
 
 ::: {.columns}
 ::: {.column width="56%"}
