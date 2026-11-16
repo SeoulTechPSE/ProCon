@@ -383,6 +383,104 @@ Acting on the **measurement** instead of the error removes it: $R$ reaches the o
 - **Check the form** before copying settings from one controller to another.
 :::
 
+## Digital PID: position and velocity forms
+
+A digital controller reads $e_k$ every $\Delta t$, computes $p_k$ and **holds** it until the next sample.
+
+::: {.columns}
+::: {.column width="56%" .small}
+**Position form** (rectangle rule for $\int$, difference for $d/dt$):
+$$
+p_k=\bar p+K_c\Big[e_k+\frac{\Delta t}{\tau_I}\sum_{j=1}^{k}e_j+\frac{\tau_D}{\Delta t}(e_k-e_{k-1})\Big]
+$$
+**Velocity (incremental) form**: subtract $p_{k-1}$
+$$
+\Delta p_k=K_c\Big[(e_k-e_{k-1})+\frac{\Delta t}{\tau_I}e_k+\frac{\tau_D}{\Delta t}(e_k-2e_{k-1}+e_{k-2})\Big]
+$$
+$$
+p_k=p_{k-1}+\Delta p_k
+$$
+:::
+::: {.column width="44%"}
+::: {.box .small}
+**Why most DCS use the velocity form**
+
+- no bias $\bar p$ and no running sum to store
+- **anti-windup for free**: clip $p_k$ at its limits and the next step starts from the clipped value
+- **bumpless transfer**: switching from manual to automatic starts from the current output
+:::
+
+::: {.boxr .small}
+**Sampling time.** Rule of thumb: $\Delta t\lesssim\tfrac1{10}$ of the closed-loop time constant. The hold acts like an extra dead time of about $\Delta t/2$.
+:::
+:::
+:::
+
+## Sampling time matters
+
+![](figures/f12_sampling.png){width="96%" fig-align="center"}
+
+::: {.columns}
+::: {.column width="50%" .small}
+- Ex 2.6 loop, PI $10(1+1/s)$, closed-loop time constant about 1
+- $\Delta t=0.05$: same as the continuous controller
+- $\Delta t=0.5$: overshoot 25%; $\;\Delta t=0.75$: oscillatory
+- $\Delta t=1$: **unstable**
+:::
+::: {.column width="50%" .small}
+- the hold delays the control action by about $\Delta t/2$, and dead time reduces stability (Ch 4–5)
+- typical sampling: flow and pressure 0.1–1 s, temperature and level 1–10 s, analyzers minutes
+:::
+:::
+
+## Bumpless transfer: manual → automatic
+
+![](figures/f13_bumpless.png){width="96%" fig-align="center"}
+
+::: {.small}
+The operator holds the process at $y=0.5$ with $p=0.625$ in **manual**, then switches to **automatic** at $t=5$ ($K_c=2$, $\tau_I=5$, $G_p=0.8/(5s+1)$).
+
+- **Position form** with the bias left at $\bar p=0$: the output jumps to 0 and upsets the process. It must be initialized with $\bar p=p_{\text{manual}}$ and $\sum e=0$.
+- **Velocity form**: $\Delta p_k=0$ while $e=0$, so the transfer is **bumpless** automatically.
+:::
+
+## Digital PID in code
+
+::: {.panel-tabset}
+### Python
+
+```{.python}
+import numpy as np
+Kc, tI, dt = 10.0, 1.0, 0.5            # PI of Ex 2.6, sampling time 0.5
+a = np.exp(-dt/5)                      # plant 0.8/(5s+1), exact over one hold interval
+y, p, e1 = 0.0, 0.0, 0.0
+for k in range(20):
+    e = 1.0 - y                        # set point 1
+    p += Kc*((e - e1) + dt/tI*e)       # velocity-form PI
+    p = min(max(p, -20.0), 20.0)       # output limits: anti-windup for free
+    e1 = e
+    y = a*y + 0.8*(1 - a)*p            # process over one sample (zero-order hold)
+    print(f'{(k + 1)*dt:5.1f} {y:7.3f} {p:7.3f}')
+```
+
+### MATLAB
+
+```{.matlab}
+Kc = 10; tI = 1; dt = 0.5;             % PI of Ex 2.6, sampling time 0.5
+a = exp(-dt/5);                        % plant 0.8/(5s+1), exact over one hold interval
+y = 0; p = 0; e1 = 0;
+for k = 1:20
+    e = 1 - y;                         % set point 1
+    p = p + Kc*((e - e1) + dt/tI*e);   % velocity-form PI
+    p = min(max(p, -20), 20);          % output limits: anti-windup for free
+    e1 = e;
+    y = a*y + 0.8*(1 - a)*p;           % process over one sample (zero-order hold)
+    fprintf('%5.1f %7.3f %7.3f\n', k*dt, y, p)
+end
+% same plant model: Gd = c2d(tf(0.8, [5 1]), dt)   (zero-order hold)
+```
+:::
+
 ## The three modes side by side
 
 ::: {.columns}
@@ -589,6 +687,36 @@ Offset disappears only when the loop contains an **integrator** between the erro
 :::
 :::
 
+## Steady-state error and system type
+
+::: {.columns}
+::: {.column width="44%" .small}
+$$
+G_{OL}=\frac{K\prod(\tau_as+1)}{s^N\prod(\tau_is+1)},\qquad e(\infty)=\lim_{s\to0}\frac{sR(s)}{1+G_{OL}}
+$$
+**System type** $N$ = number of integrators in $G_{OL}$:
+
+| type $N$ | step $1/s$ | ramp $1/s^2$ |
+|:-:|:-:|:-:|
+| 0 | $\dfrac1{1+K_p}$ | $\infty$ |
+| 1 | 0 | $\dfrac1{K_v}$ |
+| 2 | 0 | 0 |
+
+$K_p=\lim_{s\to0}G_{OL}$, $\;K_v=\lim_{s\to0}sG_{OL}$
+
+::: {.boxr}
+For **load** changes what counts is an integrator **in the controller**, between the error and the disturbance. An integrating process removes set-point offset, not load offset (Ex 2.5).
+:::
+:::
+::: {.column width="56%"}
+![](figures/f11_sstype.png){width="90%"}
+
+::: {.small}
+Ex 2.6 plant $0.8/(5s+1)$: P gives $K_p=8$, offset $1/9=0.111$; PI gives $K_v=8$, ramp lag $0.125$.
+:::
+:::
+:::
+
 ## [Example 2.6]{.ex} &nbsp; Closed-loop simulation
 
 ::: {.columns}
@@ -710,6 +838,7 @@ The exit concentration $c_3$ is controlled with stream 2.
 - forward path $/$ (1 + loop)
 - one characteristic equation $1+G_{OL}=0$ for servo and regulator
 - every block has units; $K_m$ in front of the comparator equals the gain of $G_m$
+- offset: set by the system type (number of integrators)
 :::
 :::
 ::: {.column width="50%"}
@@ -719,6 +848,7 @@ The exit concentration $c_3$ is controlled with stream 2.
 - **P**: faster, but leaves an offset
 - **I**: removes the offset, costs damping; beware windup
 - **D**: adds damping, amplifies noise; filter it and put it on the measurement
+- digital PID: velocity form; $\Delta t\lesssim\tau_{cl}/10$
 - closed-loop order, $\tau$ and $\zeta$ follow from substituting $G_c$ and $G_p$
 :::
 :::

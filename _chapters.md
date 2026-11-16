@@ -23,8 +23,8 @@
     <p class="topics">block diagrams · closed-loop transfer functions · P / PI / PD / PID · offset, reset windup, derivative kick</p>
     <div class="links">
       <a class="btn primary" href="ch2/ch2_analysis.html">Slides</a>
-      <a class="btn" href="ch2/ch2_analysis.pdf">PDF <small>2.1 MB</small></a>
-      <a class="btn" href="ch2/ch2_analysis_handout.pdf">Handout <small>2.1 MB</small></a>
+      <a class="btn" href="ch2/ch2_analysis.pdf">PDF <small>2.5 MB</small></a>
+      <a class="btn" href="ch2/ch2_analysis_handout.pdf">Handout <small>2.5 MB</small></a>
       <a class="btn" href="https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch2/ch2_analysis.ipynb">Colab</a>
     </div>
     <div class="widgets"><a class="chip" href="ch2/interactive/loop_explorer.html">▶ Closed-loop explorer</a></div>

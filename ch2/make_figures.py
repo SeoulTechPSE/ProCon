@@ -196,7 +196,80 @@ def fig_ex26():
     save(fig, "f09_ex26.png")
 
 
+
+# ---------------------------------------------------------------- steady-state error / system type
+def fig_sstype():
+    s_ = ct.tf("s"); Gp = 0.8 / (5 * s_ + 1)
+    loops = [("type 0: P,  $10\\,G_p$", 10 * Gp, NAVY),
+             ("type 1: PI, $10(1+1/s)\\,G_p$", 10 * (1 + 1 / s_) * Gp, RED),
+             ("type 2: PI on $0.8/s$", (1 + 1 / (4 * s_)) * 0.8 / s_, GREEN)]
+    t = np.linspace(0, 15, 1501)
+    fig, axs = plt.subplots(2, 1, figsize=(7.2, 6.6), sharex=True)
+    axs[0].plot(t, np.ones_like(t), color=GRAY, ls=":", lw=1.4, label="set point")
+
+    for lab, L, c in loops:
+        T = ct.feedback(L, 1)
+        axs[0].plot(t, y_(T, t), color=c, lw=2.2, label=lab)
+        axs[1].plot(t, t - np.asarray(ct.forced_response(T, t, t).outputs).ravel(), color=c, lw=2.2, label=lab)
+    axs[0].set_title("unit step: offset only for type 0"); axs[0].set_ylim(0, 1.3)
+    axs[1].set_title(r"unit ramp $r=t$: error $e=r-y$")
+    axs[1].set_ylim(-0.1, 1.6); axs[1].axhline(0.125, color=RED, ls=":", lw=1)
+    axs[1].text(11.5, 0.17, r"$1/K_v=0.125$", color=RED, fontsize=13)
+    axs[0].legend(fontsize=9.5, loc="lower right"); axs[1].legend(fontsize=9.5, loc="upper left")
+    axs[1].set_xlabel("time")
+    save(fig, "f11_sstype.png")
+
+
+# ---------------------------------------------------------------- digital PID
+def dpi_sim(dt, Kc=10.0, tI=1.0, T=10.0, sub=50):
+    """Sampled PI (velocity form) on 0.8/(5s+1) with zero-order hold; returns fine-grid t, y, u."""
+    h = dt / sub; a = np.exp(-h / 5); y = 0.0; u = 0.0; e1 = 0.0
+    ts, ys, us = [], [], []
+    for k in range(int(round(T / dt))):
+        e = 1 - y; u += Kc * ((e - e1) + dt / tI * e); e1 = e
+        for j in range(sub):
+            ts.append(k * dt + j * h); ys.append(y); us.append(u); y = a * y + 0.8 * (1 - a) * u
+    return np.array(ts), np.array(ys), np.array(us)
+
+
+def fig_sampling():
+    fig, axs = plt.subplots(1, 2, figsize=(12, 4.0), gridspec_kw={"width_ratios": [1.5, 1]})
+    for dt, c in zip((0.05, 0.25, 0.5, 0.75), (NAVY, GREEN, ORANGE, RED)):
+        t, y, u = dpi_sim(dt)
+        axs[0].plot(t, y, color=c, lw=2, label=rf"$\Delta t={dt}$")
+        if dt in (0.05, 0.5):
+            axs[1].plot(t, u, color=c, lw=1.8, label=rf"$\Delta t={dt}$")
+    axs[0].axhline(1, color=GRAY, ls=":"); axs[0].set_ylim(0, 2.1)
+    axs[0].set_title(r"PI $10(1+1/s)$ on $0.8/(5s+1)$: larger $\Delta t$, less damping ($\Delta t=1$ unstable)")
+    axs[1].set_title("controller output: a staircase (zero-order hold)")
+    for a in axs: a.set_xlabel("time"); a.legend(fontsize=10, loc="upper right")
+    axs[1].set_xlim(0, 4)
+    save(fig, "f12_sampling.png")
+
+
+def fig_bumpless():
+    """Manual -> auto at t = 5 (y at 0.5 with p = 0.625); set-point step 0.5 -> 0.7 at t = 15."""
+    dt, Kc, tI, T = 0.05, 2.0, 5.0, 30.0
+    a = np.exp(-dt / 5); fig, axs = plt.subplots(1, 2, figsize=(12, 4.0), sharex=True)
+    for form, c in (("position, bias not initialised", RED), ("velocity (incremental)", NAVY)):
+        y, p, I, e1 = 0.5, 0.625, 0.0, 0.0; ts, ys, ps = [], [], []
+        for k in range(int(T / dt)):
+            t = k * dt; r = 0.5 if t < 15 else 0.7; e = r - y
+            if t >= 5:
+                if form.startswith("position"):
+                    I += e * dt; p = 0.0 + Kc * (e + I / tI)          # bias p_bar = 0 (not set to 0.625)
+                else:
+                    p += Kc * ((e - e1) + dt / tI * e)
+            e1 = e; ts.append(t); ys.append(y); ps.append(p); y = a * y + 0.8 * (1 - a) * p
+        axs[0].plot(ts, ys, color=c, lw=2.2, label=form); axs[1].plot(ts, ps, color=c, lw=2, label=form)
+    for a_ in axs:
+        a_.axvline(5, color=GRAY, ls="--", lw=1); a_.axvline(15, color=GRAY, ls=":", lw=1); a_.set_xlabel("time")
+    axs[0].text(5.3, 0.79, "manual → auto", color=GRAY); axs[0].text(15.3, 0.79, "set point 0.5 → 0.7", color=GRAY)
+    axs[0].set_title("measured variable"); axs[1].set_title("controller output $p$")
+    axs[0].set_ylim(0, 0.85); axs[0].legend(fontsize=10, loc="lower right"); axs[1].legend(fontsize=10, loc="lower right")
+    save(fig, "f13_bumpless.png")
+
 if __name__ == "__main__":
-    for f in (fig_valve, fig_heater, fig_p, fig_pi_windup, fig_pi_tune, fig_kick, fig_modes, fig_examples, fig_ex26):
+    for f in (fig_valve, fig_heater, fig_p, fig_pi_windup, fig_pi_tune, fig_kick, fig_modes, fig_examples, fig_ex26, fig_sstype, fig_sampling, fig_bumpless):
         f()
     print(sorted(p.name for p in OUT.glob("*.png")))

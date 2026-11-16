@@ -105,8 +105,12 @@ subtitle: "Every slide of every chapter — use the search box (top right) to fi
 - [Derivative action](ch2/ch2_analysis.html#/3/4)
 - [Derivative kick](ch2/ch2_analysis.html#/3/5)
 - [PID control and its forms](ch2/ch2_analysis.html#/3/6)
-- [The three modes side by side](ch2/ch2_analysis.html#/3/7)
-- [Problem #2 (homework)](ch2/ch2_analysis.html#/3/8)
+- [Digital PID: position and velocity forms](ch2/ch2_analysis.html#/3/7)
+- [Sampling time matters](ch2/ch2_analysis.html#/3/8)
+- [Bumpless transfer: manual → automatic](ch2/ch2_analysis.html#/3/9)
+- [Digital PID in code](ch2/ch2_analysis.html#/3/10)
+- [The three modes side by side](ch2/ch2_analysis.html#/3/11)
+- [Problem #2 (homework)](ch2/ch2_analysis.html#/3/12)
 
 **[2.3 Closed-Loop System Response](ch2/ch2_analysis.html#/4)**
 
@@ -117,8 +121,9 @@ subtitle: "Every slide of every chapter — use the search box (top right) to fi
 - [Example 2.4 PD control, first-order process](ch2/ch2_analysis.html#/4/5)
 - [Example 2.5 P control, integrating process](ch2/ch2_analysis.html#/4/6)
 - [Examples 2.1–2.5 at a glance](ch2/ch2_analysis.html#/4/7)
-- [Example 2.6 Closed-loop simulation](ch2/ch2_analysis.html#/4/8)
-- [Interactive: try the modes yourself](ch2/ch2_analysis.html#/4/9)
+- [Steady-state error and system type](ch2/ch2_analysis.html#/4/8)
+- [Example 2.6 Closed-loop simulation](ch2/ch2_analysis.html#/4/9)
+- [Interactive: try the modes yourself](ch2/ch2_analysis.html#/4/10)
 
 **[2.4 Choice of Controllers](ch2/ch2_analysis.html#/5)**
 

@@ -57,6 +57,17 @@ for lab, Cc in [('P', pid(2)), ('PI', pid(2, 2.5)), ('PID', pid(3, 2, 0.6))]:
     plt.plot(t, step(ct.feedback(G3, Cc), t), label=lab)
 plt.xlabel('time'); plt.legend();""")
 
+md("### Digital PID — velocity form and sampling time (Ex 2.6 loop)")
+code(r"""def dpi(dt, Kc=10.0, tI=1.0, T=10.0):
+    a = np.exp(-dt/5); y = p = e1 = 0.0; out = []
+    for k in range(int(round(T/dt))):
+        e = 1.0 - y; p += Kc*((e - e1) + dt/tI*e); e1 = e
+        y = a*y + 0.8*(1 - a)*p; out.append(y)
+    return np.arange(1, len(out) + 1)*dt, np.array(out)
+for dt in (0.05, 0.25, 0.5, 0.75):
+    tt, yy = dpi(dt); print(f'dt = {dt}: peak {yy.max():.3f}'); plt.step(tt, yy, where='post', label=f'dt = {dt}')
+plt.axhline(1, ls=':'); plt.legend(); plt.xlabel('time');""")
+
 md("### Reset windup and anti-windup (clamping)")
 code(r"""A, B, Cm, _ = (np.asarray(M) for M in ct.ssdata(ct.tf2ss(G3))); B = B.ravel(); Cm = Cm.ravel()
 dt, T, Kc, tI, umax = 0.002, 40, 2.5, 2.0, 1.25
@@ -106,6 +117,13 @@ plt.plot(t, step(ct.feedback(Kc5*Gi, 1), t), label='set-point step')
 plt.plot(t, step(ct.feedback(Gi, Kc5), t), label=f'load step, P: C -> 1/Kc = {1/Kc5:.2f}')
 plt.plot(t, step(ct.feedback(Gi, pid(Kc5, 2)), t), label='load step, PI')
 plt.legend(); plt.xlabel('time');""")
+
+md("### Steady-state error and system type")
+code(r"""s_ = ct.tf('s'); Gp6 = 0.8/(5*s_ + 1)
+for name, L in [('type 0', 10*Gp6), ('type 1', 10*(1 + 1/s_)*Gp6), ('type 2', (1 + 1/(4*s_))*0.8/s_)]:
+    T_ = ct.feedback(L, 1); tt = np.linspace(0, 40, 4001)
+    e_step = 1 - step(T_, tt)[-1]; e_ramp = tt[-1] - ct.forced_response(T_, tt, tt).outputs[-1]
+    print(f'{name}: step error {e_step:.3f}, ramp error {e_ramp:.3f}')""")
 
 md("### Example 2.6 — simulation")
 code(r"""Gp6 = ct.tf(0.8, [5, 1]); t = np.linspace(0, 6, 601)
