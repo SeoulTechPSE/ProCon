@@ -26,5 +26,6 @@ Lecture notes for **Process Dynamics and Control (공정제어)**. Slides are Qu
 - **[Slide contents](contents.qmd)** lists every slide (searchable) and **[Homework problems](problems.qmd)** collects the problems of all chapters.
 - **[Case study](case.qmd)** — the stirred-tank heater followed through all six chapters with one set of numbers.
 - **[MATLAB scripts](matlab.qmd)** — every MATLAB code tab as a ready-to-run `.m` file, downloadable per chapter (zip).
+- **[Formula sheets](formulas.qmd)** — one A4 page of key formulas per chapter (PDF), and the **[Glossary · 용어집](glossary.qmd)** of English–Korean terms.
 
 {{< include _updates.md >}}

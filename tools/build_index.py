@@ -150,6 +150,7 @@ def cards():
       <a class="btn" href="{pdf}">PDF <small>{size(pdf)}</small></a>
       <a class="btn" href="{ho}">Handout <small>{size(ho)}</small></a>
       <a class="btn" href="{COLAB}/{d}/{s}.ipynb">Colab</a>
+      <a class="btn" href="formulas/ch{n}_formulas.pdf" title="One-page formula sheet (A4)">Formulas</a>
     </div>
     <div class="widgets">{widgets}</div>
   </div>

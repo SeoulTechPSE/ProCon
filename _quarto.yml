@@ -8,11 +8,14 @@ project:
     - problems.qmd
     - matlab.qmd
     - case.qmd
+    - glossary.qmd
+    - formulas.qmd
     - ch*/ch*_*.qmd
   resources:
     - "ch*/*.pdf"
     - "ch*/interactive/*.html"
     - "ch*/matlab/*"
+    - "formulas/*.pdf"
     - "assets/og-card.png"
     - "assets/apple-touch-icon.png"
 
@@ -37,6 +40,12 @@ website:
         text: Case study
       - href: matlab.qmd
         text: MATLAB
+      - text: Study aids
+        menu:
+          - href: formulas.qmd
+            text: Formula sheets
+          - href: glossary.qmd
+            text: Glossary · 용어집
     right:
       - icon: github
         href: "https://github.com/SeoulTechPSE/ProCon"

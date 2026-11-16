@@ -52,3 +52,17 @@
 .roadmap-legend .solid { border-top: 3px solid #333399; }
 .roadmap-legend .dash { border-top: 2px dashed #2E7D32; }
 .roadmap a, .roadmap a:hover { text-decoration: none; }
+
+/* glossary filter */
+.gl-filter input{width:100%;max-width:28rem;padding:.45rem .7rem;border:1px solid #c9d1e0;border-radius:6px;font-size:1rem;margin:.3rem 0 1rem}
+.gl-filter input:focus{outline:2px solid #1f3a68;border-color:#1f3a68}
+.gl-body table{font-size:.93em}
+.gl-body table td,.gl-body table th{padding:.28rem .5rem}
+.gl-body table td:nth-child(1){width:38%}
+.gl-body table td:nth-child(2){width:27%}
+.gl-body table td:nth-child(3){color:#555;font-size:.92em}
+
+/* formula sheets */
+.fs-dl{background:#f4f6fb;border-left:4px solid #1f3a68;padding:.5rem .9rem;margin-bottom:1rem}
+.fs-cols table{font-size:.9em;width:auto}
+.fs-cols table td,.fs-cols table th{padding:.2rem .6rem}

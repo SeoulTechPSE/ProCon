@@ -1,0 +1,204 @@
+---
+title: "Formula sheets"
+subtitle: "One page per chapter · download as PDF for review or exams"
+toc: true
+toc-depth: 1
+---
+
+::: {.fs-dl}
+**PDF:** [all chapters](formulas/ProCon_formulas.pdf) · [Ch 1](formulas/ch1_formulas.pdf) · [Ch 2](formulas/ch2_formulas.pdf) · [Ch 3](formulas/ch3_formulas.pdf) · [Ch 4](formulas/ch4_formulas.pdf) · [Ch 5](formulas/ch5_formulas.pdf) · [Ch 6](formulas/ch6_formulas.pdf)
+:::
+
+# Ch 1 · Mathematical Preliminaries & Dynamic Response {#fs1}
+
+::: {.fs-cols}
+**Laplace transform** $\;F(s)=\int_0^\infty f(t)e^{-st}dt$
+
+| $f(t)$ | $F(s)$ | $f(t)$ | $F(s)$ |
+|:-:|:-:|:-:|:-:|
+| $\delta(t)$ | $1$ | $e^{-at}$ | $\dfrac{1}{s+a}$ |
+| $u(t)$ | $\dfrac1s$ | $t^ne^{-at}$ | $\dfrac{n!}{(s+a)^{n+1}}$ |
+| $t$ | $\dfrac1{s^2}$ | $\sin\omega t$ | $\dfrac{\omega}{s^2+\omega^2}$ |
+| $\cos\omega t$ | $\dfrac{s}{s^2+\omega^2}$ | $e^{-at}\sin\omega t$ | $\dfrac{\omega}{(s+a)^2+\omega^2}$ |
+
+$\mathcal L[f']=sF-f(0)$, $\;\mathcal L[\int_0^t f]=F/s$, $\;\mathcal L[f(t-\theta)u(t-\theta)]=e^{-\theta s}F$, $\;\mathcal L[e^{-at}f]=F(s+a)$
+
+**Initial / final value:** $f(0^+)=\lim_{s\to\infty}sF(s)$; $\;f(\infty)=\lim_{s\to0}sF(s)$ (only if $sF$ has all poles in the LHP)
+
+**Partial fractions:** $\dfrac{Q(s)}{\prod(s-p_i)}=\sum\dfrac{\alpha_i}{s-p_i}$, $\;\alpha_i=\left.(s-p_i)\dfrac{Q}{P}\right|_{s=p_i}$
+
+**Linearization:** $f(x,u)\approx f_s+\left.\dfrac{\partial f}{\partial x}\right|_sx'+\left.\dfrac{\partial f}{\partial u}\right|_su'$; state space $\dot{\mathbf x}=\mathbf A\mathbf x+\mathbf B\mathbf u$, $\;\mathbf G=\mathbf C(s\mathbf I-\mathbf A)^{-1}\mathbf B$, poles = eig$(\mathbf A)$
+
+**First order** $\;G=\dfrac{K}{\tau s+1}$: step $y=KM(1-e^{-t/\tau})$ (63.2 % at $\tau$, 95 % at $3\tau$, 99.3 % at $5\tau$); impulse $y=\dfrac{KM}{\tau}e^{-t/\tau}$; ramp lag $\tau$
+
+**Second order** $\;G=\dfrac{K}{\tau^2s^2+2\zeta\tau s+1}$, poles $\dfrac{-\zeta\pm\sqrt{\zeta^2-1}}{\tau}$
+
+| quantity | underdamped step ($0<\zeta<1$) |
+|:--|:--|
+| overshoot | $\mathrm{OS}=\exp\!\left(-\pi\zeta/\sqrt{1-\zeta^2}\right)$ |
+| decay ratio | $\mathrm{OS}^2$ |
+| period | $P=2\pi\tau/\sqrt{1-\zeta^2}$ |
+| peak time | $t_p=\pi\tau/\sqrt{1-\zeta^2}$ |
+| settling time | $t_s\approx4\tau/\zeta$ (2 %), $3\tau/\zeta$ (5 %) |
+
+**Dead time** $e^{-\theta s}\approx\dfrac{1-\theta s/2}{1+\theta s/2}$ (1/1 Padé)
+
+**Half rule:** largest neglected lag split half to the kept lag, half to $\theta$; smaller lags added to $\theta$
+
+**Lead-lag** $\dfrac{\tau_as+1}{\tau s+1}$: $y(0^+)=\tau_a/\tau$; $\tau_a<0$ → inverse response
+:::
+
+# Ch 2 · Analysis of Single-Loop Control Systems {#fs2}
+
+::: {.fs-cols}
+**Closed loop:** $\;C=\dfrac{K_mG_cG_aG_p}{1+G_cG_aG_pG_m}R+\dfrac{G_L}{1+G_cG_aG_pG_m}L$, characteristic equation $1+G_{OL}=0$, $\;G_{OL}=G_cG_aG_pG_m$
+
+**Transmitter:** $K_m=\dfrac{\text{output span}}{\text{input span}}$ (e.g. 16 mA / 100 °C)
+
+**PID forms**
+
+| | $G_c(s)$ |
+|:--|:--|
+| P | $K_c$ |
+| PI | $K_c\left(1+\dfrac{1}{\tau_Is}\right)$ |
+| ideal PID | $K_c\left(1+\dfrac{1}{\tau_Is}+\tau_Ds\right)$ |
+| real PID | $K_c\left(1+\dfrac{1}{\tau_Is}+\dfrac{\tau_Ds}{\alpha\tau_Ds+1}\right)$, $\alpha\approx0.1$ |
+| series | $K_c\dfrac{\tau_Is+1}{\tau_Is}\cdot\dfrac{\tau_Ds+1}{\alpha\tau_Ds+1}$ |
+
+Proportional band $=100/K_c$ %; reverse acting $K_c>0$
+
+**Unity loop, first-order process** $K_p/(\tau_ps+1)$:
+
+- P: $K_{cl}=\dfrac{K_cK_p}{1+K_cK_p}$, $\tau_{cl}=\dfrac{\tau_p}{1+K_cK_p}$, offset $\dfrac1{1+K_cK_p}$
+- PI: second order, $\tau=\sqrt{\dfrac{\tau_I\tau_p}{K_cK_p}}$, $\zeta=\dfrac{1+K_cK_p}{2}\sqrt{\dfrac{\tau_I}{K_cK_p\tau_p}}$, no offset
+
+**Steady-state error and system type** $N$ ($G_{OL}=K\prod(\cdot)/s^N\prod(\cdot)$):
+
+| $N$ | step | ramp |
+|:-:|:-:|:-:|
+| 0 | $1/(1+K_p)$ | $\infty$ |
+| 1 | 0 | $1/K_v$ |
+| 2 | 0 | 0 |
+
+$K_p=\lim_{s\to0}G_{OL}$, $K_v=\lim_{s\to0}sG_{OL}$
+
+**Digital PID (velocity form):**
+$\Delta p_k=K_c\left[(e_k-e_{k-1})+\dfrac{\Delta t}{\tau_I}e_k+\dfrac{\tau_D}{\Delta t}(e_k-2e_{k-1}+e_{k-2})\right]$; $\;\Delta t\lesssim\tau_{cl}/10$
+:::
+
+# Ch 3 · Tuning of Single-Loop Control Systems {#fs3}
+
+::: {.fs-cols}
+**FOPDT fit** $\dfrac{Ke^{-\theta s}}{\tau s+1}$, two-point: $\tau=1.5(t_{63}-t_{28})$, $\theta=t_{63}-\tau$, $K=\Delta y/\Delta u$
+
+**Ziegler–Nichols (open loop)**
+
+| | $K_cK$ | $\tau_I$ | $\tau_D$ |
+|:--|:-:|:-:|:-:|
+| P | $\tau/\theta$ | — | — |
+| PI | $0.9\,\tau/\theta$ | $3.33\,\theta$ | — |
+| PID | $1.2\,\tau/\theta$ | $2\theta$ | $0.5\theta$ |
+
+**Ziegler–Nichols (ultimate cycle)**
+
+| | $K_c$ | $\tau_I$ | $\tau_D$ |
+|:--|:-:|:-:|:-:|
+| P | $0.5K_{cu}$ | — | — |
+| PI | $0.45K_{cu}$ | $T_u/1.2$ | — |
+| PID | $0.6K_{cu}$ | $T_u/2$ | $T_u/8$ |
+
+**Relay test:** $K_{cu}\approx\dfrac{4h}{\pi a}$, $T_u=P_{\text{relay}}$
+
+**Error integrals:** IAE $=\int|e|dt$, ISE $=\int e^2dt$, ITAE $=\int t|e|dt$
+
+**ITAE (set point):** $K_cK=0.586(\theta/\tau)^{-0.916}$ (PI), $\tau_I=\tau/(1.03-0.165\,\theta/\tau)$
+
+**Direct synthesis:** $G_c=\dfrac{1}{G_p}\dfrac{(C/R)_d}{1-(C/R)_d}$
+
+**IMC / SIMC** (FOPDT, one knob $\tau_c$, default $\tau_c=\theta$):
+$$
+K_c=\frac{\tau}{K(\tau_c+\theta)},\qquad \tau_I=\min\{\tau,\ 4(\tau_c+\theta)\}\ \text{(SIMC)},\ \tau\ \text{(IMC)}
+$$
+SOPDT: as above with $\tau_1$; $\tau_D=\tau_2$ (series form). Integrating $K'e^{-\theta s}/s$: $K_c=\dfrac{1}{K'(\tau_c+\theta)}$, $\tau_I=4(\tau_c+\theta)$
+
+**IMC-PID** (1/1 Padé): $K_c=\dfrac{2\tau/\theta+1}{K(2\tau_c/\theta+1)}$, $\tau_I=\tau+\dfrac\theta2$, $\tau_D=\dfrac{\tau}{2\tau/\theta+1}$
+:::
+
+# Ch 4 · Stability of Closed-Loop Systems {#fs4}
+
+::: {.fs-cols}
+**Stable** ⇔ all roots of $1+G_{OL}(s)=0$ have **negative real parts**
+
+**Routh array** for $a_ns^n+a_{n-1}s^{n-1}+\dots+a_0$:
+
+| | | |
+|:--|:-:|:-:|
+| $s^n$ | $a_n$ | $a_{n-2}$ |
+| $s^{n-1}$ | $a_{n-1}$ | $a_{n-3}$ |
+| $s^{n-2}$ | $b_1=\dfrac{a_{n-1}a_{n-2}-a_na_{n-3}}{a_{n-1}}$ | $b_2$ |
+
+Stable ⇔ first column all positive; number of sign changes = number of RHP roots. Necessary: all $a_i>0$. Cubic $a_3s^3+a_2s^2+a_1s+a_0$: $a_2a_1>a_3a_0$. Zero in first column → $\varepsilon$; zero row → auxiliary polynomial
+
+**Direct substitution:** $s=j\omega_u$ in the characteristic equation; real and imaginary parts $=0$ → $K_{cu}$, $\omega_u$, $P_u=2\pi/\omega_u$
+
+**Root locus** $1+K\dfrac{N(s)}{D(s)}=0$, $n$ poles, $m$ zeros:
+
+- angle: $\angle N-\angle D=\pm180^\circ(2k+1)$; magnitude: $K=|D|/|N|$
+- starts at poles ($K=0$), ends at zeros or $\infty$
+- real axis: left of an odd number of poles + zeros
+- asymptotes: angles $\dfrac{\pm180^\circ(2k+1)}{n-m}$, centroid $\dfrac{\sum p_i-\sum z_i}{n-m}$
+- breakaway: $dK/ds=0$
+
+**Dominant poles** $-\zeta\omega_n\pm j\omega_n\sqrt{1-\zeta^2}$: $\%$OS $=100e^{-\pi\zeta/\sqrt{1-\zeta^2}}$, $t_s\approx4/(\zeta\omega_n)$; constant-$\zeta$ ray at $\cos^{-1}\zeta$ from the negative real axis
+
+**Open-loop unstable process** $K/(s-a)$ with P control: stable iff $K_cK>a$ (minimum gain)
+:::
+
+# Ch 5 · Frequency-Response Analysis & Design {#fs5}
+
+::: {.fs-cols}
+**Sine in → sine out:** $\text{AR}=|G(j\omega)|$, $\phi=\angle G(j\omega)$; for products $|G_1G_2|=|G_1||G_2|$, $\angle G_1G_2=\angle G_1+\angle G_2$
+
+| element | AR | $\phi$ |
+|:--|:--|:--|
+| $K$ | $|K|$ | $0$ (or $-180^\circ$ if $K<0$) |
+| $\dfrac{1}{\tau s+1}$ | $\dfrac{1}{\sqrt{1+\omega^2\tau^2}}$ | $-\tan^{-1}\omega\tau$ |
+| $\tau s+1$ | $\sqrt{1+\omega^2\tau^2}$ | $+\tan^{-1}\omega\tau$ |
+| $\dfrac1s$ | $\dfrac1\omega$ | $-90^\circ$ |
+| $e^{-\theta s}$ | $1$ | $-\omega\theta$ (rad) |
+| $-\tau s+1$ | $\sqrt{1+\omega^2\tau^2}$ | $-\tan^{-1}\omega\tau$ |
+| $\dfrac{1}{\tau^2s^2+2\zeta\tau s+1}$ | $\dfrac{1}{\sqrt{(1-\omega^2\tau^2)^2+(2\zeta\omega\tau)^2}}$ | $-\tan^{-1}\dfrac{2\zeta\omega\tau}{1-\omega^2\tau^2}$ |
+
+Bode asymptotes: slope $-1$ (−20 dB/dec) per lag after $\omega=1/\tau$. Resonance for $\zeta<0.707$: $M_p=\dfrac{1}{2\zeta\sqrt{1-\zeta^2}}$
+
+**Bode criterion** (open-loop stable, monotonic phase): stable iff $|G_{OL}(j\omega_c)|<1$ at $\angle G_{OL}=-180^\circ$ → $K_{cu}=1/|G_{OL}(j\omega_c)|_{K_c=1}$, $P_u=2\pi/\omega_c$
+
+**Nyquist:** $Z=N+P$ ($N$ clockwise encirclements of $-1$, $P$ open-loop RHP poles); stable iff $Z=0$
+
+**Margins:** GM $=\dfrac{1}{|G_{OL}(j\omega_c)|}$ (target 1.7–2), PM $=180^\circ+\angle G_{OL}(j\omega_g)$ at $|G_{OL}|=1$ (target 30–45°). Extra delay tolerated: $\theta_{\max}=\text{PM}/\omega_g$ (rad). PM ≈ $100\zeta$ (deg)
+
+**Sensitivity:** $S=\dfrac{1}{1+L}$, $T=\dfrac{L}{1+L}$, $S+T=1$, $M_s=\max|S|$ (target 1.2–2): GM $\ge\dfrac{M_s}{M_s-1}$, PM $\ge2\sin^{-1}\dfrac{1}{2M_s}$. Bandwidth $\omega_B$: $|T(j\omega_B)|=1/\sqrt2$
+:::
+
+# Ch 6 · Multi-loop Systems {#fs6}
+
+::: {.fs-cols}
+**Cascade:** inner loop $G_v^*=\dfrac{G_{c2}G_v}{1+G_{c2}G_vG_{m2}}$; outer loop sees $G_{c1}G_v^*G_pG_{m1}$. Secondary must be **faster** (rule of thumb ≥ 3–5×); tune inner loop first (P often enough)
+
+**Feedforward:** $C=(G_L+G_{FF}G_tG_vG_p)L$ → $G_{FF}=-\dfrac{G_L}{G_tG_vG_p}$. FOPDT $G_L$, $G_p$: $G_{FF}=-\dfrac{K_L}{K_pK_tK_v}\dfrac{\tau_ps+1}{\tau_Ls+1}e^{-(\theta_L-\theta_p)s}$ (lead-lag; drop the prediction if $\theta_L<\theta_p$). Always combine with feedback
+
+**Ratio:** $R=u_2/u_1$; manipulated flow set point $=R\times$ measured wild flow
+
+**Smith predictor:** $G=G^*e^{-\theta s}$; controller sees $G^*$: $\dfrac{C}{R}=\dfrac{G_cG^*}{1+G_cG^*}e^{-\theta s}$ (needs an accurate $\theta$)
+
+**RGA** of steady-state gain matrix $\mathbf K$: $\Lambda=\mathbf K\circ(\mathbf K^{-1})^T$; rows and columns sum to 1; for $2\times2$: $\lambda_{11}=\dfrac{1}{1-\dfrac{K_{12}K_{21}}{K_{11}K_{22}}}$
+
+- pair on $\lambda_{ij}$ **positive and closest to 1**
+- $\lambda_{ij}<0$: never pair; $\lambda\gg1$: strong interaction, sensitive to model error
+
+**Decouplers** ($M_1=U_1+D_{12}U_2$, $M_2=U_2+D_{21}U_1$): $D_{12}=-\dfrac{G_{12}}{G_{11}}$, $D_{21}=-\dfrac{G_{21}}{G_{22}}$; static version: gains only
+
+**Selective:** low/high selector chooses among controller outputs (velocity form or reset feedback against windup). **Split range:** one controller output divided among two valves
+
+**MPC:** $\min\sum_{j=1}^P(r-\hat y_{k+j})^2+\lambda\sum_{j=0}^{M-1}\Delta u_{k+j}^2$ s.t. $u_{\min}\le u\le u_{\max}$; apply $u_k$ only (receding horizon)
+:::

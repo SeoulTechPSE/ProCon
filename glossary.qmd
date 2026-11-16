@@ -1,0 +1,159 @@
+---
+title: "Glossary · 용어집"
+subtitle: "English–Korean terms used in the slides, by chapter"
+toc: true
+toc-depth: 2
+---
+
+```{=html}
+<div class="gl-filter"><input id="gl-q" type="search" placeholder="Filter terms (English or 한국어) …" aria-label="Filter glossary"></div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelector('main').classList.add('gl-body');
+  const q = document.getElementById('gl-q');
+  q.addEventListener('input', () => {
+    const v = q.value.trim().toLowerCase();
+    document.querySelectorAll('main .gl-body table tbody tr').forEach(tr => {
+      tr.style.display = !v || tr.textContent.toLowerCase().includes(v) ? '' : 'none';
+    });
+  });
+});
+</script>
+```
+
+## 1. Mathematical Preliminaries & Dynamic Response
+
+| English | 한국어 | Note |
+|:--|:--|:--|
+| deviation variable | 편차변수 | value minus its steady-state value |
+| steady state | 정상상태 | all time derivatives zero |
+| linearization | 선형화 | first-order Taylor expansion about the operating point |
+| operating point | 운전점 | steady state about which a model is linearized |
+| Laplace transform | 라플라스 변환 | $F(s)=\int_0^\infty f(t)e^{-st}dt$ |
+| inverse Laplace transform | 라플라스 역변환 | by table look-up after partial fractions |
+| partial-fraction expansion | 부분분수 전개 | one term per pole |
+| initial-/final-value theorem | 초기값/최종값 정리 | final value only if $sF(s)$ is stable |
+| transfer function | 전달함수 | output/input in Laplace domain, zero initial conditions |
+| characteristic equation | 특성방정식 | denominator of the transfer function $=0$ |
+| pole / zero | 극점 / 영점 | roots of the denominator / numerator |
+| steady-state gain | 정상상태 이득 | $K=G(0)$ |
+| time constant | 시간상수 | 63.2 % of the final change at $t=\tau$ |
+| first-/second-order system | 1차/2차 시스템 | |
+| damping ratio | 감쇠비 (감쇠계수) | $\zeta$ |
+| overdamped / critically damped / underdamped | 과감쇠 / 임계감쇠 / 부족감쇠 | $\zeta>1$, $=1$, $<1$ |
+| natural frequency | 고유진동수 | $\omega_n=1/\tau$ |
+| overshoot | 오버슈트 (초과량) | $\exp(-\pi\zeta/\sqrt{1-\zeta^2})$ |
+| decay ratio | 감쇠비율 | (overshoot)$^2$ |
+| rise / peak / settling time | 상승 / 최대 / 정착 시간 | |
+| dead time, time delay, transport lag | 데드타임, 시간지연, 수송지연 | $e^{-\theta s}$ |
+| Padé approximation | 파데 근사 | rational approximation of $e^{-\theta s}$ |
+| integrating process | 적분 공정 | pole at the origin, e.g. a level |
+| interacting / non-interacting tanks | 상호작용 / 비상호작용 탱크 | |
+| inverse response | 역응답 | caused by a right-half-plane zero |
+| lead-lag | 진상-지상 | $(\tau_as+1)/(\tau s+1)$ |
+| state-space form | 상태공간 표현 | $\dot{\mathbf x}=\mathbf A\mathbf x+\mathbf B\mathbf u$ |
+| impulse / step / ramp / pulse input | 임펄스 / 계단 / 경사 / 펄스 입력 | |
+
+## 2. Analysis of Single-Loop Control Systems
+
+| English | 한국어 | Note |
+|:--|:--|:--|
+| feedback control | 피드백 제어 (되먹임 제어) | |
+| set point | 설정점 (설정값) | $R$ |
+| controlled variable (CV) | 제어변수 | |
+| manipulated variable (MV) | 조작변수 | |
+| disturbance, load | 외란, 부하 | $L$ |
+| error | 오차 | $e=r-c_m$ |
+| block diagram | 블록선도 | |
+| open-loop / closed-loop | 개루프 / 폐루프 | |
+| servo problem / regulator problem | 서보 문제 / 레귤레이터 문제 | set-point vs. load changes |
+| sensor, transmitter | 센서, 전송기 | $G_m$ |
+| final control element, actuator | 최종 제어요소, 구동기 | $G_a$, usually a valve |
+| control valve | 제어밸브 | air-to-open / air-to-close |
+| fail-safe | 고장 안전 | valve position on air failure |
+| proportional / integral / derivative action | 비례 / 적분 / 미분 동작 | P, I, D |
+| controller gain | 제어기 이득 | $K_c$ |
+| proportional band | 비례대 | $100/K_c$ % |
+| integral (reset) time | 적분시간 | $\tau_I$ |
+| derivative time | 미분시간 | $\tau_D$ |
+| offset | 오프셋 (정상상태 오차) | |
+| reset windup / anti-windup | 적분 와인드업 / 와인드업 방지 | |
+| derivative kick | 미분 킥 | |
+| direct / reverse acting | 정동작 / 역동작 | |
+| system type | 시스템 형 | number of integrators in $G_{OL}$ |
+| sampling time | 샘플링 주기 | $\Delta t$ |
+| position / velocity form | 위치형 / 속도형 | digital PID |
+| bumpless transfer | 무충격 전환 | manual → automatic |
+
+## 3. Tuning of Single-Loop Control Systems
+
+| English | 한국어 | Note |
+|:--|:--|:--|
+| controller tuning | 제어기 튜닝 (동조) | |
+| process reaction curve | 공정 반응 곡선 | open-loop step test |
+| FOPDT model | 1차+데드타임 모델 | $Ke^{-\theta s}/(\tau s+1)$ |
+| ultimate gain / period | 한계 이득 / 한계 주기 | $K_{cu}$, $T_u$ |
+| quarter-decay ratio | 1/4 감쇠비 | ZN design target |
+| error integral (IAE, ISE, ITAE) | 오차 적분 지표 | |
+| direct synthesis | 직접 합성법 | |
+| internal model control (IMC) | 내부모델 제어 | |
+| closed-loop time constant | 폐루프 시간상수 | $\tau_c$, the IMC/SIMC tuning knob |
+| relay autotuning | 릴레이 자동튜닝 | |
+| describing function | 기술함수 | relay: $4h/\pi a$ |
+| half rule | 절반 규칙 | model reduction (Skogestad) |
+| lag-dominant | 지상 지배 | $\tau\gg\theta$ |
+| field tuning | 현장 튜닝 | |
+
+## 4. Stability of Closed-Loop Systems
+
+| English | 한국어 | Note |
+|:--|:--|:--|
+| stability | 안정성 | bounded input → bounded output |
+| left/right half-plane (LHP/RHP) | 좌/우 반평면 | |
+| Routh array / criterion | 라우스 배열 / 판별법 | |
+| direct substitution | 직접 대입법 | $s=j\omega$ |
+| root locus | 근궤적 | |
+| asymptote, centroid | 점근선, 중심 | |
+| breakaway / break-in point | 이탈점 / 진입점 | |
+| angle / magnitude condition | 각 조건 / 크기 조건 | |
+| dominant poles | 지배 극점 | |
+| stability region | 안정 영역 | |
+| minimum / maximum gain | 최소 / 최대 이득 | |
+
+## 5. Frequency-Response Analysis & Design
+
+| English | 한국어 | Note |
+|:--|:--|:--|
+| frequency response | 주파수 응답 | |
+| amplitude ratio | 진폭비 | $\lvert G(j\omega)\rvert$ |
+| phase angle (lag) | 위상각 (위상 지연) | $\angle G(j\omega)$ |
+| Bode plot | 보드 선도 | |
+| Nyquist plot | 나이퀴스트 선도 | |
+| corner (break) frequency | 절점 주파수 | $1/\tau$ |
+| crossover frequency | 교차 주파수 | phase ($-180^\circ$) / gain ($\lvert L\rvert=1$) |
+| gain margin / phase margin | 이득 여유 / 위상 여유 | GM, PM |
+| resonance, resonant peak | 공진, 공진 피크 | |
+| sensitivity / complementary sensitivity | 감도 / 상보 감도 함수 | $S$, $T$ |
+| maximum sensitivity | 최대 감도 | $M_s$ |
+| bandwidth | 대역폭 | $\omega_B$ |
+| robustness | 강건성 | |
+
+## 6. Multi-loop Systems
+
+| English | 한국어 | Note |
+|:--|:--|:--|
+| cascade control | 캐스케이드 제어 (다단 제어) | master / slave loops |
+| primary (master) / secondary (slave) loop | 주 / 부 루프 | |
+| feedforward control | 피드포워드 제어 (앞먹임 제어) | |
+| ratio control | 비율 제어 | |
+| Smith predictor | 스미스 예측기 | dead-time compensator |
+| multiple-input multiple-output (MIMO) | 다입력 다출력 | |
+| interaction | 상호작용 | |
+| relative gain array (RGA) | 상대이득 배열 | |
+| pairing | 짝짓기 (루프 짝지음) | |
+| decoupling | 비간섭화 (디커플링) | |
+| selective (override) control | 선택 (오버라이드) 제어 | low/high selector |
+| split-range control | 분할 범위 제어 | |
+| model predictive control (MPC) | 모델 예측 제어 | |
+| receding horizon | 후퇴 지평 | apply only the first move |
+| constraint | 제약 조건 | |

@@ -11,6 +11,7 @@
       <a class="btn" href="ch1/ch1_dynamics.pdf">PDF <small>3.1 MB</small></a>
       <a class="btn" href="ch1/ch1_dynamics_handout.pdf">Handout <small>3.1 MB</small></a>
       <a class="btn" href="https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch1/ch1_dynamics.ipynb">Colab</a>
+      <a class="btn" href="formulas/ch1_formulas.pdf" title="One-page formula sheet (A4)">Formulas</a>
     </div>
     <div class="widgets"><a class="chip" href="ch1/interactive/response_explorer.html">▶ Response explorer</a></div>
   </div>
@@ -26,6 +27,7 @@
       <a class="btn" href="ch2/ch2_analysis.pdf">PDF <small>2.5 MB</small></a>
       <a class="btn" href="ch2/ch2_analysis_handout.pdf">Handout <small>2.5 MB</small></a>
       <a class="btn" href="https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch2/ch2_analysis.ipynb">Colab</a>
+      <a class="btn" href="formulas/ch2_formulas.pdf" title="One-page formula sheet (A4)">Formulas</a>
     </div>
     <div class="widgets"><a class="chip" href="ch2/interactive/loop_explorer.html">▶ Closed-loop explorer</a></div>
   </div>
@@ -41,6 +43,7 @@
       <a class="btn" href="ch3/ch3_tuning.pdf">PDF <small>2.2 MB</small></a>
       <a class="btn" href="ch3/ch3_tuning_handout.pdf">Handout <small>2.2 MB</small></a>
       <a class="btn" href="https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch3/ch3_tuning.ipynb">Colab</a>
+      <a class="btn" href="formulas/ch3_formulas.pdf" title="One-page formula sheet (A4)">Formulas</a>
     </div>
     <div class="widgets"><a class="chip" href="ch3/interactive/tuning_explorer.html">▶ Tuning explorer</a></div>
   </div>
@@ -56,6 +59,7 @@
       <a class="btn" href="ch4/ch4_stability.pdf">PDF <small>2.4 MB</small></a>
       <a class="btn" href="ch4/ch4_stability_handout.pdf">Handout <small>2.4 MB</small></a>
       <a class="btn" href="https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch4/ch4_stability.ipynb">Colab</a>
+      <a class="btn" href="formulas/ch4_formulas.pdf" title="One-page formula sheet (A4)">Formulas</a>
     </div>
     <div class="widgets"><a class="chip" href="ch4/interactive/rlocus_explorer.html">▶ Root-locus explorer</a></div>
   </div>
@@ -71,6 +75,7 @@
       <a class="btn" href="ch5/ch5_frequency.pdf">PDF <small>3.0 MB</small></a>
       <a class="btn" href="ch5/ch5_frequency_handout.pdf">Handout <small>3.0 MB</small></a>
       <a class="btn" href="https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch5/ch5_frequency.ipynb">Colab</a>
+      <a class="btn" href="formulas/ch5_formulas.pdf" title="One-page formula sheet (A4)">Formulas</a>
     </div>
     <div class="widgets"><a class="chip" href="ch5/interactive/freq_explorer.html">▶ Frequency-response explorer</a></div>
   </div>
@@ -86,6 +91,7 @@
       <a class="btn" href="ch6/ch6_multiloop.pdf">PDF <small>2.5 MB</small></a>
       <a class="btn" href="ch6/ch6_multiloop_handout.pdf">Handout <small>2.5 MB</small></a>
       <a class="btn" href="https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch6/ch6_multiloop.ipynb">Colab</a>
+      <a class="btn" href="formulas/ch6_formulas.pdf" title="One-page formula sheet (A4)">Formulas</a>
     </div>
     <div class="widgets"><a class="chip" href="ch6/interactive/cascade_explorer.html">▶ Cascade explorer</a> <a class="chip" href="ch6/interactive/rga_explorer.html">▶ RGA explorer</a></div>
   </div>
