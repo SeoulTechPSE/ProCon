@@ -54,4 +54,3 @@ tools/build_chapter.sh ch5 ch5_frequency "Ch. 5 Frequency-Response Analysis & De
 tools/build_chapter.sh ch6 ch6_multiloop "Ch. 6 Multi-loop Systems"
 ```
 
-`NEW` / `FIX` review badges in the slides are hidden by a rule at the end of `assets/procon.css`.

@@ -104,7 +104,7 @@ $$
 :::
 
 ::: {.tiny .navy}
-$K_m$ converts the set point (°C) into the same mA signal as the measurement, so $K_m$ must equal the steady-state gain of $G_m$. [NEW]{.new}
+$K_m$ converts the set point (°C) into the same mA signal as the measurement, so $K_m$ must equal the steady-state gain of $G_m$.
 :::
 
 ## Servo and regulator problems
@@ -238,7 +238,7 @@ $C_v$: valve coefficient, $\ell$: lift (0–1), $f(\ell)$: valve characteristic.
 
 The actuator must cover the range of the manipulated variable and **respond faster than the process**.
 
-**Fail-safe action** [NEW]{.new}: *air-to-open* (fail closed) or *air-to-close* (fail open), chosen for safety when the air supply fails. It fixes the sign of the valve gain.
+**Fail-safe action**: *air-to-open* (fail closed) or *air-to-close* (fail open), chosen for safety when the air supply fails. It fixes the sign of the valve gain.
 
 Lumping I/P, valve and steam coil:
 $$
@@ -247,7 +247,7 @@ $$
 :::
 :::
 
-## The heater loop assembled [NEW]{.new}
+## The heater loop assembled
 
 ::: {.columns}
 ::: {.column width="56%"}
@@ -286,7 +286,7 @@ $$
 - $K_c$: **proportional gain** (controller sensitivity)
 - **proportional band**: $\text{PB}=\dfrac{100}{K_c}\,\%$
 
-**Action**: [NEW]{.new} *reverse acting* ($K_c>0$): output falls as the measurement rises. *Direct acting* ($K_c<0$) is needed when the process gain is negative, so that $K_cK_p>0$.
+**Action**: *reverse acting* ($K_c>0$): output falls as the measurement rises. *Direct acting* ($K_c<0$) is needed when the process gain is negative, so that $K_cK_p>0$.
 :::
 ::: {.column width="54%" .small}
 - larger $K_c$: faster response, smaller offset
@@ -380,7 +380,7 @@ Acting on the **measurement** instead of the error removes it: $R$ reaches the o
 ::: {.small}
 - The ideal PID has a numerator of higher order than its denominator, so it is **not physically realizable**. We still use it in analysis for its clean algebra and the insight it gives.
 - Simulink's PID block: $P+I\dfrac1s+D\dfrac{N}{1+N/s}$, so $N=1/(\alpha\tau_D)$.
-- **Check the form** before copying settings from one controller to another. [NEW]{.new}
+- **Check the form** before copying settings from one controller to another.
 :::
 
 ## The three modes side by side
@@ -399,7 +399,7 @@ Acting on the **measurement** instead of the error removes it: $R$ reaches the o
 | noise sensitivity | – | – | ↑ |
 
 ::: {.tiny}
-Arrows: effect of increasing $K_c$, $1/\tau_I$ and $\tau_D$. [NEW]{.new}
+Arrows: effect of increasing $K_c$, $1/\tau_I$ and $\tau_D$.
 :::
 
 Start simple: P, then PI; add D only if it helps.
@@ -557,7 +557,7 @@ $C(\infty)=1$: **no offset** for set-point changes. The process already contains
 :::
 :::
 ::: {.column width="50%"}
-**Regulator** [NEW]{.new} (load at the process input, $G_L=G_p$)
+**Regulator** (load at the process input, $G_L=G_p$)
 $$
 \frac{C}{L}=\frac{K_p}{s+K_cK_p}\ \Rightarrow\ C(\infty)=\frac{1}{K_c}
 $$
@@ -636,7 +636,7 @@ P: $K_{cl}=8/9$, offset 0.11. PI: no offset, $\zeta=0.71$, 16% overshoot. In Sim
 :::
 :::
 
-## Interactive: try the modes yourself [NEW]{.new}
+## Interactive: try the modes yourself
 
 ::: {.screen-only}
 {{< include interactive/_loop_widget.md >}}

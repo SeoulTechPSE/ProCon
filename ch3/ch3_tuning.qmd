@@ -62,7 +62,7 @@ G_{PRC}=\frac{C_m}{P}=G_aG_pG_m\;\approx\;\frac{Ke^{-\theta s}}{\tau s+1}
 $$
 :::
 
-## Fitting the FOPDT model [NEW]{.new}
+## Fitting the FOPDT model
 
 ![](figures/f01_prc_fit.png){width="82%"}
 
@@ -114,7 +114,7 @@ $$
 ::: {.column width="62%" .small}
 - **ISE** weights large errors heavily: fast initial response, but oscillatory.
 - **IAE** weights all errors equally.
-- **ITAE** weights errors that **persist**: it penalizes slow oscillation, so the settings are well damped and **conservative**. Recommended. [FIX]{.fix}
+- **ITAE** weights errors that **persist**: it penalizes slow oscillation, so the settings are well damped and **conservative**. Recommended.
 :::
 :::
 
@@ -209,7 +209,7 @@ Raising $K_c$ under P control (ultimate-cycle figure, two slides back):
 $$
 K_{cu}=4.150,\qquad T_u=1.46
 $$
-[FIX]{.fix} <span class="tiny">(the original read $T_u=1.45$ off the plot; exact: $\omega_u=4.297$, $T_u=2\pi/\omega_u=1.462$)</span>
+<span class="tiny">(exact: $\omega_u=4.297$, $T_u=2\pi/\omega_u=1.462$)</span>
 
 | | $K_c$ | $\tau_I$ | $\tau_D$ |
 |:--|--:|--:|--:|
@@ -264,7 +264,7 @@ legend('P','PI','PID')
 ```
 :::
 
-## [Example 3.6]{.ex} &nbsp; Same plant, five tuning rules [NEW]{.new}
+## [Example 3.6]{.ex} &nbsp; Same plant, five tuning rules
 
 "True" process $\;\dfrac{1}{(2s+1)(s+1)(0.5s+1)}$, two-point FOPDT fit $\;K=1,\ \tau=2.57,\ \theta=1.14\;(\theta/\tau=0.44)$
 
@@ -319,7 +319,7 @@ figure, step(feedback(C*G, 1)),  figure, margin(C*G)
 ```
 :::
 
-## Interactive: compare the rules yourself [NEW]{.new}
+## Interactive: compare the rules yourself
 
 ::: {.screen-only}
 {{< include interactive/_tuning_widget.md >}}
@@ -366,7 +366,7 @@ It looks like magic. In reality, saturation limits how small $\tau_c$ can be, an
 ## The catch, and two more target responses
 
 ::: {.boxr .small}
-$G_c=1/(G_p\tau_cs)$ **cancels** the process: the poles of $G_c$ are the zeros of $G_p$. An RHP zero (Van de Vusse) gives an **unstable controller**, and the cancellation is internally unstable even though $C/R$ looks fine. Dead time would need $e^{+\theta s}$, which requires knowing the future. IMC fixes both. [NEW]{.new}
+$G_c=1/(G_p\tau_cs)$ **cancels** the process: the poles of $G_c$ are the zeros of $G_p$. An RHP zero (Van de Vusse) gives an **unstable controller**, and the cancellation is internally unstable even though $C/R$ looks fine. Dead time would need $e^{+\theta s}$, which requires knowing the future. IMC fixes both.
 :::
 
 ::: {.columns}
@@ -436,9 +436,7 @@ $$
 Same controller, two parameterizations: industrial controllers come in both forms, so check which one before entering the numbers.
 :::
 
-## [Example 3.3]{.ex} &nbsp; FOPDT process → PI [NEW]{.new}
-
-<span class="small">(left blank in the original)</span>
+## [Example 3.3]{.ex} &nbsp; FOPDT process → PI
 
 $$
 G_p=\frac{K_pe^{-\theta s}}{\tau_ps+1},\qquad\frac{C}{R}=\frac{e^{-\theta s}}{\tau_cs+1}\quad(3.2\text{-}4)
@@ -456,9 +454,7 @@ PI controller: $\;K_c=\dfrac{\tau_p}{K_p(\tau_c+\theta)},\qquad\tau_I=\tau_p$
 The dead time cancels exactly and acts like extra $\tau_c$, so $K_c$ stays finite even for $\tau_c\to0$.
 :::
 
-## [Example 3.4]{.ex} &nbsp; Overdamped process, underdamped target [NEW]{.new}
-
-<span class="small">(left blank in the original)</span>
+## [Example 3.4]{.ex} &nbsp; Overdamped process, underdamped target
 
 $$
 G_p=\frac{K_p}{(\tau_1s+1)(\tau_2s+1)},\qquad\frac{C}{R}=\frac{1}{\tau^2s^2+2\zeta\tau s+1}\quad(3.2\text{-}6)
@@ -560,7 +556,7 @@ Checked symbolically in the notebook. Dropping the Padé factor in $\tilde G_{p-
 :::
 :::
 
-## Choosing $\tau_c$ [NEW]{.new}
+## Choosing $\tau_c$
 
 ::: {.columns}
 ::: {.column width="58%"}
@@ -581,7 +577,7 @@ $$
 :::
 :::
 
-## [Example 3.7]{.ex} &nbsp; IMC for the Van de Vusse reactor [NEW]{.new}
+## [Example 3.7]{.ex} &nbsp; IMC for the Van de Vusse reactor
 
 ::: {.columns}
 ::: {.column width="50%" .small}

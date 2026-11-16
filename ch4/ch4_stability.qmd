@@ -100,7 +100,7 @@ $$
 
 - If all roots are in the LHP, then **all coefficients are positive** (none missing).
 - If **any coefficient is negative** → at least one root has a positive real part.
-- If **any coefficient is zero** → not all roots are in the open LHP. [FIX]{.fix}
+- If **any coefficient is zero** → not all roots are in the open LHP.
   <br><span class="small">(The roots may be on the imaginary axis *or* in the RHP — e.g. $s^3+1$ has roots $-1,\ \tfrac12\pm j\tfrac{\sqrt3}{2}$.)</span>
 
 ::: {.boxr .small}
@@ -131,7 +131,7 @@ $$
 :::
 ::: {.column width="44%"}
 ::: {.boxr}
-**Routh criterion.** All roots in the LHP ⇔ every element of the **first column** is positive. [FIX]{.fix}
+**Routh criterion.** All roots in the LHP ⇔ every element of the **first column** is positive.
 
 The **number of sign changes** in the first column = number of **RHP roots**.
 :::
@@ -147,7 +147,7 @@ The **number of sign changes** in the first column = number of **RHP roots**.
 :::
 :::
 
-## (3) Special cases [NEW]{.new}
+## (3) Special cases
 
 ::: {.columns}
 ::: {.column width="50%"}
@@ -211,7 +211,7 @@ Same as the 3rd-order rule $a_2a_1>a_3a_0$: $\;6\cdot11>6+K_c$.
 :::
 :::
 
-## Example 4.2 at $K_c=60$: a row of zeros [NEW]{.new}
+## Example 4.2 at $K_c=60$: a row of zeros
 
 | | | |
 |:--|:--:|:--:|
@@ -352,7 +352,7 @@ $K_{cu}=\dfrac{\sqrt{1+25\omega_u^2}}{0.8}=5.73$
 
 Stable for $0<K_c<5.73$.
 
-## Dead time: exact vs. Padé approximation [NEW]{.new}
+## Dead time: exact vs. Padé approximation
 
 First-order Padé: $\;e^{-\theta s}\approx\dfrac{1-\theta s/2}{1+\theta s/2}=\dfrac{1-s}{1+s}\;$ ⇒ $\;5s^2+(6-0.8K_c)s+(1+0.8K_c)=0$ ⇒ [$K_{cu}=7.5$, $\omega_u=1.18$]{.navy}
 
@@ -400,7 +400,7 @@ Gd = tf(0.8, [5 1], 'InputDelay', 2);
 
 {{< include diagrams/_decision_chart.md >}}
 
-## From $K_{cu}, P_u$ to controller tuning [NEW]{.new}
+## From $K_{cu}, P_u$ to controller tuning
 
 The ultimate gain and period are the basis of **closed-loop (Ziegler–Nichols) tuning** — the starting point for the PID term project.
 
@@ -449,7 +449,7 @@ $$
 With first- or second-order processes, no time delay and no RHP zeros, the closed loop is stable for all $K_c>0$ (Ex 4.6 a–b).
 :::
 
-## Angle and magnitude conditions [NEW]{.new}
+## Angle and magnitude conditions
 
 A point $s$ is on the locus iff $K_cG_0(s)=-1$ for some $K_c>0$:
 
@@ -563,7 +563,7 @@ $s=-1.634$ (break-away), $\ s=-3.366$ (break-in)
 ::: {.column width="50%"}
 **(d)** $\;G_0=\dfrac{s+3}{s^2+4s+5}$, poles $-2\pm j$, zero $-3$
 
-Departure from the lower pole $p_2=-2-j$: [FIX]{.fix}
+Departure from the lower pole $p_2=-2-j$:
 
 - from zero $-3$: $\ \psi=\angle(1-j)=-\pi/4$
 - from pole $p_1=-2+j$: $\ \phi_1=\angle(-2j)=-\pi/2$
@@ -575,7 +575,7 @@ $$
 :::
 :::
 
-## Effect of adding a **zero** [NEW]{.new}
+## Effect of adding a **zero**
 
 ![](figures/f05_zero_effect.png){width="100%"}
 
@@ -609,7 +609,7 @@ Adding poles pushes loci **to the right** (destabilizing). Keep the PI zero far 
 :::
 :::
 
-## RHP zero: inverse response [NEW]{.new}
+## RHP zero: inverse response
 
 ![](figures/f10_rhp_zero.png){width="90%"}
 
@@ -633,7 +633,7 @@ $$
 :::
 ::: {.column width="50%" .small}
 ::: {.box}
-[NEW]{.new} $\;\%OS=100\exp\!\left(-\dfrac{\pi\zeta}{\sqrt{1-\zeta^2}}\right),\qquad t_s(2\%)\approx\dfrac{4}{\zeta\omega_n}$
+$\;\%OS=100\exp\!\left(-\dfrac{\pi\zeta}{\sqrt{1-\zeta^2}}\right),\qquad t_s(2\%)\approx\dfrac{4}{\zeta\omega_n}$
 :::
 $\zeta$ spec → a **ray** at angle $\psi$; $\ t_s$ spec → a **vertical line** $\mathrm{Re}\,s=-4/t_s$
 :::
@@ -653,12 +653,12 @@ $$
 $$
 
 ::: {.box}
-$\zeta=0.7\ \Rightarrow\ K_c=\dfrac{127}{98}=1.30$ [FIX]{.fix}
+$\zeta=0.7\ \Rightarrow\ K_c=\dfrac{127}{98}=1.30$
 
 poles $-0.375\pm0.383j$, $\ \%OS=4.6\%$, $\ t_s\approx11$
 :::
 
-- Graphical `rlocfind` gave 1.23 — use the **magnitude condition** for an exact value.
+- A graphical `rlocfind` click gives only ≈1.23 — the **magnitude condition** gives the exact value.
 - Offset: $\dfrac{1}{1+K_c}=0.44$ (!) → P control alone is not enough → Ex 4.8 (PI)
 :::
 ::: {.column width="50%"}
@@ -718,9 +718,9 @@ $\zeta=\dfrac{3(1+0.5K_c)}{2\sqrt{3K_c}}\ \ge\ 1.22$ for all $K_c$
 $\zeta=0.7\Rightarrow 0.0625K_c^2-0.485K_c+0.25=0$
 
 ::: {.box}
-$K_c=0.555$ [FIX]{.fix}: poles $-0.32\pm0.33j$, $t_s\approx12$ min
+$K_c=0.555$: poles $-0.32\pm0.33j$, $t_s\approx12$ min
 
-$K_c=7.20$ [FIX]{.fix}: poles $-1.15\pm1.17j$, $t_s\approx3$ min
+$K_c=7.20$: poles $-1.15\pm1.17j$, $t_s\approx3$ min
 :::
 :::
 :::
@@ -735,7 +735,7 @@ $K_c=7.20$ [FIX]{.fix}: poles $-1.15\pm1.17j$, $t_s\approx3$ min
 - Alternative: $\tau_I=\tau_p=2$ cancels the process pole → $1+\dfrac{0.5K_c}{2s}=0$, a first-order closed loop with $\tau_{cl}=4/K_c$.
 :::
 
-## Interactive: move $K_c$, watch poles and response [NEW]{.new}
+## Interactive: move $K_c$, watch poles and response
 
 ::: {.screen-only}
 {{< include interactive/_rlocus_widget.md >}}

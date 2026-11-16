@@ -85,7 +85,7 @@ $$
 A\frac{dh}{dt}\simeq q_i-\beta\left[\sqrt{h_s}+\frac{1}{2\sqrt{h_s}}(h-h_s)\right]
 $$
 
-Subtract the steady state and use $\bar q_i=q_i-q_{i,s}$, $\bar h=h-h_s$ [FIX]{.fix}:
+Subtract the steady state and use $\bar q_i=q_i-q_{i,s}$, $\bar h=h-h_s$:
 $$
 A\frac{d\bar h}{dt}+\frac{\beta}{2\sqrt{h_s}}\bar h=\bar q_i,\qquad \bar h(0)=0
 $$
@@ -124,7 +124,7 @@ At steady state $c_s=c_{i,s}$, so the flow term **vanishes**:
 $$
 \frac{V}{q_s}\frac{dc'}{dt}+c'=c_i'
 $$
-To first order, a flow change does not move the concentration; only $c_i$ does. [NEW]{.new}
+To first order, a flow change does not move the concentration; only $c_i$ does.
 :::
 :::
 :::
@@ -201,7 +201,7 @@ $a_{22}=-\dfrac qV-\dfrac{UA}{\rho VC_p}+\dfrac{(-\Delta H_R)k_s'c_{As}}{\rho C_
 $$
 \frac{C_A'(s)}{T_c'(s)}=\frac{a_{12}b_2}{(s-a_{11})(s-a_{22})-a_{12}a_{21}}
 $$
-[NEW]{.new} &nbsp; second order: the two balances are coupled.
+Second order: the two balances are coupled.
 :::
 :::
 :::
@@ -306,7 +306,7 @@ $$
 Proof of the final value: $\displaystyle\lim_{s\to0}\int_0^\infty\frac{df}{dt}e^{-st}dt=\int_0^\infty df=f(\infty)-f(0)$, and the left side is $\lim_{s\to0}[sF(s)-f(0)]$.
 
 ::: {.boxr}
-The final-value theorem holds **only if $f(\infty)$ exists**: all poles of $sF(s)$ must lie in the left half-plane. [FIX]{.fix}
+The final-value theorem holds **only if $f(\infty)$ exists**: all poles of $sF(s)$ must lie in the left half-plane.
 :::
 :::
 ::: {.column width="50%" .small}
@@ -684,10 +684,6 @@ C_2(s)=\frac{5(1-e^{-s/4})}{s(2s+1)(1.5s+1)}\quad\text{or}\quad\frac{5/4}{(2s+1)
 $$
 
 ![](figures/f07_two_tanks.png){width="100%"}
-
-::: {.tiny}
-The original MATLAB script used `pulselength = 1.25`, a pulse 5× too long. [FIX]{.fix}
-:::
 :::
 :::
 
@@ -746,7 +742,7 @@ $$
 $$
 
 ::: {.box}
-Critical damping $\zeta=1$ at $R_{cr}=\left(\dfrac{6\mu^2L}{\rho^2g}\right)^{1/4}$. [NEW]{.new} Wider tubes oscillate, narrower tubes creep.
+Critical damping $\zeta=1$ at $R_{cr}=\left(\dfrac{6\mu^2L}{\rho^2g}\right)^{1/4}$. Wider tubes oscillate, narrower tubes creep.
 :::
 
 ::: {.tiny}
@@ -952,7 +948,7 @@ $$
 - SOPDT: $\dfrac{3e^{-0.6s}}{(s+1)(3s+1)}$
 
 ::: {.box}
-**Half rule** (Skogestad) [NEW]{.new}: split the largest neglected time constant, half to the lag, half to the delay, e.g. $\dfrac{3e^{-0.35s}}{(1.25s+1)(3s+1)}$.
+**Half rule** (Skogestad): split the largest neglected time constant, half to the lag, half to the delay, e.g. $\dfrac{3e^{-0.35s}}{(1.25s+1)(3s+1)}$.
 :::
 :::
 ::: {.column width="60%"}
@@ -989,7 +985,7 @@ $$
 :::
 
 ::: {.box .small}
-**Which damps inlet-flow disturbances better?** The interacting pair: the extra term pushes one pole closer to the origin, so the response is slower and smoother. [NEW]{.new}
+**Which damps inlet-flow disturbances better?** The interacting pair: the extra term pushes one pole closer to the origin, so the response is slower and smoother.
 :::
 :::
 :::
@@ -1078,7 +1074,7 @@ Calculate the response to a step of magnitude $M$ and show that
 (d) if an extremum exists, find the time at which it occurs.
 :::
 
-## Interactive: poles, zeros, dead time [NEW]{.new}
+## Interactive: poles, zeros, dead time
 
 ::: {.screen-only}
 {{< include interactive/_response_widget.md >}}

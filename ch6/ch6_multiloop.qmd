@@ -233,8 +233,6 @@ $$
 C=\big[G_L+G_{mL}G_{FF}G_v^*G_p\big]L \;\xrightarrow{\;C=0\;}\; G_{FF}=-\frac{G_L}{G_{mL}G_v^*G_p}
 $$
 
-[FIX]{.fix} <span class="small">(the original wrote $F_{FF}$ for $G_{FF}$)</span>
-
 ::: {.columns}
 ::: {.column width="46%"}
 **Pitfalls of the ideal $G_{FF}$:**
@@ -264,7 +262,7 @@ $$
 If the measurement is fast and $\tau_v^*$ is small (a cascade slave loop), the static gain alone may be enough — **but check** (Ex 6.7).
 :::
 
-## [Example 6.7]{.ex} &nbsp; Static or dynamic feedforward? [NEW]{.new}
+## [Example 6.7]{.ex} &nbsp; Static or dynamic feedforward?
 
 ::: {.columns}
 ::: {.column width="62%"}
@@ -349,8 +347,6 @@ $$
 If $G(s)$ and $\theta$ are known, **predict** the undelayed output and feed that back instead.
 :::
 
-[Notation: the original slides use $t_d$; here $\theta$, as in Ch 4–5.]{.small .navy}
-
 ## The Smith predictor
 
 {{< include diagrams/_smith.md >}}
@@ -366,12 +362,12 @@ $$
 :::
 ::: {.column width="45%"}
 ::: {.box}
-The characteristic equation $1+G_cG=0$ has **no dead time**. Tune $G_c$ as if the delay were absent; the response is the same, only shifted by $\theta$. [NEW]{.new}
+The characteristic equation $1+G_cG=0$ has **no dead time**. Tune $G_c$ as if the delay were absent; the response is the same, only shifted by $\theta$.
 :::
 :::
 :::
 
-## [Example 6.8]{.ex} &nbsp; Smith predictor on the Ex 4.4 plant [NEW]{.new}
+## [Example 6.8]{.ex} &nbsp; Smith predictor on the Ex 4.4 plant
 
 ![](figures/f04_ex68_smith.png){width="96%"}
 
@@ -505,7 +501,7 @@ $$
 :::
 ::: {.column width="48%"}
 ::: {.box .small}
-**Properties** [NEW]{.new}
+**Properties**
 
 - each **row and column sums to 1**
 - independent of the units and scaling of the variables
@@ -536,7 +532,7 @@ Same result from the gains: $\kappa=K_{12}K_{21}/(K_{11}K_{22})=-m_1/m_2$
 :::
 :::
 
-## Reading the RGA: pairing rules [FIX]{.fix}
+## Reading the RGA: pairing rules
 
 | $\lambda_{ij}$ | $\kappa$ (2×2) | meaning | pair $m_j$–$c_i$? |
 |:----------:|:----------:|:------------------------------------------|:--------------:|
@@ -672,7 +668,7 @@ $$
 $$
 D_{21}=-\frac{G_{21}}{G_{22}}=0.667\,\frac{10s+1}{11s+1}\,e^{-2s}\approx0.67
 $$
-$D_{12}$ would need a prediction ($e^{+2s}$) → drop it; $D_{21}$ is realizable as it stands. [NEW]{.new}
+$D_{12}$ would need a prediction ($e^{+2s}$) → drop it; $D_{21}$ is realizable as it stands.
 :::
 :::
 
@@ -712,7 +708,7 @@ $K_{c2}<0$ because $K_{22}<0$: more boil-up lowers $x_B$.
 ::: {.column width="58%"}
 - **No decoupling:** an $x_D$ set-point step drives $x_B$ up to 0.94.
 - **Static** decouplers: $x_B$ now dips to $-0.61$. $D_{21}$ acts at $t=2$ through $G_{22}$, before $G_{21}$ arrives at $t=4$.
-- **Dynamic** $D_{21}$ (with its $e^{-2s}$): $x_B$ stays at **0**, exact decoupling. [NEW]{.new}
+- **Dynamic** $D_{21}$ (with its $e^{-2s}$): $x_B$ stays at **0**, exact decoupling.
 :::
 ::: {.column width="42%"}
 ::: {.boxr}
@@ -759,7 +755,7 @@ end
 ```
 :::
 
-## Interactive: cascade vs. single loop [NEW]{.new}
+## Interactive: cascade vs. single loop
 
 ::: {.screen-only}
 {{< include interactive/_cascade_widget.md >}}
@@ -787,7 +783,7 @@ Interactive version: [seoultechpse.github.io/ProCon/ch6/ch6_multiloop.html](http
 None of these replaces feedback: each one is built **around** a feedback loop.
 :::
 
-## [Problem #1]{.ex} &nbsp; (homework) [NEW]{.new}
+## [Problem #1]{.ex} &nbsp; (homework)
 
 $$
 \mathbf G(s)=\begin{bmatrix}\dfrac{2e^{-s}}{10s+1} & \dfrac{1.5e^{-s}}{15s+1}\\[2mm] \dfrac{1.5e^{-s}}{15s+1} & \dfrac{2e^{-s}}{10s+1}\end{bmatrix}
