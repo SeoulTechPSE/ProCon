@@ -7,6 +7,7 @@ project:
     - contents.qmd
     - problems.qmd
     - matlab.qmd
+    - case.qmd
     - ch*/ch*_*.qmd
   resources:
     - "ch*/*.pdf"
@@ -32,6 +33,8 @@ website:
         text: Slide contents
       - href: problems.qmd
         text: Problems
+      - href: case.qmd
+        text: Case study
       - href: matlab.qmd
         text: MATLAB
     right:

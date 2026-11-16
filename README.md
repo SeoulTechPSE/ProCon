@@ -22,6 +22,7 @@ _quarto.yml            website project (renders to _site/, not committed)
 .github/workflows/     publish.yml: renders and deploys the site to GitHub Pages on every push
 index.qmd              course home page (cards, updates: generated pieces _chapters.md, _updates.md)
 contents.qmd, problems.qmd  generated slide contents and problem index
+case.qmd, case/heater.py     running case study (stirred-tank heater through Ch 1–6); heater.py writes case/figures
 tools/chapters.py      single source of truth for chapters (title, topics, thumbnail, widgets)
 tools/build_index.py   writes the generated pieces + the table above (Quarto pre-render)
 assets/procon.css      slide theme + print rules (shared by all chapters)

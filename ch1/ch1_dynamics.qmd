@@ -1256,4 +1256,5 @@ Next (Ch 2): close the loop with a controller and see how $K_c$, $\tau_I$, $\tau
 - **PDF:** [slides](https://seoultechpse.github.io/ProCon/ch1/ch1_dynamics.pdf) · [handout with note space](https://seoultechpse.github.io/ProCon/ch1/ch1_dynamics_handout.pdf)
 - **Python notebook:** [Open in Colab](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch1/ch1_dynamics.ipynb) — every transform (sympy), calculation and figure of this chapter
 - **Response explorer:** [standalone page](https://seoultechpse.github.io/ProCon/ch1/interactive/response_explorer.html)
+- **Case study:** [the stirred-tank heater in this chapter](https://seoultechpse.github.io/ProCon/case.html#ch1)
 :::

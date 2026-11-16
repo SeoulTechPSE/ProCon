@@ -781,4 +781,5 @@ Determine PID settings by
 - **PDF:** [slides](https://seoultechpse.github.io/ProCon/ch3/ch3_tuning.pdf) · [handout with note space](https://seoultechpse.github.io/ProCon/ch3/ch3_tuning_handout.pdf)
 - **Python notebook:** [Open in Colab](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch3/ch3_tuning.ipynb) — every calculation and figure of this chapter
 - **Tuning relations:** [`tuning.py`](https://github.com/SeoulTechPSE/ProCon/blob/main/ch3/tuning.py) (ZN, Cohen–Coon, ITAE, IMC, FOPDT fitting)
+- **Case study:** [the stirred-tank heater in this chapter](https://seoultechpse.github.io/ProCon/case.html#ch3)
 :::

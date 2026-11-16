@@ -865,4 +865,5 @@ Next (Ch 3): how to choose $K_c$, $\tau_I$ and $\tau_D$. Then (Ch 4–5): when t
 - **PDF:** [slides](https://seoultechpse.github.io/ProCon/ch2/ch2_analysis.pdf) · [handout with note space](https://seoultechpse.github.io/ProCon/ch2/ch2_analysis_handout.pdf)
 - **Python notebook:** [Open in Colab](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch2/ch2_analysis.ipynb) — every derivation (sympy), calculation and figure of this chapter
 - **Closed-loop explorer:** [standalone page](https://seoultechpse.github.io/ProCon/ch2/interactive/loop_explorer.html)
+- **Case study:** [the stirred-tank heater in this chapter](https://seoultechpse.github.io/ProCon/case.html#ch2)
 :::

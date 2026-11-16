@@ -78,13 +78,13 @@
 <article class="chapter-card">
   <a class="thumb" href="ch6/ch6_multiloop.html"><img src="assets/thumbs/ch6.png" alt="Chapter 6 figure" loading="lazy"></a>
   <div class="card-body">
-    <div class="card-num">Chapter 6<span class="updated">updated 2026-11-16</span></div>
+    <div class="card-num">Chapter 6<span class="updated">updated 2026-11-17</span></div>
     <h3><a href="ch6/ch6_multiloop.html">Multi-loop Systems</a></h3>
     <p class="topics">cascade · feedforward · Smith predictor · ratio control · RGA &amp; decoupling</p>
     <div class="links">
       <a class="btn primary" href="ch6/ch6_multiloop.html">Slides</a>
-      <a class="btn" href="ch6/ch6_multiloop.pdf">PDF <small>2.1 MB</small></a>
-      <a class="btn" href="ch6/ch6_multiloop_handout.pdf">Handout <small>2.2 MB</small></a>
+      <a class="btn" href="ch6/ch6_multiloop.pdf">PDF <small>2.5 MB</small></a>
+      <a class="btn" href="ch6/ch6_multiloop_handout.pdf">Handout <small>2.5 MB</small></a>
       <a class="btn" href="https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch6/ch6_multiloop.ipynb">Colab</a>
     </div>
     <div class="widgets"><a class="chip" href="ch6/interactive/cascade_explorer.html">▶ Cascade explorer</a> <a class="chip" href="ch6/interactive/rga_explorer.html">▶ RGA explorer</a></div>

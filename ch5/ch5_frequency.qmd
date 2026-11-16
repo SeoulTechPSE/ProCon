@@ -794,6 +794,7 @@ Hint: the phase of $e^{-j\omega}/j\omega$ is $-\pi/2-\omega$.
 - **Slides (interactive HTML):** [seoultechpse.github.io/ProCon/ch5/ch5_frequency.html](https://seoultechpse.github.io/ProCon/ch5/ch5_frequency.html)
 - **PDF:** [slides](https://seoultechpse.github.io/ProCon/ch5/ch5_frequency.pdf) · [handout with note space](https://seoultechpse.github.io/ProCon/ch5/ch5_frequency_handout.pdf)
 - **Python notebook:** [Open in Colab](https://colab.research.google.com/github/SeoulTechPSE/ProCon/blob/main/ch5/ch5_frequency.ipynb) — every calculation and figure of this chapter
+- **Case study:** [the stirred-tank heater in this chapter](https://seoultechpse.github.io/ProCon/case.html#ch5)
 :::
 
 # Appendix
