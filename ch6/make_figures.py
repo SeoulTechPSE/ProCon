@@ -151,6 +151,84 @@ def fig_ex66():
     fig.tight_layout(); fig.savefig(OUT / "f06_ex66_decoupling.png"); plt.close(fig)
 
 
+
+def save_(fig, name):
+    fig.tight_layout(); fig.savefig(OUT / name); plt.close(fig)
+
+
+# ---------------------------------------------------------------- selective (override) control
+def override_run(override, T=60.0, dt=0.01, lim=90.0):
+    """Furnace: fuel m -> outlet T1 = 100 e^{-s}/(5s+1) m,  tube skin T2 = 120/(2s+1) m (deviations from 0).
+    TC1 (outlet) and TC2 (skin, set point = limit) are velocity-form PI controllers; a low selector
+    passes the smaller output, and both start every step from the selected value (no windup)."""
+    g1, g2 = FOPDT(100, 5, 1.0, dt), FOPDT(120, 2, 0.0, dt)
+    m = 0.5; y1 = y2 = 0.0
+    for _ in range(int(40 / dt)): y1, y2 = g1(m), g2(m)               # steady state at m = 0.5
+    Kc1, tI1, Kc2, tI2 = 0.012, 5.0, 0.008, 2.0
+    e1p = e2p = None; out = []
+    for k in range(int(T / dt)):
+        t = k * dt; r1 = 50.0 if t < 5 else 85.0
+        e1, e2 = r1 - y1, lim - y2
+        e1p = e1 if e1p is None else e1p; e2p = e2 if e2p is None else e2p
+        p1 = m + Kc1 * ((e1 - e1p) + dt / tI1 * e1)
+        p2 = m + Kc2 * ((e2 - e2p) + dt / tI2 * e2)
+        m = min(p1, p2) if override else p1
+        e1p, e2p = e1, e2
+        y1, y2 = g1(m), g2(m); out.append((t, y1, y2, m, override and p2 < p1))
+    return np.array(out).T
+
+
+def fig_override():
+    fig, axs = plt.subplots(1, 2, figsize=(12.5, 4.2))
+    for ov, ls, lab in ((False, "--", "TC1 only"), (True, "-", "with low-select override")):
+        t, y1, y2, m, sel = override_run(ov)
+        axs[0].plot(t, y1, color=NAVY, ls=ls, lw=2.2, label=f"outlet $T_1$, {lab}")
+        axs[0].plot(t, y2, color=RED, ls=ls, lw=2.2, label=f"tube skin $T_2$, {lab}")
+        axs[1].plot(t, m, color=NAVY if not ov else GREEN, ls=ls, lw=2.2, label=f"fuel $m$, {lab}")
+        if ov:
+            axs[1].fill_between(t, 0, 1.2, where=sel > 0, color=RED, alpha=0.08, label="TC2 (override) selected")
+    axs[0].axhline(90, color=RED, ls=":", lw=1.2); axs[0].text(57, 91.5, "skin limit 90", color=RED, ha="right")
+    axs[0].axhline(85, color=NAVY, ls=":", lw=1.2); axs[0].text(57, 81, "set point 85", color=NAVY, ha="right")
+    axs[0].set_ylim(40, 108); axs[1].set_ylim(0.4, 1.0)
+    axs[0].set_title("set point of $T_1$ raised 50 → 85 at $t=5$"); axs[1].set_title("controller output")
+    for a in axs: a.set_xlabel("time"); a.legend(fontsize=9.5, loc="lower right")
+    save_(fig, "f09_override.png")
+
+
+def fig_splitrange():
+    p = np.linspace(0, 100, 401)
+    cw = np.clip((50 - p) / 50, 0, 1) * 100; st = np.clip((p - 50) / 50, 0, 1) * 100
+    fig, ax = plt.subplots(figsize=(6.6, 3.9))
+    ax.plot(p, cw, color=NAVY, lw=2.6, label="cooling-water valve (air-to-close)")
+    ax.plot(p, st, color=RED, lw=2.6, label="steam valve (air-to-open)")
+    ax.axvline(50, color=GRAY, ls=":"); ax.text(51, 92, "both closed\nat 50 %", color=GRAY, fontsize=10)
+    ax.set_xlabel("controller output $p$ (%)"); ax.set_ylabel("valve opening (%)")
+    ax.set_xlim(0, 100); ax.set_ylim(0, 105); ax.legend(fontsize=10, loc="center left", bbox_to_anchor=(0.0, 0.62))
+    ax.set_title("Split range: one controller, two valves")
+    save_(fig, "f10_splitrange.png")
+
+
+def fig_mpc():
+    from mpc import fopdt_mpc
+    r = lambda t: 1.0; ld = lambda t: -0.3 if t >= 30 else 0.0
+    t, y, u = fopdt_mpc(0.8, 5, 2, r, 0.0, 1.6, T=60, load=ld)
+    # SIMC PI with the same input limit (clamped, velocity form), same sampling
+    dt = 0.5; g = FOPDT(0.8, 5, 2.0, dt); Kc, tI = 5 / (0.8 * 4), 5.0
+    m = 0.0; ep = 0.0; yp = 0.0; yy, uu = [], []
+    for k in range(len(t)):
+        e = r(t[k]) - yp; m = float(np.clip(m + Kc * ((e - ep) + dt / tI * e), 0.0, 1.6)); ep = e
+        yy.append(yp); uu.append(m); yp = g(m + ld(t[k]))
+    fig, axs = plt.subplots(2, 1, figsize=(7.2, 6.4), sharex=True)
+    axs[0].plot(t, y, color=NAVY, lw=2.3, label="MPC ($P=30$, $M=6$)"); axs[0].plot(t, yy, color=RED, lw=2, ls="--", label="SIMC PI")
+    axs[1].step(t, u, color=NAVY, lw=2, where="post", label="MPC"); axs[1].step(t, uu, color=RED, lw=1.8, ls="--", where="post", label="SIMC PI")
+    axs[1].axhline(1.6, color=GRAY, ls=":"); axs[1].text(59, 1.63, "$u_{\\max}=1.6$", color=GRAY, ha="right")
+    axs[0].axhline(1, color=GRAY, ls=":")
+    for a in axs:
+        a.axvline(30, color=GRAY, ls="--", lw=0.8); a.legend(fontsize=10, loc="lower right")
+    axs[1].set_xlabel("time")
+    axs[0].set_title(r"$0.8e^{-2s}/(5s+1)$: set point at 1, load $-0.3$ at 30"); axs[1].set_title("manipulated input (bounded)")
+    save_(fig, "f11_mpc.png")
+
 if __name__ == "__main__":
-    for f in (fig_ex61_rlocus, fig_ex61_response, fig_ex67_ff, fig_ex68_smith, fig_rga_blend, fig_ex66):
+    for f in (fig_ex61_rlocus, fig_ex61_response, fig_ex67_ff, fig_ex68_smith, fig_rga_blend, fig_ex66, fig_override, fig_splitrange, fig_mpc):
         f(); print("ok", f.__name__)

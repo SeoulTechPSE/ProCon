@@ -396,9 +396,33 @@ def mimo(decouple=False):
     d.write()
 
 
+
+def override():
+    d = SVG("override", 900, 260, "Selective (override) control with a low selector")
+    y1, y2 = 70, 190
+    d.math(6, y1 - 22, "T_{1,sp}", size=18, anchor="start"); s1 = d.sumj(90, y1, {"w": "+", "n": "−"})
+    c1 = d.box(190, y1, "TC1", w=90, h=46, kind="red", size=20)
+    d.math(6, y2 - 22, "T_{2,max}", size=18, anchor="start"); s2 = d.sumj(90, y2, {"w": "+", "s": "−"})
+    c2 = d.box(190, y2, "TC2", w=90, h=46, kind="red", size=20)
+    ls = d.bubble(350, 130, "LS", r=26)
+    d.wire([(6, y1), s1["l"]]); d.wire([s1["r"], c1["l"]]); d.wire([(6, y2), s2["l"]]); d.wire([s2["r"], c2["l"]])
+    d.wire([c1["r"], (300, y1), (330, 112)]); d.wire([c2["r"], (300, y2), (330, 148)])
+    d.text(258, y1 - 16, "p_{1}", size=15); d.text(258, y2 + 18, "p_{2}", size=15)
+    v = d.box(480, 130, "fuel valve", w=120, h=46, size=16); d.wire([ls["r"], v["l"]])
+    d.text(430, 92, "min(p_{1}, p_{2})", size=14, color=NAVY)
+    f1 = d.box(680, y1, "100e^{−s}/(5s+1)", w=170, h=46, size=17); f2 = d.box(680, y2, "120/(2s+1)", w=170, h=46, size=17)
+    d.dot(570, 130); d.wire([v["r"], (570, 130)], arrow=False)
+    d.wire([(570, 130), (570, y1), f1["l"]]); d.wire([(570, 130), (570, y2), f2["l"]])
+    d.wire([f1["r"], (890, y1)]); d.wire([f2["r"], (890, y2)])
+    d.math(870, y1 - 20, "T_{1}", size=18); d.math(870, y2 + 22, "T_{2}", size=18)
+    d.text(810, y1 + 34, "outlet", size=13, color=GRAY); d.text(810, y2 - 34, "tube skin", size=13, color=GRAY)
+    d.dot(860, y1); d.wire([(860, y1), (860, 20), (90, 20), s1["t"]], color=GRAY)
+    d.dot(860, y2); d.wire([(860, y2), (860, 245), (90, 245), s2["b"]], color=GRAY)
+    d.write()
+
 if __name__ == "__main__":
     for f in (cascade_block, cascade_reduced, lambda: ff_fb(False), lambda: ff_fb(True),
               lambda: furnace("furnace_cascade"), lambda: furnace("furnace_full", ff=True),
-              ratio, smith, blending, lambda: mimo(False), lambda: mimo(True)):
+              ratio, smith, blending, lambda: mimo(False), lambda: mimo(True), override):
         f()
     print("diagrams written:", sorted(p.name for p in OUT.glob("_*.md")))

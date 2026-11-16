@@ -33,6 +33,6 @@ subtitle: "All problems by chapter, linked to the slide where they are posed"
 
 ## 6. Multi-loop Systems
 
-- **[Problem #1](ch6/ch6_multiloop.html#/8/8)** — (a) Compute the RGA. Which pairing do you choose, and how strong is the interaction? (b) Design the two decouplers. Are they realizable? Compare the static and dynamic versions. (c) Tune two PI controllers with the ITAE …
+- **[Problem #1](ch6/ch6_multiloop.html#/9/8)** — (a) Compute the RGA. Which pairing do you choose, and how strong is the interaction? (b) Design the two decouplers. Are they realizable? Compare the static and dynamic versions. (c) Tune two PI controllers with the ITAE …
 
 *Starter code for each problem is at the end of the chapter's Colab notebook.*

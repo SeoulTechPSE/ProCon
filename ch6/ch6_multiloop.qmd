@@ -35,6 +35,7 @@ Single-loop feedback (Ch 4–5) reacts only **after** the controlled variable ha
 | **Ratio** (6.4) | streams that must stay in proportion | one flow follows another |
 | **Smith predictor** (6.5) | large dead time | feed back a *prediction* of the output |
 | **MIMO, RGA, decoupling** (6.6–6.7) | several interacting loops | choose the pairing, then cancel the interaction |
+| **Selective, split range, MPC** (6.8) | limits, two actuators, constraints | select, split, or optimize over a prediction |
 
 ::: {.small .navy}
 Running example for 6.1–6.4: the **fired heater** — outlet temperature controlled with the fuel-gas flow.
@@ -755,6 +756,127 @@ end
 ```
 :::
 
+# 6.8 Selective Control, Split Range and MPC
+
+## Selective (override) control
+
+{{< include diagrams/_override.md >}}
+
+::: {.columns}
+::: {.column width="55%" .small}
+Two controllers, **one** valve. A **low selector** (LS) passes the smaller output:
+
+- TC1 normally drives the fuel to hold the outlet temperature $T_1$
+- TC2 takes over when the tube skin $T_2$ approaches its limit
+:::
+::: {.column width="45%" .small}
+::: {.box}
+The controller not selected must not wind up: **velocity-form PI** (Ch 2) restarts every step from the selected output.
+:::
+
+::: {.tiny}
+High selectors, and auctioneering (pick the hottest of several thermocouples), work the same way.
+:::
+:::
+:::
+
+## Override in action
+
+![](figures/f09_override.png){width="96%" fig-align="center"}
+
+::: {.columns}
+::: {.column width="50%" .small}
+- dashed: TC1 alone pushes $T_2$ to 102, above the limit of 90
+- solid: $T_2$ is held at 90; $T_1$ settles at 75, the best the limit allows
+:::
+::: {.column width="50%" .small}
+- TC2 is selected from $t\approx5$ on (shaded); TC1 regains control by itself once its set point can be met within the limit
+:::
+:::
+
+## Split-range control
+
+::: {.columns}
+::: {.column width="52%"}
+![](figures/f10_splitrange.png){width="100%"}
+:::
+::: {.column width="48%" .small}
+**One** controller drives **two** valves over different parts of its output range.
+
+- jacketed batch reactor: cooling water at low output, steam at high output
+- pressure: inert-gas feed below 50 %, vent valve above 50 %
+- pH: acid valve and base valve
+
+::: {.box}
+The opposite of selective control: selective = several controllers → one valve; split range = one controller → several valves.
+:::
+
+::: {.tiny}
+The process gain usually differs between the two halves (e.g. cooling vs heating), so the tuning is a compromise, or gain scheduling is used.
+:::
+:::
+:::
+
+## Model predictive control (MPC): the idea
+
+::: {.columns}
+::: {.column width="50%" .small}
+At every sample $k$:
+
+1. **predict** the output $P$ steps ahead with a process model (here a step-response model)
+2. choose the next $M$ moves $u_k,\dots,u_{k+M-1}$ that minimize
+$$
+\sum_{j=1}^{P}(r-\hat y_{k+j})^2+\lambda\sum_{j=0}^{M-1}\Delta u_{k+j}^2
+$$
+subject to **constraints** $u_{\min}\le u\le u_{\max}$
+3. apply **only** $u_k$; measure, correct the prediction, repeat (**receding horizon**)
+
+::: {.navy}
+MPC handles dead time, constraints and **MIMO** interaction in one formulation; it is the standard advanced-control layer above the PID loops in refineries and chemical plants.
+:::
+:::
+::: {.column width="50%"}
+![](figures/f11_mpc.png){width="92%"}
+
+::: {.small}
+Same input limit for both: MPC reaches 95 % in 9 instead of 17 time units because it **plans** around the constraint and the dead time.
+:::
+:::
+:::
+
+## MPC in code
+
+::: {.panel-tabset}
+### Python
+
+```{.python}
+from mpc import fopdt_mpc          # mpc.py in ch6/: DMC-type MPC, ~40 lines, scipy lsq_linear
+
+t, y, u = fopdt_mpc(K=0.8, tau=5, theta=2,            # model (and plant) 0.8 e^{-2s}/(5s+1)
+                    r=lambda t: 1.0,                   # set point
+                    umin=0.0, umax=1.6,                # input constraint
+                    dt=0.5, P=30, M=6, lam=0.05,       # sampling, horizons, move penalty
+                    T=60, load=lambda t: -0.3 if t >= 30 else 0.0)
+
+# model mismatch: plant 1.0 e^{-2.5s}/(6s+1), controller still uses the nominal model
+t, y, u = fopdt_mpc(0.8, 5, 2, lambda t: 1.0, 0, 1.6, T=60, Kp=1.0, taup=6, thetap=2.5)
+print(y.max(), y[-1])              # 1.12 overshoot, no offset (output correction)
+```
+
+### MATLAB
+
+```{.matlab}
+% Model Predictive Control Toolbox
+G = tf(0.8, [5 1], 'InputDelay', 2);
+mpcobj = mpc(c2d(G, 0.5), 0.5, 30, 6);        % Ts, prediction P, control M
+mpcobj.MV.Min = 0;  mpcobj.MV.Max = 1.6;
+mpcobj.Weights.MVRate = 0.05;
+T = 120;  r = ones(T, 1);
+[y, t, u] = sim(mpcobj, T, r);
+subplot(2,1,1), plot(t, y), subplot(2,1,2), stairs(t, u)
+```
+:::
+
 ## Interactive: cascade vs. single loop
 
 ::: {.screen-only}
@@ -778,6 +900,9 @@ Interactive version: [seoultechpse.github.io/ProCon/ch6/ch6_multiloop.html](http
 | two streams must stay proportional | **ratio** | flow measurements |
 | dead time dominates | **Smith predictor** | an accurate model, especially of $\theta$ |
 | several loops interact | **RGA pairing**, then **decoupling** | gain matrix (pairing); dynamic model (decoupling) |
+| a limit must not be exceeded | **selective (override)** | a second measurement and controller; anti-windup |
+| one controller, two actuators | **split range** | valve ranges; gains often differ |
+| constraints, dead time and interaction together | **MPC** | a dynamic model of the whole unit |
 
 ::: {.small .navy}
 None of these replaces feedback: each one is built **around** a feedback loop.

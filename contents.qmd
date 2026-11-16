@@ -347,8 +347,16 @@ subtitle: "Every slide of every chapter — use the search box (top right) to fi
 - [Example 6.6: PI tuning (ITAE)](ch6/ch6_multiloop.html#/8/3)
 - [Example 6.6: does decoupling help? (replaces the Simulink runs)](ch6/ch6_multiloop.html#/8/4)
 - [Decoupling in code](ch6/ch6_multiloop.html#/8/5)
-- [Interactive: cascade vs. single loop](ch6/ch6_multiloop.html#/8/6)
-- [Summary: which structure for which problem?](ch6/ch6_multiloop.html#/8/7)
-- [Problem #1 (homework)](ch6/ch6_multiloop.html#/8/8)
-- [Resources](ch6/ch6_multiloop.html#/8/9)
-- [A final word — Neal R. Amundson (University of Minnesota, circa 1970)](ch6/ch6_multiloop.html#/8/10)
+
+**[6.8 Selective Control, Split Range and MPC](ch6/ch6_multiloop.html#/9)**
+
+- [Selective (override) control](ch6/ch6_multiloop.html#/9/1)
+- [Override in action](ch6/ch6_multiloop.html#/9/2)
+- [Split-range control](ch6/ch6_multiloop.html#/9/3)
+- [Model predictive control (MPC): the idea](ch6/ch6_multiloop.html#/9/4)
+- [MPC in code](ch6/ch6_multiloop.html#/9/5)
+- [Interactive: cascade vs. single loop](ch6/ch6_multiloop.html#/9/6)
+- [Summary: which structure for which problem?](ch6/ch6_multiloop.html#/9/7)
+- [Problem #1 (homework)](ch6/ch6_multiloop.html#/9/8)
+- [Resources](ch6/ch6_multiloop.html#/9/9)
+- [A final word — Neal R. Amundson (University of Minnesota, circa 1970)](ch6/ch6_multiloop.html#/9/10)

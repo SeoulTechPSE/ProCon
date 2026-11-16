@@ -3,6 +3,7 @@ import nbformat as nbf
 from pathlib import Path
 
 blocks_src = Path(__file__).with_name("blocks.py").read_text()
+mpc_src = Path(__file__).with_name("mpc.py").read_text()
 
 cells = []
 md = lambda t: cells.append(nbf.v4.new_markdown_cell(t))
@@ -130,6 +131,16 @@ for col, (r1, r2) in enumerate([(1, 0), (0, 1)]):
     axs[0, col].set_title(r'step in $x_D$ set point' if r1 else r'step in $x_B$ set point')
     axs[1, col].set_xlabel('time')
 axs[0, 0].set_ylabel(r'$x_D$'); axs[1, 0].set_ylabel(r'$x_B$'); axs[0, 0].legend(); fig.tight_layout()""")
+
+md("## 6.8 Selective control, split range and MPC")
+md("### A minimal DMC-type MPC (`mpc.py`)")
+code(mpc_src)
+code(r"""t, y, u = fopdt_mpc(0.8, 5, 2, lambda t: 1.0, 0.0, 1.6, T=60, load=lambda t: -0.3 if t >= 30 else 0.0)
+fig, axs = plt.subplots(1, 2, figsize=(12, 3.8))
+axs[0].plot(t, y); axs[0].axhline(1, ls=':'); axs[0].set_title('MPC: output')
+axs[1].step(t, u, where='post'); axs[1].axhline(1.6, ls=':'); axs[1].set_title('MPC: bounded input')
+t, y, u = fopdt_mpc(0.8, 5, 2, lambda t: 1.0, 0, 1.6, T=60, Kp=1.0, taup=6, thetap=2.5)
+print('model mismatch: peak', y.max().round(3), ' final', y[-1].round(3))""")
 
 md("## Problem #1 — (homework) start here")
 code(r"""G3 = [[(2, 10, 1), (1.5, 15, 1)],
